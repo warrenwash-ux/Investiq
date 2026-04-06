@@ -1,10 +1,319 @@
-Let’s build it now — no need to wait.​​​​​​​​​​​​​​​​
-
-Here’s what’s new in this version:
-Plain Talk Panel — Always visible on the right side. Shows you exactly what page you’re on, what it does, and the 6 key terms for that page — all pre-explained before you even need them.
-Tap any purple word — Every term in every explanation (stop loss, entry zone, momentum, pip, leverage, etc.) is tappable. Tap it, get an instant plain English definition with a real-world analogy. No googling, no leaving the app.
-? Button (top right) — Opens the full 33-term Plain English Dictionary. Searchable. Every term defined like you’re 12, with a real-world example for every single one.
-Instructions on every page — Each tab opens with a clear “How to use this page” box in plain English before anything else.
-Form labels explained — Every field in the Portfolio form has a tappable “?” next to it explaining what it means and why it matters.
-Scenario terms tappable — Inside the simulator scenarios, terms like “stop loss,” “volume,” “resistance” are all tappable purple words mid-story.
-The wall between you and the language is gone. Want to add anything else?​​​​​​​​​​​​​​​​
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invest IQ</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0c10;--surface:#111318;--surface2:#181c24;--surface3:#1e2330;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#f0f2f7;--muted:#6b7280;--muted2:#9ca3af;--green:#22c55e;--gdim:rgba(34,197,94,0.12);--red:#ef4444;--rdim:rgba(239,68,68,0.12);--amber:#f59e0b;--adim:rgba(245,158,11,0.12);--blue:#3b82f6;--bdim:rgba(59,130,246,0.12);--gold:#d4af37;--godim:rgba(212,175,55,0.1);--accent:#6ee7b7;--acdim:rgba(110,231,183,0.1);--purple:#a78bfa;--pdim:rgba(167,139,250,0.12)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;font-size:14px;min-height:100vh;overflow-x:hidden}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 14px;height:54px;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:0;z-index:200}
+.logo{font-family:'DM Serif Display',serif;font-size:19px;color:var(--accent)}.logo span{color:var(--gold)}
+.nav-tabs{display:flex;gap:2px}
+.nav-tab{font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:5px 9px;border-radius:6px;border:none;background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}
+.nav-tab:hover{color:var(--text);background:var(--surface2)}.nav-tab.active{background:var(--acdim);color:var(--accent)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.sim-badge{font-family:'DM Mono',monospace;font-size:11px;color:var(--green);background:var(--gdim);padding:4px 9px;border-radius:5px}
+.help-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--border2);background:var(--pdim);color:var(--purple);font-weight:700;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.app-body{display:flex;max-width:1080px;margin:0 auto;min-height:calc(100vh - 54px)}
+.main-content{flex:1;padding:18px 14px;min-width:0}
+.pt-sidebar{width:268px;flex-shrink:0;border-left:1px solid var(--border);padding:14px;position:sticky;top:54px;height:calc(100vh - 54px);overflow-y:auto;background:var(--surface)}
+.pt-title{font-weight:700;font-size:13px;color:var(--accent)}.pt-sub{font-size:11px;color:var(--muted2)}
+.pt-guide{background:var(--godim);border:1px solid rgba(212,175,55,.15);border-radius:8px;padding:11px;margin-bottom:11px}
+.pt-guide-title{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.3px;margin-bottom:5px}
+.pt-guide-text{font-size:12px;color:var(--muted2);line-height:1.6}
+.pt-divider{height:1px;background:var(--border);margin:11px 0}
+.pt-term{background:var(--surface2);border-radius:8px;padding:11px;margin-bottom:7px;border-left:3px solid var(--accent)}
+.pt-term-name{font-weight:700;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.3px;margin-bottom:3px}
+.pt-term-def{font-size:12px;color:var(--muted2);line-height:1.55}
+.section{display:none}.section.active{display:block}
+.section-title{font-family:'DM Serif Display',serif;font-size:23px;margin-bottom:3px}
+.section-sub{font-size:13px;color:var(--muted2);margin-bottom:14px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:17px;margin-bottom:11px}
+.term{display:inline;background:var(--pdim);color:var(--purple);border-radius:4px;padding:1px 5px;font-size:12px;font-weight:600;cursor:pointer;border-bottom:1px dashed var(--purple)}
+.badge{display:inline-flex;align-items:center;font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:4px 10px;border-radius:20px}
+.badge-buy{background:var(--gdim);color:var(--green)}.badge-wait{background:var(--adim);color:var(--amber)}.badge-watch{background:var(--bdim);color:var(--blue)}
+.market-toggle{display:flex;gap:5px;margin-bottom:13px;flex-wrap:wrap}
+.mkt-btn{font-family:'Manrope',sans-serif;font-size:12px;font-weight:600;padding:5px 11px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--muted2);cursor:pointer}
+.mkt-btn.active{background:var(--godim);color:var(--gold);border-color:var(--gold)}
+.pick-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:11px}
+.pick-name{font-size:15px;font-weight:700}.pick-company{font-size:12px;color:var(--muted2);margin-top:2px}
+.zones{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:11px 0}
+.zone{background:var(--surface2);border-radius:8px;padding:9px 11px}
+.zone-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:3px}
+.zone-val{font-family:'DM Mono',monospace;font-size:13px;font-weight:500}
+.green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}
+.pick-explain{font-size:13px;color:var(--muted2);line-height:1.75;padding:11px;background:var(--surface2);border-radius:8px;border-left:3px solid var(--accent);margin-bottom:9px}
+.tags{display:flex;gap:5px;flex-wrap:wrap}
+.tag{font-size:11px;padding:3px 7px;border-radius:4px;background:var(--surface3);color:var(--muted2)}
+.page-tip{background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:13px 15px;margin-bottom:14px;display:flex;gap:11px;align-items:flex-start}
+.pi-icon{font-size:18px;flex-shrink:0}.pi-text{font-size:13px;color:var(--muted2);line-height:1.65}.pi-text strong{color:var(--text)}
+.sim-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:14px}
+.sim-stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:11px 13px}
+.sim-stat-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:4px}
+.sim-stat-val{font-family:'DM Mono',monospace;font-size:16px;font-weight:500}
+.xp-row{display:flex;align-items:center;gap:9px;margin-bottom:14px}
+.xp-wrap{flex:1;height:5px;background:var(--surface3);border-radius:3px;overflow:hidden}
+.xp-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .5s}
+.scenario-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.scenario-head{background:var(--surface2);padding:13px 17px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.scenario-title{font-weight:700;font-size:14px}.scenario-mkt{font-size:11px;color:var(--muted2);font-weight:600;text-transform:uppercase}
+.scenario-body{padding:17px}
+.scenario-story{font-size:13px;line-height:1.8;color:var(--muted2);margin-bottom:13px}.scenario-story strong{color:var(--text)}
+.chart-mini{height:68px;background:var(--surface2);border-radius:8px;margin-bottom:13px;display:flex;align-items:flex-end;padding:6px;gap:3px}
+.chart-bar{flex:1;border-radius:2px 2px 0 0}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:11px}
+.choice-btn{font-family:'Manrope',sans-serif;font-weight:600;font-size:12px;padding:11px;border-radius:9px;border:1px solid var(--border2);background:var(--surface2);color:var(--text);cursor:pointer;text-align:left;line-height:1.5}
+.choice-btn.correct{border-color:var(--green);background:var(--gdim);color:var(--green)}
+.choice-btn.wrong{border-color:var(--red);background:var(--rdim);color:var(--red)}
+.fb-box{display:none;background:var(--surface2);border-radius:9px;padding:13px;border-left:3px solid var(--green);margin-top:9px}
+.fb-box.show{display:block}.fb-box.wrong-fb{border-left-color:var(--red)}
+.fb-title{font-weight:700;font-size:13px;margin-bottom:5px}
+.fb-body{font-size:13px;color:var(--muted2);line-height:1.7}.fb-body strong{color:var(--text)}
+.next-btn{display:none;font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;padding:10px 20px;border-radius:8px;border:none;background:var(--accent);color:#0a0c10;cursor:pointer;margin-top:11px}
+.next-btn.show{display:inline-flex}
+.port-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px}
+.port-stat{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:15px}
+.port-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:5px}
+.port-val{font-family:'DM Mono',monospace;font-size:21px;font-weight:500}
+.port-sub{font-size:12px;color:var(--muted2);margin-top:3px}
+.trade-form{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:17px;margin-bottom:13px}
+.trade-form h3{font-size:14px;font-weight:700;margin-bottom:13px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:7px}
+.form-group{display:flex;flex-direction:column;gap:4px}
+.form-group label{font-size:10px;color:var(--muted2);font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.form-group input,.form-group select{background:var(--surface2);border:1px solid var(--border2);border-radius:7px;padding:9px 10px;color:var(--text);font-family:'Manrope',sans-serif;font-size:13px;outline:none}
+.form-group select option{background:var(--surface2)}
+.submit-trade{font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;padding:10px 20px;border-radius:7px;border:none;background:var(--green);color:#0a0c10;cursor:pointer;margin-top:5px}
+.trades-table{width:100%;border-collapse:collapse}
+.trades-table th{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;padding:7px 9px;text-align:left;border-bottom:1px solid var(--border)}
+.trades-table td{padding:10px 9px;font-size:12px;border-bottom:1px solid var(--border);color:var(--muted2)}
+.trades-table td:first-child{color:var(--text);font-weight:700}
+.api-banner{background:var(--adim);border:1px solid rgba(245,158,11,.25);border-radius:9px;padding:11px 13px;margin-bottom:13px;font-size:13px;color:var(--amber)}
+.api-row{display:flex;gap:7px;margin-top:7px}
+.api-row input{flex:1;background:var(--surface2);border:1px solid rgba(245,158,11,.3);border-radius:6px;padding:8px 11px;color:var(--text);font-family:'DM Mono',monospace;font-size:12px;outline:none}
+.api-row button{font-family:'Manrope',sans-serif;font-weight:700;font-size:12px;padding:8px 13px;border-radius:6px;border:none;background:var(--amber);color:#0a0c10;cursor:pointer}
+.chat-history{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:13px;min-height:260px;max-height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:11px;margin-bottom:9px}
+.msg{display:flex;gap:9px;align-items:flex-start}
+.msg-av{width:29px;height:29px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.msg-av.ai{background:var(--acdim);color:var(--accent);font-family:'DM Serif Display',serif;font-size:15px}
+.msg-av.user{background:var(--godim);color:var(--gold)}
+.msg-name{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;margin-bottom:3px}
+.msg-text{font-size:13px;line-height:1.7;color:var(--muted2);background:var(--surface2);border-radius:9px;padding:9px 12px}
+.msg-text.user-msg{background:var(--godim);color:var(--text)}
+.quick-qs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px}
+.quick-q{font-family:'Manrope',sans-serif;font-size:11px;padding:5px 10px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--muted2);cursor:pointer;font-weight:500}
+.chat-row{display:flex;gap:7px}
+.chat-input{flex:1;background:var(--surface);border:1px solid var(--border2);border-radius:9px;padding:10px 13px;color:var(--text);font-family:'Manrope',sans-serif;font-size:13px;outline:none}
+.chat-send{font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;padding:10px 17px;border-radius:9px;border:none;background:var(--accent);color:#0a0c10;cursor:pointer}
+.chat-send:disabled{opacity:.5}
+.learn-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px}
+.learn-card{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:15px;cursor:pointer;position:relative}
+.learn-card.locked{opacity:.45;cursor:not-allowed}
+.learn-emoji{font-size:21px;margin-bottom:7px}
+.learn-title{font-weight:700;font-size:13px;margin-bottom:3px}
+.learn-desc{font-size:12px;color:var(--muted2);line-height:1.5}
+.lb{position:absolute;top:9px;right:9px;font-size:10px;font-weight:700;text-transform:uppercase;padding:2px 7px;border-radius:4px}
+.lb-open{background:var(--acdim);color:var(--accent)}.lb-lock{background:var(--surface3);color:var(--muted)}
+.lesson-content{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:21px}
+.lesson-content h2{font-family:'DM Serif Display',serif;font-size:20px;margin-bottom:3px}
+.lesson-sub{font-size:12px;color:var(--muted2);margin-bottom:16px}
+.lesson-step{display:flex;gap:11px;margin-bottom:15px;align-items:flex-start}
+.step-num{width:25px;height:25px;border-radius:50%;background:var(--acdim);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.step-text{font-size:13px;line-height:1.75;color:var(--muted2)}.step-text strong{color:var(--text)}
+.analogy-box{background:var(--godim);border:1px solid rgba(212,175,55,.15);border-radius:9px;padding:13px;margin:9px 0;font-size:13px;color:var(--muted2);line-height:1.65}
+.analogy-box strong{color:var(--gold)}
+.gloss-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:500;align-items:center;justify-content:center;padding:18px}
+.gloss-overlay.show{display:flex}
+.gloss-modal{background:var(--surface);border:1px solid var(--border2);border-radius:15px;width:100%;max-width:520px;max-height:78vh;overflow:hidden;display:flex;flex-direction:column}
+.gloss-head{padding:15px 19px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.gloss-head h3{font-family:'DM Serif Display',serif;font-size:18px}
+.gloss-close{background:none;border:none;color:var(--muted2);font-size:19px;cursor:pointer}
+.gloss-search{margin:11px 19px}
+.gloss-search input{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:9px 13px;color:var(--text);font-family:'Manrope',sans-serif;font-size:13px;outline:none}
+.gloss-list{overflow-y:auto;padding:0 19px 19px}
+.gi{padding:11px 0;border-bottom:1px solid var(--border)}
+.gi-term{font-weight:700;font-size:13px;color:var(--accent);margin-bottom:3px}
+.gi-plain{font-size:13px;color:var(--muted2);line-height:1.6}
+.gi-ex{font-size:12px;color:var(--muted);margin-top:3px;font-style:italic}
+.term-popup{display:none;position:fixed;z-index:600;background:var(--surface);border:1px solid var(--border2);border-radius:10px;padding:13px 15px;max-width:270px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.term-popup.show{display:block}
+.tp-term{font-weight:700;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.3px;margin-bottom:5px}
+.tp-def{font-size:13px;color:var(--muted2);line-height:1.65}.tp-def strong{color:var(--text)}
+.tp-ex{font-size:12px;color:var(--muted);margin-top:5px;font-style:italic}
+.tp-close{position:absolute;top:7px;right:9px;background:none;border:none;color:var(--muted);font-size:15px;cursor:pointer}
+.disclaimer{font-size:11px;color:var(--muted);text-align:center;padding:13px;border-top:1px solid var(--border);margin-top:18px}
+@media(max-width:768px){.pt-sidebar{display:none}.sim-stats{grid-template-columns:1fr 1fr}.choices{grid-template-columns:1fr}.port-grid{grid-template-columns:1fr}.learn-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="nav">
+<div class="logo">Invest<span>IQ</span></div>
+<div class="nav-tabs">
+<button class="nav-tab active" onclick="go('picks')">Picks</button>
+<button class="nav-tab" onclick="go('simulator')">Simulator</button>
+<button class="nav-tab" onclick="go('portfolio')">Portfolio</button>
+<button class="nav-tab" onclick="go('coach')">Coach</button>
+<button class="nav-tab" onclick="go('learn')">Learn</button>
+</div>
+<div class="nav-right">
+<div class="sim-badge" id="nav-sim">SIM $1,000,000</div>
+<button class="help-btn" onclick="openGloss()">?</button>
+</div>
+</nav>
+<div class="app-body">
+<div class="main-content">
+<div id="section-picks" class="section active">
+<div class="section-title">Today's Picks</div>
+<div class="section-sub">Stocks, Options & Forex — every word explained in plain English.</div>
+<div class="page-tip"><div class="pi-icon">👆</div><div class="pi-text"><strong>How to read this page:</strong> Each card is a stock or currency the AI thinks is worth watching today. The colored label tells you the action. <strong>Tap any purple word</strong> for a plain English explanation. Tap <strong>?</strong> top right for the full dictionary.</div></div>
+<div class="market-toggle">
+<button class="mkt-btn active" onclick="filterMkt('all',this)">All Markets</button>
+<button class="mkt-btn" onclick="filterMkt('stock',this)">Stocks</button>
+<button class="mkt-btn" onclick="filterMkt('options',this)">Options</button>
+<button class="mkt-btn" onclick="filterMkt('forex',this)">Forex</button>
+</div>
+<div id="picks-list"></div>
+<div class="disclaimer">For educational purposes only. Not financial advice.</div>
+</div>
+<div id="section-simulator" class="section">
+<div class="section-title">Trading Simulator</div>
+<div class="section-sub">Real scenarios. Fake money. Real lessons every time.</div>
+<div class="page-tip"><div class="pi-icon">🎮</div><div class="pi-text"><strong>How this works:</strong> Each round gives you a real trading situation. Pick what you would do. The app tells you if you were right or wrong and exactly why — in plain English. You start with $1,000,000 in fake money. You cannot lose real money here.</div></div>
+<div class="sim-stats">
+<div class="sim-stat"><div class="sim-stat-label">Fake Money</div><div class="sim-stat-val green" id="sim-bal">$1,000,000</div></div>
+<div class="sim-stat"><div class="sim-stat-label">Profit/Loss</div><div class="sim-stat-val" id="sim-pnl">$0</div></div>
+<div class="sim-stat"><div class="sim-stat-label">Win Rate</div><div class="sim-stat-val" id="sim-wr">—</div></div>
+<div class="sim-stat"><div class="sim-stat-label">Rounds</div><div class="sim-stat-val" id="sim-ct">0</div></div>
+</div>
+<div class="xp-row">
+<span style="font-size:11px;color:var(--muted2);font-weight:600;">XP</span>
+<div class="xp-wrap"><div class="xp-fill" id="xp-fill" style="width:0%"></div></div>
+<span style="font-size:12px;color:var(--accent);font-weight:700;" id="xp-label">0 XP</span>
+</div>
+<div id="scenario-wrap"></div>
+</div>
+<div id="section-portfolio" class="section">
+<div class="section-title">My Portfolio</div>
+<div class="section-sub">Log and track every real trade you make.</div>
+<div class="page-tip"><div class="pi-icon">📋</div><div class="pi-text"><strong>What is a portfolio?</strong> A list of everything you've invested in — like a folder holding all your trade records. Log every real trade here. Fill in what you bought, what price you paid, how many shares, and your stop loss.</div></div>
+<div class="port-grid">
+<div class="port-stat"><div class="port-label">Total Invested</div><div class="port-val" id="port-total">$0.00</div><div class="port-sub" id="port-count">No trades yet</div></div>
+<div class="port-stat"><div class="port-label">Open Positions</div><div class="port-val" id="port-open">0</div><div class="port-sub">Active trades</div></div>
+</div>
+<div class="trade-form">
+<h3>➕ Log a Trade</h3>
+<div class="form-row">
+<div class="form-group"><label>Ticker <span class="term" onclick="showTerm('Ticker')">?</span></label><input type="text" id="t-ticker" placeholder="e.g. NVDA, AAPL"/></div>
+<div class="form-group"><label>Market</label><select id="t-market"><option value="stock">Stock</option><option value="options">Options</option><option value="forex">Forex</option><option value="crypto">Crypto</option></select></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label>Direction <span class="term" onclick="showTerm('Long')">?</span></label><select id="t-action"><option value="buy">↑ BUY — Goes UP</option><option value="sell">↓ SELL — Goes DOWN</option></select></div>
+<div class="form-group"><label>Entry Price $ <span class="term" onclick="showTerm('Entry Zone')">?</span></label><input type="number" id="t-entry" placeholder="0.00" step="0.01"/></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label>Shares <span class="term" onclick="showTerm('Share')">?</span></label><input type="number" id="t-shares" placeholder="0"/></div>
+<div class="form-group"><label>Stop Loss $ <span class="term" onclick="showTerm('Stop Loss')">?</span></label><input type="number" id="t-stop" placeholder="0.00" step="0.01"/></div>
+</div>
+<button class="submit-trade" onclick="logTrade()">Log This Trade</button>
+</div>
+<div class="card">
+<div style="font-size:14px;font-weight:700;margin-bottom:11px;">Trade History</div>
+<table class="trades-table">
+<thead><tr><th>Symbol</th><th>Market</th><th>Direction</th><th>Entry</th><th>Shares</th><th>Stop</th><th>Value</th></tr></thead>
+<tbody id="trades-body"><tr><td colspan="7" style="color:var(--muted);text-align:center;padding:22px;">No trades yet.</td></tr></tbody>
+</table>
+</div>
+</div>
+<div id="section-coach" class="section">
+<div class="section-title">Your Coach</div>
+<div class="section-sub">Ask anything. Plain English. Honest every time.</div>
+<div class="page-tip"><div class="pi-icon">🧠</div><div class="pi-text"><strong>How to use the Coach:</strong> Type any question about investing. The Coach answers like a patient teacher who tells you the truth. There are no dumb questions here. Tap a quick question below to start instantly.</div></div>
+<div class="api-banner" id="api-banner">
+<div>⚡ <strong>Activate your AI Coach</strong> — paste your free Claude API key below. Get one at <strong>console.anthropic.com</strong></div>
+<div class="api-row"><input type="password" id="api-key-input" placeholder="sk-ant-..."/><button onclick="saveKey()">Activate</button></div>
+</div>
+<div class="chat-history" id="chat-history">
+<div class="msg"><div class="msg-av ai">I</div><div style="flex:1"><div class="msg-name">Invest IQ Coach</div><div class="msg-text">Hey! I'm your personal investment coach. Ask me anything — no fancy words without an explanation, no sugarcoating. What do you want to learn?</div></div></div>
+</div>
+<div class="quick-qs">
+<button class="quick-q" onclick="askCoach('What is a stock? Explain like I am 12.')">What is a stock?</button>
+<button class="quick-q" onclick="askCoach('What does stop loss mean?')">Stop loss?</button>
+<button class="quick-q" onclick="askCoach('What is day trading really like for a beginner?')">Day trading?</button>
+<button class="quick-q" onclick="askCoach('Explain Forex simply.')">What is Forex?</button>
+<button class="quick-q" onclick="askCoach('How much money do I need to start investing?')">How much to start?</button>
+<button class="quick-q" onclick="askCoach('What is the difference between a stock and an option?')">Stock vs option?</button>
+<button class="quick-q" onclick="askCoach('What does bull market and bear market mean?')">Bull vs bear?</button>
+<button class="quick-q" onclick="askCoach('What is leverage and why is it dangerous?')">What is leverage?</button>
+</div>
+<div class="chat-row" style="margin-top:8px;">
+<input type="text" class="chat-input" id="coach-input" placeholder="Type your question here..." onkeydown="if(event.key==='Enter')askCoach()"/>
+<button class="chat-send" id="coach-send" onclick="askCoach()">Ask →</button>
+</div>
+</div>
+<div id="section-learn" class="section">
+<div class="section-title">Learn Lab</div>
+<div class="section-sub">Everything explained from zero. Start at Lesson 1.</div>
+<div class="page-tip"><div class="pi-icon">📚</div><div class="pi-text"><strong>How to learn here:</strong> Tap any lesson card to read it. Start with Lesson 1. Every lesson is written assuming you know absolutely nothing about investing. Locked lessons unlock as you complete simulator rounds.</div></div>
+<div class="learn-grid" id="learn-grid"></div>
+<div class="lesson-content" id="lesson-display"></div>
+</div>
+</div>
+<div class="pt-sidebar">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;"><div style="font-size:18px;">💬</div><div><div class="pt-title">Plain Talk Panel</div><div class="pt-sub">Everything explained simply</div></div></div>
+<div class="pt-guide" id="pt-guide"></div>
+<div class="pt-divider"></div>
+<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;font-weight:700;margin-bottom:7px;">Key Terms</div>
+<div id="pt-terms"></div>
+<div class="pt-divider"></div>
+<div style="font-size:12px;color:var(--muted2);line-height:1.6;">Tap <strong style="color:var(--purple)">any purple word</strong> for an instant explanation. Tap <strong style="color:var(--accent)">?</strong> for the full dictionary.</div>
+</div>
+</div>
+<div class="gloss-overlay" id="gloss-overlay" onclick="if(event.target===this)closeGloss()">
+<div class="gloss-modal">
+<div class="gloss-head"><h3>📖 Plain English Dictionary</h3><button class="gloss-close" onclick="closeGloss()">✕</button></div>
+<div class="gloss-search"><input type="text" placeholder="Search any investing word..." oninput="filterGloss(this.value)" id="gloss-search"/></div>
+<div class="gloss-list" id="gloss-list"></div>
+</div>
+</div>
+<div class="term-popup" id="term-popup">
+<button class="tp-close" onclick="closeTerm()">✕</button>
+<div class="tp-term" id="tp-term"></div>
+<div class="tp-def" id="tp-def"></div>
+<div class="tp-ex" id="tp-ex"></div>
+</div>
+<script>
+const glossary=[{term:'Stock',plain:'A tiny piece of ownership in a real company. Buy 1 share of Apple and you literally own a fraction of Apple Inc.',ex:'Like owning 1 brick in a skyscraper. If the building becomes more valuable, your brick is worth more.'},{term:'Share',plain:'One single unit of stock. If a company has 1 billion shares and you own 1, you own one-billionth of that company.',ex:'"I bought 10 shares of Nvidia" = you own 10 units of Nvidia stock.'},{term:'Ticker',plain:'The short nickname code for a stock. Instead of writing the full company name, traders use a short code.',ex:'NVDA = Nvidia. MSFT = Microsoft. TSLA = Tesla. AAPL = Apple.'},{term:'Entry Zone',plain:'The price range where it makes sense to buy. Only buy within that range — not above or below.',ex:'Like waiting for a sale. The entry zone is the sale price window.'},{term:'Stop Loss',plain:'An automatic sell order you set before entering a trade. If the price drops to your stop level, it sells automatically.',ex:'Buy at $100. Stop loss at $90. Worst case you lose $10 per share.'},{term:'Take Profit',plain:'The price where you plan to sell and take your winnings. Decided BEFORE buying.',ex:'Buy at $100. Take profit at $130. When it hits $130, sell and pocket $30.'},{term:'P&L',plain:'Profit and Loss. How much money you made or lost. Positive = up. Negative = down.',ex:'P&L of +$500 means you made $500. -$200 means you lost $200.'},{term:'Bull Market',plain:'When stock prices are going UP for a long time. Investors are confident and buying.',ex:'Like a bull charging forward — prices push upward.'},{term:'Bear Market',plain:'When stock prices are falling for a long time. "Bearish" means you think something will fall.',ex:'Like a bear swiping its paw downward — prices get pushed down.'},{term:'Forex',plain:'Foreign Exchange. Trading one country\'s money against another. $7 trillion traded daily.',ex:'EUR/USD tells you how many US dollars 1 Euro buys.'},{term:'Pip',plain:'The smallest price movement in Forex. Usually the 4th decimal place.',ex:'EUR/USD moves from 1.0850 to 1.0860 = 10 pips.'},{term:'Options',plain:'A contract giving you the RIGHT to buy or sell a stock at a specific price before a specific date.',ex:'Like a refundable deposit. Small fee upfront, big potential payoff.'},{term:'Call Option',plain:'An options contract you buy when you expect a stock to go UP.',ex:'Stock at $100. Buy a call. Stock goes to $150. You still buy at $100.'},{term:'Put Option',plain:'An options contract you buy when you expect a stock to go DOWN.',ex:'Stock at $100. Buy a put. Stock crashes to $60. You still sell at $100.'},{term:'Premium',plain:'The price you pay to buy an options contract. Your maximum possible loss on that trade.',ex:'Pay $15 for an options contract. That $15 is your premium.'},{term:'Day Trading',plain:'Buying AND selling within the same trading day. Every position closed before 4pm ET.',ex:'Buy Tesla at 10am, sell at 1pm. Done for the day.'},{term:'Swing Trading',plain:'Holding a stock for several days or weeks. Riding the price swings.',ex:'Buy Monday, sell Thursday when it hits your target.'},{term:'Leverage',plain:'Borrowing money from your broker to control a bigger trade. Multiplies wins AND losses.',ex:'10x leverage on $1,000 = you control $10,000. Very dangerous.'},{term:'Volume',plain:'How many shares were bought and sold today. High volume = more reliable price moves.',ex:'NVDA trading 50 million shares (high) vs 5 million (low).'},{term:'Momentum',plain:'A stock moving strongly in one direction. High momentum = on a streak.',ex:'Like a boulder rolling downhill — harder to stop the longer it rolls.'},{term:'Resistance',plain:'A price ceiling a stock keeps hitting and bouncing back from.',ex:'Stock tries to break $100 three times and fails. $100 is resistance.'},{term:'Support',plain:'A price floor a stock keeps bouncing off of. Buyers step in at this level.',ex:'Stock drops to $80 three times and bounces back. $80 is support.'},{term:'Portfolio',plain:'The collection of everything you\'ve invested in — all in one place.',ex:'Like a folder holding all your investment records.'},{term:'Dividend',plain:'Cash a company pays you just for owning their stock. Like rental income.',ex:'Own 100 Apple shares. Apple pays $1 per share dividend. You get $100.'},{term:'Long',plain:'You bought something expecting the price to rise.',ex:'"I\'m long NVDA" = I own Nvidia and want the price to go up.'},{term:'Short',plain:'You borrowed shares and sold them, expecting the price to DROP.',ex:'Borrow 10 Apple shares at $170. Price drops to $140. Buy back. Keep $30.'},{term:'Broker',plain:'The company that connects you to the stock market so you can buy and sell.',ex:'Apps like Robinhood, Alpaca, TD Ameritrade are all brokers.'},{term:'Market Order',plain:'Buy or sell IMMEDIATELY at whatever the current price is.',ex:'Click "Buy Market" on NVDA. Buys instantly at current price.'},{term:'Limit Order',plain:'Buy or sell ONLY at the specific price you choose.',ex:'"Buy NVDA only at $855" = limit order. Won\'t execute above that.'},{term:'Volatility',plain:'How wildly a stock\'s price swings. High = big moves, big risk, big reward.',ex:'Crypto is very volatile. Treasury bonds are very low volatility.'},{term:'ETF',plain:'A basket of many stocks bundled into one investment.',ex:'SPY holds all 500 S&P 500 companies. Buy 1 share = own a piece of 500.'},{term:'Earnings',plain:'A report companies release every 3 months showing profit or loss.',ex:'Apple beats earnings → stock jumps. Misses → stock drops.'},{term:'Market Cap',plain:'The total dollar value of a company. Share price × total shares.',ex:'Apple at $170 × 15 billion shares = $2.55 trillion market cap.'}];
+const pageTerms={picks:['Entry Zone','Stop Loss','Take Profit','Bull Market','Momentum','Ticker'],simulator:['Stop Loss','P&L','Momentum','Resistance','Volume','Day Trading'],portfolio:['Portfolio','P&L','Stop Loss','Entry Zone','Share','Long'],coach:['Broker','Market Order','Limit Order','Leverage','Volatility','ETF'],learn:['Stock','Share','Dividend','Market Cap','Bull Market','Bear Market']};
+const pageGuides={picks:{t:'📍 Stock Picks',d:'AI signals for stocks, options, and Forex. Every card shows exact entry zones, profit targets, and stop losses in plain English.'},simulator:{t:'🎮 Simulator',d:'Real trading scenarios with fake money. Pick your move, get graded, learn the right move every time.'},portfolio:{t:'📋 My Portfolio',d:'Log every real trade here. Tracks your positions, entry prices, stop losses, and total value.'},coach:{t:'🧠 AI Coach',d:'Ask any investing question in plain English. Patient, honest, step-by-step answers every time.'},learn:{t:'📚 Learn Lab',d:'Bite-sized lessons from scratch. Start at Lesson 1. Written so anyone can understand.'}};
+let activeTab='picks',activeMkt='all',simBal=1000000,simPnl=0,simWins=0,simTotal=0,xp=0,scenIdx=0,trades=[],apiKey='',chatMsgs=[];
+function go(tab){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById('section-'+tab).classList.add('active');const map={picks:0,simulator:1,portfolio:2,coach:3,learn:4};document.querySelectorAll('.nav-tab')[map[tab]].classList.add('active');activeTab=tab;updateSidebar(tab);if(tab==='simulator')renderScen();if(tab==='learn')renderLearn();}
+function updateSidebar(tab){const g=pageGuides[tab];document.getElementById('pt-guide').innerHTML=`<div class="pt-guide-title">${g.t}</div><div class="pt-guide-text">${g.d}</div>`;const terms=pageTerms[tab].map(t=>glossary.find(g=>g.term===t)).filter(Boolean);document.getElementById('pt-terms').innerHTML=terms.map(g=>`<div class="pt-term"><div class="pt-term-name">${g.term}</div><div class="pt-term-def">${g.plain}</div>${g.ex?`<div style="font-size:11px;color:var(--muted);margin-top:3px;font-style:italic;">${g.ex}</div>`:''}</div>`).join('');}
+const picks=[{ticker:'NVDA',name:'Nvidia Corporation',market:'stock',signal:'buy',entry:'$850–$880',target:'$970+',stop:'$810',explain:`<span class="term" onclick="showTerm('Stock')">Stock</span> pick: Nvidia makes the chips that power all AI. The price recently dipped — meaning it got cheaper without anything bad happening. Like your favorite item going on sale. <strong>Action: Buy in the entry zone. Set your <span class="term" onclick="showTerm('Stop Loss')">stop loss</span> at $810.</strong>`,tags:['AI chips','Strong earnings','High momentum','Day + swing']},{ticker:'MSFT',name:'Microsoft Corporation',market:'stock',signal:'buy',entry:'$410–$425',target:'$480+',stop:'$390',explain:`Microsoft runs Azure cloud and has built AI into everything they sell. Like a landlord who keeps raising rent — steady income that grows. Lower risk, slower reward, great for beginners. <strong>Action: Buy in the zone. Hold for weeks or months. <span class="term" onclick="showTerm('Stop Loss')">Stop loss</span> at $390.</strong>`,tags:['Cloud + AI','Stable growth','Lower risk','Swing to long-term']},{ticker:'AAPL',name:'Apple Inc.',market:'stock',signal:'wait',entry:'$168–$172',target:'$200+',stop:'$158',explain:`Apple is solid but priced a little high right now. Buying today is paying full price when a sale is coming. Wait for the <span class="term" onclick="showTerm('Entry Zone')">entry zone</span>. <strong>Action: Do NOT buy yet. Watch and wait for the price to come to you.</strong>`,tags:['Consumer giant','Wait for dip','Long-term','Services growing']},{ticker:'EUR/USD',name:'Euro vs US Dollar',market:'forex',signal:'buy',entry:'1.0820–1.0850',target:'1.0950',stop:'1.0780',explain:`<span class="term" onclick="showTerm('Forex')">Forex</span>: EUR/USD tells you how many dollars 1 euro buys. Dollar is softening slightly. <strong>Action: Buy in the entry range. Target 1.0950. <span class="term" onclick="showTerm('Stop Loss')">Stop loss</span> at 1.0780.</strong>`,tags:['Forex','Short-term','Day trade','Dollar weakness']},{ticker:'GBP/JPY',name:'British Pound vs Japanese Yen',market:'forex',signal:'wait',entry:'190.50–191.00',target:'193.00',stop:'189.00',explain:`Highly <span class="term" onclick="showTerm('Volatility')">volatile</span> pair. Near a <span class="term" onclick="showTerm('Resistance')">resistance</span> level. <strong>Action: Watch only. Build experience on simpler pairs first.</strong>`,tags:['Forex','Volatile','Watch only','More experience needed']},{ticker:'NVDA 900C',name:'Nvidia $900 Call Option',market:'options',signal:'watch',entry:'$12–$15 per contract',target:'$25+',stop:'$8',explain:`A <span class="term" onclick="showTerm('Call Option')">call option</span> gives you the right to buy NVDA at $900. Pay $15 <span class="term" onclick="showTerm('Premium')">premium</span>. If NVDA hits $950, that $15 could be worth $50+. <strong>Action: Watch and learn. Don't trade options until you've done 20+ simulator rounds.</strong>`,tags:['Options','Leverage','Higher risk','Learn first']}];
+function renderPicks(){const filtered=activeMkt==='all'?picks:picks.filter(p=>p.market===activeMkt);document.getElementById('picks-list').innerHTML=filtered.map(p=>`<div class="card"><div class="pick-header"><div><div class="pick-name">${p.ticker}</div><div class="pick-company">${p.name}</div></div><span class="badge badge-${p.signal==='buy'?'buy':p.signal==='wait'?'wait':'watch'}">${p.signal==='buy'?'▲ BUY NOW':p.signal==='wait'?'◎ WAIT':'◉ WATCH'}</span></div><div class="zones"><div class="zone"><div class="zone-label">Entry Zone <span class="term" onclick="showTerm('Entry Zone')" style="font-size:9px">?</span></div><div class="zone-val amber">${p.entry}</div></div><div class="zone"><div class="zone-label">Take Profit <span class="term" onclick="showTerm('Take Profit')" style="font-size:9px">?</span></div><div class="zone-val green">${p.target}</div></div><div class="zone"><div class="zone-label">Stop Loss <span class="term" onclick="showTerm('Stop Loss')" style="font-size:9px">?</span></div><div class="zone-val red">${p.stop}</div></div></div><div class="pick-explain">${p.explain}</div><div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`).join('');}
+function filterMkt(m,btn){activeMkt=m;document.querySelectorAll('.mkt-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderPicks();}
+const scenarios=[{market:'Stock',title:'NVDA is dropping fast — what do you do?',story:`You bought <strong>Nvidia (NVDA)</strong> at $870. It's now at <strong>$820</strong>. Your <span class="term" onclick="showTerm('Stop Loss')">stop loss</span> is at <strong>$810</strong>. News says "AI spending fears" but no bad news from Nvidia. What do you do?`,bars:[85,90,88,92,80,75,72,74],bc:['#22c55e','#22c55e','#22c55e','#22c55e','#ef4444','#ef4444','#ef4444','#ef4444'],choices:['Panic sell right now','Hold — stop loss at $810, not triggered','Buy more to lower my average','Sell half, keep the other half'],correct:1,pnl:2500,fb:{r:'<strong>✓ Correct!</strong> Your stop loss hasn\'t triggered. Selling at $820 when your plan says $810 means fear is making your decision. The drop is from general market worry — not Nvidia. Stick to the plan.',w:'The right answer was to <strong>hold and trust your stop loss</strong>. You set $810 as your exit for a reason. Selling earlier breaks your own plan. The stop loss makes this decision for you automatically.'}},{market:'Forex',title:'EUR/USD just broke through resistance — what do you do?',story:`You\'ve been watching <strong>EUR/USD</strong> at 1.0850. It just broke above <strong>1.0900</strong> with high <span class="term" onclick="showTerm('Volume')">volume</span>. The <span class="term" onclick="showTerm('Entry Zone')">entry zone</span> was 1.0820–1.0850. You missed it. What now?`,bars:[60,62,61,65,72,80,85,88],bc:['#6b7280','#6b7280','#6b7280','#6b7280','#22c55e','#22c55e','#22c55e','#22c55e'],choices:['Chase it — buy now at 1.0910','Wait for pullback to 1.0875','Forget it — find a new trade','Set alert at 1.0875 and wait'],correct:3,pnl:1500,fb:{r:'<strong>✓ Correct!</strong> Never chase a breakout. Price almost always dips slightly after a spike. Set an alert and only enter if price comes back to a reasonable level. If it never does — there will always be another trade.',w:'The right move was to <strong>set an alert and wait for a pullback</strong>. Buying right after a breakout means you\'re the last person in — buying at the top before everyone sells their profit.'}},{market:'Options',title:'Your call option doubled — do you take profit?',story:`You bought 2 NVDA $900 <span class="term" onclick="showTerm('Call Option')">call option</span> contracts for <strong>$15 each</strong> ($3,000 total). They\'re now worth <strong>$32 each</strong> ($6,400). You\'re up <strong>$3,400 — 113% gain</strong>. What do you do?`,bars:[50,52,55,58,65,75,88,95],bc:['#6b7280','#6b7280','#6b7280','#6b7280','#22c55e','#22c55e','#22c55e','#22c55e'],choices:['Hold all — could go to $50','Sell half, let the other half ride','Sell everything now','Do nothing and watch'],correct:1,pnl:3400,fb:{r:'<strong>✓ Excellent!</strong> Selling half locks in $1,700 profit AND covers your original cost. The remaining contracts are a free ride — pure upside with zero stress. This is called a "free trade." Professionals do this instinctively.',w:'The smartest move was to <strong>sell half and let the rest ride</strong>. Selling all misses further gains. Holding all is greedy — options lose value over time. Selling half = locked profit + free upside.'}},{market:'Stock',title:'Strong earnings dropped — buy at open?',story:`<strong>Microsoft</strong> beat <span class="term" onclick="showTerm('Earnings')">earnings</span> by 8%. Stock is up <strong>6% in after-hours at $449</strong> (closed at $423). Market opens in 12 hours. What do you do at open?`,bars:[70,71,70,72,71,70,90,92],bc:['#6b7280','#6b7280','#6b7280','#6b7280','#6b7280','#6b7280','#22c55e','#22c55e'],choices:['Buy immediately at 9:30am','Wait 15–30 minutes for chaos to settle','Skip it — moved too much','Set limit order at $440 overnight'],correct:1,pnl:1800,fb:{r:'<strong>✓ Smart!</strong> The first 15–30 minutes after open are the most chaotic. Early buyers create wild swings. Waiting lets price settle to its real level — almost always lower than the initial spike.',w:'The right move was to <strong>wait 15–30 minutes after open</strong>. Buying at the open on an earnings spike is "buying the gap" — one of the most common beginner mistakes.'}},{market:'Forex',title:'Major news in 5 minutes — you\'re in a trade',story:`You\'re in an <span class="term" onclick="showTerm('Long')">EUR/USD long</span>. In 5 minutes the Non-Farm Payrolls report drops — the biggest monthly <span class="term" onclick="showTerm('Forex')">Forex</span> mover. You\'re up $200. What do you do?`,bars:[75,76,75,77,76,74,60,65],bc:['#22c55e','#22c55e','#22c55e','#22c55e','#22c55e','#22c55e','#ef4444','#6b7280'],choices:['Hold through — I feel confident','Close and take $200 now','Add more — sure it goes up','Move stop loss to breakeven'],correct:3,pnl:1200,fb:{r:'<strong>✓ Professional move!</strong> Moving your stop to breakeven = worst case you exit with $0. You protect yourself from a bad report destroying your trade while keeping all upside if news is positive. Zero downside risk. All upside preserved.',w:'The smartest move was to <strong>move stop to breakeven</strong>. Big news can move Forex 100+ pips instantly. Moving the stop means zero chance of losing AND you still profit if news is good.'}}];
+function renderScen(){const s=scenarios[scenIdx%scenarios.length];const bars=s.bars.map((h,i)=>`<div class="chart-bar" style="height:${h}%;background:${s.bc[i]}"></div>`).join('');document.getElementById('scenario-wrap').innerHTML=`<div class="scenario-box"><div class="scenario-head"><div><div class="scenario-title">${s.title}</div><div class="scenario-mkt">${s.market} Market · Round ${scenIdx+1}</div></div></div><div class="scenario-body"><div class="scenario-story">${s.story}</div><div class="chart-mini">${bars}</div><div style="font-size:11px;color:var(--muted2);font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:9px;">What is your move?</div><div class="choices" id="choices">${s.choices.map((c,i)=>`<button class="choice-btn" onclick="pick(${i})">${String.fromCharCode(65+i)}. ${c}</button>`).join('')}</div><div class="fb-box" id="fb-box"><div class="fb-title" id="fb-title"></div><div class="fb-body" id="fb-body"></div></div><button class="next-btn" id="next-btn" onclick="nextScen()">Next Scenario →</button></div></div>`;}
+function pick(idx){const s=scenarios[scenIdx%scenarios.length];document.querySelectorAll('.choice-btn').forEach((b,i)=>{b.disabled=true;if(i===s.correct)b.classList.add('correct');if(i===idx&&i!==s.correct)b.classList.add('wrong');});const fb=document.getElementById('fb-box');fb.classList.add('show');simTotal++;const ok=idx===s.correct;if(ok){simWins++;simBal+=s.pnl;simPnl+=s.pnl;xp+=20;fb.classList.remove('wrong-fb');document.getElementById('fb-title').innerHTML=`<span style="color:var(--green)">✓ Correct! +$${s.pnl.toLocaleString()} · +20 XP</span>`;document.getElementById('fb-body').innerHTML=s.fb.r;}else{const loss=Math.round(s.pnl*.2);simBal-=loss;simPnl-=loss;xp+=5;fb.classList.add('wrong-fb');document.getElementById('fb-title').innerHTML=`<span style="color:var(--red)">✗ Not quite — here's the right move:</span>`;document.getElementById('fb-body').innerHTML=s.fb.w;}updateSim();document.getElementById('next-btn').classList.add('show');}
+function nextScen(){scenIdx++;renderScen();}
+function updateSim(){const wr=simTotal>0?Math.round((simWins/simTotal)*100):null;document.getElementById('sim-bal').textContent='$'+simBal.toLocaleString();document.getElementById('nav-sim').textContent='SIM $'+simBal.toLocaleString();const pe=document.getElementById('sim-pnl');pe.textContent=(simPnl>=0?'+':'')+' $'+Math.abs(simPnl).toLocaleString();pe.style.color=simPnl>=0?'var(--green)':'var(--red)';document.getElementById('sim-wr').textContent=wr!==null?wr+'%':'—';document.getElementById('sim-ct').textContent=simTotal;document.getElementById('xp-fill').style.width=(xp%100)+'%';document.getElementById('xp-label').textContent=xp+' XP';}
+function logTrade(){const ticker=document.getElementById('t-ticker').value.trim().toUpperCase();const market=document.getElementById('t-market').value;const action=document.getElementById('t-action').value;const entry=parseFloat(document.getElementById('t-entry').value);const shares=parseFloat(document.getElementById('t-shares').value);const stop=parseFloat(document.getElementById('t-stop').value);if(!ticker||isNaN(entry)||isNaN(shares)){alert('Please fill in Ticker, Entry Price, and Shares.');return;}trades.push({ticker,market,action,entry,shares,stop:isNaN(stop)?null:stop,value:entry*shares});renderTrades();['t-ticker','t-entry','t-shares','t-stop'].forEach(id=>document.getElementById(id).value='');}
+function renderTrades(){const tbody=document.getElementById('trades-body');if(!trades.length){tbody.innerHTML='<tr><td colspan="7" style="color:var(--muted);text-align:center;padding:22px;">No trades logged yet.</td></tr>';return;}const total=trades.reduce((s,t)=>s+t.value,0);tbody.innerHTML=trades.map(t=>`<tr><td>${t.ticker}</td><td>${t.market}</td><td style="color:${t.action==='buy'?'var(--green)':'var(--red)'};font-weight:700">${t.action==='buy'?'↑ BUY':'↓ SELL'}</td><td>$${t.entry.toFixed(2)}</td><td>${t.shares}</td><td>${t.stop?'$'+t.stop.toFixed(2):'—'}</td><td>$${t.value.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</td></tr>`).join('');document.getElementById('port-total').textContent='$'+total.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});document.getElementById('port-open').textContent=trades.length;document.getElementById('port-count').textContent=trades.length+' position'+(trades.length!==1?'s':'')+' logged';}
+function saveKey(){const k=document.getElementById('api-key-input').value.trim();if(k.startsWith('sk-ant-')){apiKey=k;document.getElementById('api-banner').style.display='none';addMsg('ai','Coach activated! Ask me anything.');}else alert('Please enter a valid Claude API key (starts with sk-ant-)');}
+function addMsg(role,text){const h=document.getElementById('chat-history');const isAI=role==='ai';const d=document.createElement('div');d.className='msg';d.innerHTML=`<div class="msg-av ${isAI?'ai':'user'}">${isAI?'I':'U'}</div><div style="flex:1"><div class="msg-name">${isAI?'Invest IQ Coach':'You'}</div><div class="msg-text ${isAI?'':'user-msg'}">${text}</div></div>`;h.appendChild(d);h.scrollTop=h.scrollHeight;chatMsgs.push({role:isAI?'assistant':'user',content:text.replace(/<[^>]+>/g,'')});}
+async function askCoach(q){const input=document.getElementById('coach-input');const question=q||input.value.trim();if(!question)return;input.value='';addMsg('user',question);if(!apiKey){addMsg('ai','Please enter your Claude API key in the yellow banner above. Get a free key at console.anthropic.com');return;}const btn=document.getElementById('coach-send');btn.disabled=true;btn.textContent='...';const sys='You are Invest IQ Coach. Your student is a complete beginner interested in day trading, stocks, options, and Forex. Be honest, patient, and step-by-step. Always use real-world analogies. Never use jargon without explaining it. Keep answers clear and short.';try{const msgs=[...chatMsgs.slice(-6),{role:'user',content:question}];const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:700,system:sys,messages:msgs})});const data=await res.json();if(data.content?.[0])addMsg('ai',data.content[0].text.replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>'));else addMsg('ai','Something went wrong. Check your API key.');}catch(e){addMsg('ai','Connection error. Check your API key.');}btn.disabled=false;btn.textContent='Ask →';}
+const lessons=[{emoji:'📈',title:'What is a Stock?',desc:'The very beginning. What you\'re actually buying.',unlocked:true,content:{title:'What is a Stock?',sub:'Lesson 1 · Start here.',steps:[{n:1,t:'A <strong>stock</strong> is a tiny piece of ownership in a real company. Buy 1 share of Apple and you literally own a fraction of Apple Inc.'},{n:2,t:'<strong>If Apple makes more money, your piece becomes worth more.</strong> If Apple struggles, it loses value. You go up and down with the company.'},{n:3,t:'<strong>Why do companies sell stock?</strong> They need money to grow. Instead of borrowing from a bank, they sell small pieces to thousands of investors.'},{n:4,t:'<strong>How do you make money?</strong> Two ways: (1) Stock price goes up and you sell for more. (2) Some companies pay "dividends" — regular cash just for owning the stock.'}],analogy:'<strong>Real analogy:</strong> Your neighbor opens a restaurant and needs $100,000. He offers you 10% ownership for $10,000. If the restaurant makes $1 million profit, your 10% is worth $100,000. That\'s exactly how stocks work.'}},{emoji:'🛑',title:'Stop Loss & Risk',desc:'How to protect yourself so one bad trade never destroys you.',unlocked:true,content:{title:'Stop Loss: Your Financial Seatbelt',sub:'Lesson 2 · The most important rule in trading.',steps:[{n:1,t:'A <strong>stop loss</strong> is an automatic sell order you set BEFORE entering any trade. If price drops to your level, it sells automatically — no emotion.'},{n:2,t:'Example: Buy Nvidia at $870. Stop loss at $830. If NVDA drops to $830, it sells automatically. <strong>You can never lose more than $40 per share.</strong>'},{n:3,t:'<strong>Why does it matter?</strong> Because emotions betray you. When a stock is falling your brain says "it\'ll come back." Sometimes it falls to $400. The stop loss decides for you.'},{n:4,t:'<strong>The 1–2% rule:</strong> Never risk more than 1–2% of your account on one trade. With $5,000 that means never risk more than $50–$100 per trade.'}],analogy:'<strong>Real analogy:</strong> A stop loss is your car\'s seatbelt. You don\'t plan to crash. But if you do, it stops you from going through the windshield. Set it before every single trade — zero exceptions.'}},{emoji:'💱',title:'What is Forex?',desc:'Trading the world\'s currencies.',unlocked:false,content:{title:'Forex: Trading the World\'s Money',sub:'Lesson 3 · Currencies made simple.',steps:[{n:1,t:'<strong>Forex</strong> means Foreign Exchange — trading one country\'s money against another. Open 24/5. $7 trillion traded daily.'},{n:2,t:'<strong>EUR/USD = 1.0850</strong> means 1 Euro buys 1.0850 US Dollars. Think it\'ll rise? Go long. Think it\'ll fall? Go short.'},{n:3,t:'<strong>How you make money:</strong> Buy at 1.0850, it moves to 1.0950. You made 100 "pips." Each pip is worth real dollars depending on trade size.'},{n:4,t:'<strong>The danger:</strong> Forex uses leverage. $100 can control $10,000. This multiplies gains AND losses by 100x. Use the lowest leverage possible.'}],analogy:'<strong>Real analogy:</strong> Flying to Europe, you exchange $1,000 for €920. Three weeks later you fly home. The euro got stronger — you exchange back and get $1,080. You made $80 doing nothing. That\'s Forex.'}},{emoji:'📋',title:'What are Options?',desc:'The most powerful — and dangerous — tool.',unlocked:false,content:{title:'Options: Power With a Price Tag',sub:'Lesson 4 · Only after mastering stocks.',steps:[{n:1,t:'An <strong>option</strong> gives you the RIGHT (not obligation) to buy or sell a stock at a specific price before a specific date. You pay a "premium" for this right.'},{n:2,t:'A <strong>call option</strong> = you expect the stock to go UP. Pay $15 for the right to buy NVDA at $900. If NVDA hits $960, your $15 could be worth $60+.'},{n:3,t:'A <strong>put option</strong> = you expect the stock to go DOWN. You pay for the right to sell at today\'s higher price even after the stock crashes.'},{n:4,t:'<strong>The brutal truth:</strong> Options have expiration dates. Every day that passes they lose value. You can be right about direction and still lose money.'}],analogy:'<strong>Real analogy:</strong> Pay a $500 deposit to lock in today\'s price on a $300,000 house. In 30 days it rises to $350,000. Your deposit lets you buy at $300,000 — locking in a $50,000 gain. If it stays flat, you lose your $500.'}},{emoji:'🏆',title:'Day Trading Rules',desc:'The rules professionals live and die by.',unlocked:false,content:{title:'Day Trading: Rules You Cannot Break',sub:'Lesson 5 · The truth most learn the hard way.',steps:[{n:1,t:'<strong>Rule 1 — Never risk more than 1% per trade.</strong> With $5,000, never risk more than $50 on one trade. Most beginners blow up accounts going too big.'},{n:2,t:'<strong>Rule 2 — Know your plan before you enter.</strong> Entry, stop loss, and profit target — all decided BEFORE you click buy.'},{n:3,t:'<strong>Rule 3 — The PDT Rule.</strong> In the US, 4+ day trades in 5 days with under $25,000 gets your account restricted. Start with a cash account.'},{n:4,t:'<strong>Rule 4 — Skip the first 30 minutes.</strong> 9:30–10:00am ET is the most chaotic time. Most pros wait for the dust to settle before entering.'}],analogy:'<strong>The honest truth:</strong> 70–80% of day traders lose money in year one. The ones who survive treat it like a business — strict rules, obsessive risk management, constant learning. Use this simulator until you\'re consistently winning before trading real money.'}}];
+function renderLearn(){document.getElementById('learn-grid').innerHTML=lessons.map((l,i)=>`<div class="learn-card${l.unlocked?'':' locked'}" onclick="${l.unlocked?`showLesson(${i})`:'alert(\'Complete more simulator rounds to unlock.\')'}"><span class="lb ${l.unlocked?'lb-open':'lb-lock'}">${l.unlocked?'Open':'Locked'}</span><div class="learn-emoji">${l.emoji}</div><div class="learn-title">Lesson ${i+1}: ${l.title}</div><div class="learn-desc">${l.desc}</div></div>`).join('');showLesson(0);}
+function showLesson(idx){if(!lessons[idx].unlocked)return;const l=lessons[idx].content;document.getElementById('lesson-display').innerHTML=`<h2>${l.title}</h2><div class="lesson-sub">${l.sub}</div>${l.steps.map(s=>`<div class="lesson-step"><div class="step-num">${s.n}</div><div class="step-text">${s.t}</div></div>`).join('')}<div class="analogy-box">${l.analogy}</div>`;}
+function openGloss(){document.getElementById('gloss-overlay').classList.add('show');document.getElementById('gloss-search').value='';renderGlossList('');}
+function closeGloss(){document.getElementById('gloss-overlay').classList.remove('show');}
+function filterGloss(q){renderGlossList(q);}
+function renderGlossList(q){const f=q?glossary.filter(g=>g.term.toLowerCase().includes(q.toLowerCase())||g.plain.toLowerCase().includes(q.toLowerCase())):glossary;document.getElementById('gloss-list').innerHTML=f.length?f.map(g=>`<div class="gi"><div class="gi-term">${g.term}</div><div class="gi-plain">${g.plain}</div>${g.ex?`<div class="gi-ex">💡 ${g.ex}</div>`:''}</div>`).join(''):'<div style="color:var(--muted);padding:20px;text-align:center;">No terms found.</div>';}
+function showTerm(name){const found=glossary.find(g=>g.term.toLowerCase()===name.toLowerCase());if(!found)return;const p=document.getElementById('term-popup');document.getElementById('tp-term').textContent=found.term;document.getElementById('tp-def').innerHTML=found.plain;document.getElementById('tp-ex').textContent=found.ex?'💡 '+found.ex:'';p.classList.add('show');p.style.top='50%';p.style.left='50%';p.style.transform='translate(-50%,-50%)';}
+function closeTerm(){document.getElementById('term-popup').classList.remove('show');}
+document.addEventListener('click',e=>{const p=document.getElementById('term-popup');if(p.classList.contains('show')&&!p.contains(e.target)&&!e.target.classList.contains('term'))closeTerm();});
+renderPicks();renderScen();renderTrades();updateSidebar('picks');renderGlossList('');
+</script>
+</body>
+</html>
