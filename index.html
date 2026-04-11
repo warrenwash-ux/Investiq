@@ -6,218 +6,206 @@
 <title>Market Kings</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#080a0f;--surface:#0f1219;--surface2:#161c27;--surface3:#1e2535;--border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);--text:#eef0f7;--muted:#5a6478;--muted2:#8a95a8;--green:#00e676;--gdim:rgba(0,230,118,0.1);--red:#ff3d57;--rdim:rgba(255,61,87,0.1);--amber:#ffab00;--adim:rgba(255,171,0,0.1);--gold:#ffd700;--godim:rgba(255,215,0,0.1);--blue:#2979ff;--bdim:rgba(41,121,255,0.1);--accent:#00e5ff;--acdim:rgba(0,229,255,0.08);--purple:#d500f9;--pdim:rgba(213,0,249,0.1)}
+:root{--bg:#080a0f;--surface:#0f1219;--surface2:#161c27;--surface3:#1e2535;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#eef0f7;--muted:#5a6478;--muted2:#8a95a8;--green:#00e676;--gdim:rgba(0,230,118,0.1);--red:#ff3d57;--rdim:rgba(255,61,87,0.1);--amber:#ffab00;--adim:rgba(255,171,0,0.1);--gold:#ffd700;--godim:rgba(255,215,0,0.08);--accent:#00e5ff;--acdim:rgba(0,229,255,0.08);--purple:#d500f9;--pdim:rgba(213,0,249,0.1)}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;font-size:14px;min-height:100vh;overflow-x:hidden}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(0,229,255,0.3)}50%{box-shadow:0 0 40px rgba(0,229,255,0.6)}}
+body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;font-size:15px;min-height:100vh}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(255,215,0,0.3)}50%{box-shadow:0 0 40px rgba(255,215,0,0.6)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-@keyframes celebrate{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-@keyframes candleDrop{from{height:0;opacity:0}to{opacity:1}}
+@keyframes celebrate{0%,100%{transform:scale(1)rotate(0deg)}25%{transform:scale(1.1)rotate(-3deg)}75%{transform:scale(1.1)rotate(3deg)}}
 
-.ticker-wrap{background:var(--surface);border-bottom:1px solid var(--border);overflow:hidden;height:30px;display:flex;align-items:center}
-.ticker{display:flex;gap:36px;animation:ticker 28s linear infinite;white-space:nowrap;padding:0 16px}
-.tick-item{font-family:'DM Mono',monospace;font-size:11px;display:flex;gap:5px;align-items:center}
-.tick-sym{color:var(--muted2);font-weight:700}
-.tick-up{color:var(--green)}.tick-dn{color:var(--red)}
+/* TICKER */
+.ticker-wrap{background:var(--surface);border-bottom:1px solid var(--border);overflow:hidden;height:28px;display:flex;align-items:center}
+.ticker{display:flex;gap:32px;animation:ticker 30s linear infinite;white-space:nowrap;padding:0 16px}
+.ti{font-family:'DM Mono',monospace;font-size:11px;display:flex;gap:5px}
+.ti-sym{color:var(--muted2);font-weight:700}
+.up{color:var(--green)}.dn{color:var(--red)}
 
-.nav{display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:54px;border-bottom:1px solid var(--border);background:rgba(8,10,15,0.97);position:sticky;top:0;z-index:200;backdrop-filter:blur(10px)}
-.logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:52px;border-bottom:1px solid var(--border);background:rgba(8,10,15,0.97);position:sticky;top:0;z-index:200}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .nav-tabs{display:flex;gap:2px}
-.nav-tab{font-family:'Manrope',sans-serif;font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:5px 10px;border-radius:6px;border:none;background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}
-.nav-tab:hover{color:var(--text);background:var(--surface2)}.nav-tab.active{background:var(--acdim);color:var(--accent);border:1px solid rgba(0,229,255,0.2)}
-.nav-right{display:flex;align-items:center;gap:8px}
-.cash-badge{font-family:'DM Mono',monospace;font-size:11px;color:var(--green);background:var(--gdim);padding:4px 10px;border-radius:5px;border:1px solid rgba(0,230,118,0.2)}
-.level-badge{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;color:var(--gold);background:var(--godim);padding:4px 10px;border-radius:5px;border:1px solid rgba(255,215,0,0.2)}
+.ntab{font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;padding:5px 10px;border-radius:6px;border:none;background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}
+.ntab:hover{color:var(--text);background:var(--surface2)}.ntab.active{background:var(--acdim);color:var(--accent);border:1px solid rgba(0,229,255,0.15)}
+.nav-right{display:flex;gap:8px;align-items:center}
+.cash-pill{font-family:'DM Mono',monospace;font-size:11px;color:var(--green);background:var(--gdim);padding:4px 10px;border-radius:5px;border:1px solid rgba(0,230,118,0.2)}
+.lvl-pill{font-family:'Bebas Neue',sans-serif;font-size:13px;color:var(--gold);background:var(--godim);padding:4px 10px;border-radius:5px;border:1px solid rgba(255,215,0,0.2);letter-spacing:1px}
 
-.main{max-width:980px;margin:0 auto;padding:20px 14px}
-.section{display:none}.section.active{display:block;animation:fadeIn .3s ease}
-.section-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;margin-bottom:3px}
-.section-sub{font-size:13px;color:var(--muted2);margin-bottom:16px}
-.page-tip{background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:12px 14px;margin-bottom:14px;display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted2);line-height:1.65}
-.page-tip strong{color:var(--text)}
+/* MAIN */
+.main{max-width:760px;margin:0 auto;padding:24px 16px}
+.screen{display:none}.screen.active{display:block;animation:fadeIn .35s ease}
 
-/* GAME HOME */
-.game-hero{text-align:center;padding:32px 16px;position:relative;overflow:hidden}
-.game-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,229,255,0.04) 0%,transparent 70%);pointer-events:none}
-.game-title{font-family:'Bebas Neue',sans-serif;font-size:56px;letter-spacing:4px;background:linear-gradient(135deg,var(--gold),var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:6px}
-.game-sub{font-size:13px;color:var(--muted2);letter-spacing:2px;text-transform:uppercase;margin-bottom:28px}
-.level-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:24px}
-.level-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;transition:all .3s;position:relative}
-.level-card.unlocked:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,229,255,0.12)}
-.level-card.locked{opacity:.4;cursor:not-allowed}
-.level-card.current{border-color:var(--gold);animation:glow 2s ease-in-out infinite}
-.level-card.completed{border-color:var(--green);background:var(--gdim)}
-.lc-num{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--gold);margin-bottom:3px}
-.lc-title{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted2);margin-bottom:6px}
-.lc-cash{font-family:'DM Mono',monospace;font-size:10px;color:var(--green);margin-bottom:3px}
-.lc-badge{font-size:9px;font-weight:700;text-transform:uppercase;padding:2px 7px;border-radius:10px;display:inline-block}
-.lb-current{background:var(--godim);color:var(--gold)}.lb-done{background:var(--gdim);color:var(--green)}.lb-lock{background:var(--surface3);color:var(--muted)}
-.prog-row{max-width:480px;margin:0 auto 20px}
-.prog-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted2);margin-bottom:5px;font-weight:600}
-.prog-bar{height:6px;background:var(--surface3);border-radius:3px;overflow:hidden}
-.prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:3px;transition:width .8s ease}
-.play-btn{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;padding:14px 44px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--gold),var(--amber));color:#000;cursor:pointer;transition:all .3s;box-shadow:0 4px 18px rgba(255,215,0,0.3)}
-.play-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,215,0,0.5)}
+/* INSTRUCTION BOX — appears on every screen */
+.instruct{background:linear-gradient(135deg,rgba(0,229,255,0.06),rgba(255,215,0,0.04));border:1px solid rgba(0,229,255,0.2);border-radius:14px;padding:16px 18px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start}
+.instruct-icon{font-size:22px;flex-shrink:0;margin-top:1px}
+.instruct-body{}
+.instruct-title{font-weight:800;font-size:14px;color:var(--accent);margin-bottom:4px}
+.instruct-text{font-size:13px;color:var(--muted2);line-height:1.75}
+.instruct-text strong{color:var(--text)}
 
-/* TRADING ARENA */
-.arena{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:14px}
-.arena-head{background:var(--surface2);padding:14px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.arena-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:var(--accent)}
-.a-stats{display:flex;gap:16px}
-.a-stat-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
-.a-stat-val{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;margin-top:2px}
-.arena-body{padding:16px}
+/* WELCOME SCREEN */
+.welcome-wrap{text-align:center;padding:48px 20px}
+.welcome-emoji{font-size:56px;margin-bottom:20px;animation:celebrate 3s ease-in-out infinite}
+.welcome-title{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:4px;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:10px}
+.welcome-sub{font-size:16px;color:var(--muted2);line-height:1.8;max-width:480px;margin:0 auto 32px}
+.welcome-sub strong{color:var(--text)}
+.big-btn{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;padding:18px 52px;border-radius:14px;border:none;background:linear-gradient(135deg,var(--gold),var(--amber));color:#000;cursor:pointer;transition:all .3s;box-shadow:0 4px 20px rgba(255,215,0,0.35);display:inline-block;margin-bottom:12px}
+.big-btn:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(255,215,0,0.5)}
+.big-btn-sub{font-size:12px;color:var(--muted2)}
+.welcome-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:32px;text-align:left}
+.ws-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px}
+.ws-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold);margin-bottom:6px}
+.ws-title{font-weight:700;font-size:13px;margin-bottom:4px}
+.ws-desc{font-size:12px;color:var(--muted2);line-height:1.6}
 
-/* REAL CANDLESTICK CHART */
-.chart-wrap{background:var(--surface2);border-radius:10px;padding:14px;margin-bottom:14px;position:relative}
-.chart-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
-.chart-sym{font-weight:700;font-size:14px}
-.chart-price-big{font-family:'DM Mono',monospace;font-size:20px;font-weight:500}
-.chart-chg{font-size:12px;font-weight:700;margin-top:2px}
-.candlestick-chart{display:flex;align-items:flex-end;gap:3px;height:100px;padding:0 4px;position:relative;cursor:pointer}
-.candle-wrap{display:flex;flex-direction:column;align-items:center;flex:1;position:relative;cursor:pointer}
-.candle-wrap:hover .candle-tooltip{display:block}
-.candle-wick{width:1.5px;background:currentColor}
-.candle-body{width:100%;border-radius:1px;min-height:2px}
-.candle-wick-top{margin-bottom:0}
-.candle-wick-bottom{margin-top:0}
-.candle-bullish{color:var(--green)}.candle-bearish{color:var(--red)}
-.candle-tooltip{display:none;position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--border2);border-radius:6px;padding:6px 10px;white-space:nowrap;font-size:11px;color:var(--muted2);z-index:10;pointer-events:none}
-.candle-tooltip strong{color:var(--text);display:block;margin-bottom:2px}
-.chart-news{background:var(--surface3);border-radius:7px;padding:9px 11px;font-size:12px;color:var(--muted2);border-left:3px solid var(--amber);margin-top:10px}
-.chart-news strong{color:var(--amber)}
-.chart-axes{display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-top:4px;padding:0 4px}
+/* LESSON SCREEN */
+.lesson-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:16px}
+.lesson-head{background:var(--surface2);padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.lesson-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px}
+.lesson-progress{font-size:12px;color:var(--muted2);font-weight:600}
+.lesson-body{padding:20px}
+.lesson-step{display:flex;gap:14px;margin-bottom:20px;align-items:flex-start}
+.ls-num{width:32px;height:32px;border-radius:50%;background:var(--acdim);border:1px solid rgba(0,229,255,0.3);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.ls-content{}
+.ls-title{font-weight:800;font-size:14px;margin-bottom:4px}
+.ls-text{font-size:13px;color:var(--muted2);line-height:1.75}
+.ls-text strong{color:var(--text)}
+.analogy{background:var(--godim);border:1px solid rgba(255,215,0,0.15);border-radius:10px;padding:14px;font-size:13px;color:var(--muted2);line-height:1.7;margin:14px 0}
+.analogy strong{color:var(--gold)}
+.tip{background:var(--gdim);border:1px solid rgba(0,230,118,0.15);border-radius:10px;padding:14px;font-size:13px;color:var(--muted2);line-height:1.7;margin:10px 0}
+.tip strong{color:var(--green)}
+.warn{background:var(--rdim);border:1px solid rgba(255,61,87,0.15);border-radius:10px;padding:14px;font-size:13px;color:var(--muted2);line-height:1.7;margin:10px 0}
+.warn strong{color:var(--red)}
+.lesson-nav{display:flex;gap:10px;padding:0 20px 20px;justify-content:space-between;align-items:center}
+.ln-dots{display:flex;gap:6px}
+.ln-dot{width:8px;height:8px;border-radius:50%;background:var(--surface3);transition:all .3s}
+.ln-dot.active{background:var(--accent);width:20px;border-radius:4px}
+.ln-dot.done{background:var(--green)}
+.lesson-btn{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;padding:12px 28px;border-radius:10px;border:none;background:var(--accent);color:#000;cursor:pointer;transition:all .2s}
+.lesson-btn:hover{opacity:.85;transform:translateY(-1px)}
+.lesson-btn.secondary{background:var(--surface2);color:var(--muted2);border:1px solid var(--border2)}
 
-/* TRADE CONTROLS */
-.amt-row{display:flex;gap:8px;margin-bottom:12px;align-items:center}
-.amt-row label{font-size:11px;color:var(--muted2);font-weight:700;text-transform:uppercase;letter-spacing:.3px;white-space:nowrap}
-.amt-btns{display:flex;gap:5px;flex-wrap:wrap}
-.amt-btn{font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;padding:5px 11px;border-radius:5px;border:1px solid var(--border2);background:transparent;color:var(--muted2);cursor:pointer;transition:all .2s}
-.amt-btn.active{background:var(--acdim);color:var(--accent);border-color:var(--accent)}
-.trade-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.trade-btn{font-family:'Manrope',sans-serif;font-weight:800;font-size:13px;padding:14px;border-radius:9px;border:none;cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:.4px}
-.btn-buy{background:var(--green);color:#000}.btn-buy:hover:not(:disabled){box-shadow:0 4px 14px rgba(0,230,118,0.4);transform:translateY(-1px)}
-.btn-sell{background:var(--red);color:#fff}.btn-sell:hover:not(:disabled){box-shadow:0 4px 14px rgba(255,61,87,0.4);transform:translateY(-1px)}
-.btn-hold{background:var(--surface3);color:var(--muted2);grid-column:1/-1}.btn-hold:hover:not(:disabled){background:var(--surface2);color:var(--text)}
+/* CANDLE VISUAL */
+.candle-demo{display:flex;gap:8px;align-items:center;justify-content:center;margin:16px 0;padding:16px;background:var(--surface2);border-radius:10px}
+.candle-label-wrap{display:flex;flex-direction:column;align-items:center;gap:4px}
+.candle-label{font-size:11px;color:var(--muted2);font-weight:600;text-align:center}
+.c-visual{display:flex;flex-direction:column;align-items:center;gap:1px}
+.c-wick{width:2px;background:currentColor;border-radius:1px}
+.c-body{width:20px;border-radius:2px;min-height:6px}
+.c-bull{color:var(--green)}.c-bear{color:var(--red)}
+.candle-explain-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.ceg-item{background:var(--surface2);border-radius:8px;padding:10px;font-size:12px;color:var(--muted2);line-height:1.5}
+.ceg-item strong{display:block;color:var(--text);margin-bottom:3px;font-size:11px;text-transform:uppercase;letter-spacing:.3px}
+
+/* QUIZ */
+.quiz-wrap{background:var(--surface2);border-radius:12px;padding:16px;margin:14px 0}
+.quiz-q{font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text)}
+.quiz-choices{display:flex;flex-direction:column;gap:8px}
+.quiz-btn{font-family:'Manrope',sans-serif;font-size:13px;font-weight:600;padding:12px 16px;border-radius:9px;border:1px solid var(--border2);background:var(--surface);color:var(--text);cursor:pointer;text-align:left;transition:all .2s}
+.quiz-btn:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+.quiz-btn.correct{border-color:var(--green);background:var(--gdim);color:var(--green)}
+.quiz-btn.wrong{border-color:var(--red);background:var(--rdim);color:var(--red)}
+.quiz-feedback{font-size:13px;color:var(--muted2);line-height:1.7;margin-top:10px;padding:12px;background:var(--surface3);border-radius:8px;display:none}
+.quiz-feedback.show{display:block}
+.quiz-feedback strong{color:var(--text)}
+
+/* TRADE SCREEN */
+.trade-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:14px}
+.trade-head{background:var(--surface2);padding:14px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.trade-sym{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--accent)}
+.trade-stats{display:flex;gap:16px}
+.ts-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.ts-val{font-family:'DM Mono',monospace;font-size:14px;font-weight:500;margin-top:2px}
+.trade-body{padding:18px}
+.chart-box{background:var(--surface2);border-radius:12px;padding:14px;margin-bottom:16px}
+.chart-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.chart-name{font-weight:700;font-size:14px}
+.chart-time{font-size:11px;color:var(--muted2)}
+.chart-price{font-family:'DM Mono',monospace;font-size:22px;font-weight:500}
+.chart-chg{font-size:12px;font-weight:700;margin-top:3px}
+.chart-candles{display:flex;align-items:flex-end;gap:3px;height:90px;padding:0 2px;margin:10px 0}
+.cc{display:flex;flex-direction:column;align-items:center;flex:1;position:relative;cursor:pointer}
+.cc:hover .cc-tip{display:block}
+.cc-tip{display:none;position:absolute;bottom:105%;left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--border2);border-radius:6px;padding:5px 8px;white-space:nowrap;font-size:10px;color:var(--muted2);z-index:5}
+.cc-body{width:100%;border-radius:1px;min-height:2px}
+.cc-wick{width:1.5px;margin:0 auto}
+.news-box{background:var(--surface3);border-radius:9px;padding:11px 14px;font-size:13px;color:var(--muted2);border-left:3px solid var(--amber);line-height:1.65;margin-bottom:16px}
+.news-box strong{color:var(--amber)}
+
+/* STEP INSTRUCTIONS above buttons */
+.step-instruction{background:var(--surface2);border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:13px;color:var(--muted2);line-height:1.65;border-left:3px solid var(--accent)}
+.step-instruction strong{color:var(--accent)}
+.btn-label{font-size:11px;color:var(--muted2);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px}
+.trade-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.trade-btn{font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;padding:16px 18px;border-radius:12px;border:none;cursor:pointer;transition:all .2s;text-align:left;position:relative;display:flex;flex-direction:column;gap:3px}
+.tb-main{font-size:15px;font-weight:800}
+.tb-explain{font-size:11px;font-weight:500;opacity:.8;line-height:1.4}
+.btn-buy{background:var(--green);color:#000}.btn-buy:hover:not(:disabled){box-shadow:0 4px 16px rgba(0,230,118,.4);transform:translateY(-1px)}
+.btn-sell{background:var(--red);color:#fff}.btn-sell:hover:not(:disabled){box-shadow:0 4px 16px rgba(255,61,87,.4);transform:translateY(-1px)}
+.btn-hold{background:var(--surface2);color:var(--text);border:1px solid var(--border2)}.btn-hold:hover:not(:disabled){background:var(--surface3)}
 .trade-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
 
 /* RESULT */
-.result-box{display:none;border-radius:10px;padding:14px;margin-top:10px;animation:slideUp .3s ease}
+.result-box{display:none;border-radius:12px;padding:16px;margin-top:12px;animation:slideUp .3s ease}
 .result-box.show{display:block}
-.result-box.win{background:var(--gdim);border:1px solid rgba(0,230,118,.3)}
-.result-box.lose{background:var(--rdim);border:1px solid rgba(255,61,87,.3)}
-.result-box.neutral{background:var(--adim);border:1px solid rgba(255,171,0,.3)}
-.result-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;margin-bottom:5px}
-.result-body{font-size:13px;color:var(--muted2);line-height:1.7}.result-body strong{color:var(--text)}
-.next-btn{display:none;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;padding:10px 24px;border-radius:7px;border:none;background:var(--accent);color:#000;cursor:pointer;margin-top:10px}
-.next-btn.show{display:inline-flex}
+.result-box.win{background:var(--gdim);border:1px solid rgba(0,230,118,.25)}
+.result-box.lose{background:var(--rdim);border:1px solid rgba(255,61,87,.25)}
+.result-box.neutral{background:var(--adim);border:1px solid rgba(255,171,0,.25)}
+.result-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;margin-bottom:6px}
+.result-body{font-size:13px;color:var(--muted2);line-height:1.75}
+.result-body strong{color:var(--text)}
+.result-lesson{background:var(--surface3);border-radius:8px;padding:10px 12px;margin-top:10px;font-size:12px;color:var(--muted2);line-height:1.6;border-left:3px solid var(--gold)}
+.result-lesson strong{color:var(--gold)}
+.cont-btn{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;padding:12px 28px;border-radius:9px;border:none;background:var(--accent);color:#000;cursor:pointer;margin-top:12px;display:none}
+.cont-btn.show{display:inline-flex}
 
-.positions-box{background:var(--surface2);border-radius:9px;padding:12px;margin-top:12px}
-.pos-title{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:8px}
-.pos-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)}
-.pos-row:last-child{border-bottom:none}
-.pos-sym{font-weight:700;font-size:12px}.pos-detail{font-size:10px;color:var(--muted2);margin-top:1px}
-.pos-pnl{font-family:'DM Mono',monospace;font-size:12px;font-weight:600}
+/* LEVEL MAP */
+.level-map{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.level-row{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;cursor:pointer;transition:all .2s}
+.level-row.current{border-color:var(--gold);background:var(--godim);animation:glow 2s ease-in-out infinite}
+.level-row.completed{border-color:var(--green);background:var(--gdim);cursor:default}
+.level-row.locked{opacity:.4;cursor:not-allowed}
+.level-row:not(.locked):not(.completed):hover{border-color:var(--border2);transform:translateX(4px)}
+.lr-num{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--gold);width:40px;text-align:center;flex-shrink:0}
+.lr-content{flex:1}
+.lr-title{font-weight:800;font-size:15px;margin-bottom:2px}
+.lr-desc{font-size:12px;color:var(--muted2);line-height:1.5}
+.lr-badge{font-size:11px;font-weight:700;text-transform:uppercase;padding:4px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.lb-now{background:var(--godim);color:var(--gold);border:1px solid rgba(255,215,0,.2)}
+.lb-done{background:var(--gdim);color:var(--green)}
+.lb-next{background:var(--surface2);color:var(--muted2)}
+.lb-lock{background:var(--surface3);color:var(--muted)}
+.prog-bar-wrap{height:6px;background:var(--surface3);border-radius:3px;overflow:hidden;margin:12px 0}
+.prog-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:3px;transition:width .8s ease}
 
-/* CANDLESTICK SECTION */
-.candle-tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
-.candle-tab{font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;padding:6px 14px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--muted2);cursor:pointer;transition:all .2s}
-.candle-tab.active{background:var(--acdim);color:var(--accent);border-color:var(--accent)}
-.pattern-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
-.pattern-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;cursor:pointer;transition:all .2s;text-align:center}
-.pattern-card:hover,.pattern-card.active{border-color:var(--accent);background:var(--acdim)}
-.pattern-visual{height:60px;display:flex;align-items:flex-end;justify-content:center;gap:4px;margin-bottom:8px}
-.pattern-name{font-weight:700;font-size:12px;margin-bottom:3px}
-.pattern-signal{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
-.pattern-detail{background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:16px;display:none}
-.pattern-detail.show{display:block;animation:fadeIn .2s ease}
-.pd-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;margin-bottom:4px}
-.pd-signal{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px}
-.pd-body{font-size:13px;color:var(--muted2);line-height:1.75}.pd-body strong{color:var(--text)}
-.pd-rule{background:var(--surface3);border-radius:7px;padding:10px;margin-top:10px;font-size:12px;color:var(--muted2);border-left:3px solid var(--gold)}
-.pd-rule strong{color:var(--gold)}
-
-/* PREDICT MODE */
-.predict-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.predict-head{background:var(--surface2);padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.predict-title{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;color:var(--purple)}
-.predict-score{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted2)}
-.predict-body{padding:16px}
-.predict-question{font-size:13px;color:var(--muted2);margin-bottom:12px;line-height:1.6}
-.predict-question strong{color:var(--text)}
-.predict-choices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
-.pred-btn{font-family:'Manrope',sans-serif;font-weight:700;font-size:12px;padding:12px;border-radius:8px;border:1px solid var(--border2);background:var(--surface2);color:var(--text);cursor:pointer;transition:all .2s;text-align:left}
-.pred-btn:hover:not(:disabled){border-color:var(--purple);color:var(--purple)}
-.pred-btn.correct{border-color:var(--green);background:var(--gdim);color:var(--green)}
-.pred-btn.wrong{border-color:var(--red);background:var(--rdim);color:var(--red)}
-
-/* LIVE CHART */
-.live-chart-wrap{background:var(--surface2);border-radius:10px;padding:14px}
-.live-header{display:flex;justify-content:space-between;margin-bottom:8px;align-items:center}
-.live-price{font-family:'DM Mono',monospace;font-size:18px;font-weight:500}
-.live-candles{display:flex;align-items:flex-end;gap:2px;height:120px;padding:0 2px;overflow:hidden}
-.live-info{font-size:11px;color:var(--muted2);margin-top:8px;text-align:center;animation:pulse 2s infinite}
-
-/* LEARN LAB */
-.learn-tabs{display:flex;gap:5px;margin-bottom:16px;flex-wrap:wrap}
-.learn-tab{font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;padding:6px 13px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--muted2);cursor:pointer;transition:all .2s}
-.learn-tab.active{background:var(--godim);color:var(--gold);border-color:var(--gold)}
-.learn-content{display:none}.learn-content.active{display:block;animation:fadeIn .2s ease}
-.learn-module{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:12px}
-.lm-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;margin-bottom:3px}
-.lm-sub{font-size:12px;color:var(--muted2);margin-bottom:16px}
-.learn-step{display:flex;gap:10px;margin-bottom:14px;align-items:flex-start}
-.step-num{width:24px;height:24px;border-radius:50%;background:var(--acdim);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
-.step-text{font-size:13px;line-height:1.75;color:var(--muted2)}.step-text strong{color:var(--text)}
-.analogy{background:var(--godim);border:1px solid rgba(255,215,0,.15);border-radius:8px;padding:12px;font-size:13px;color:var(--muted2);line-height:1.65;margin:10px 0}
-.analogy strong{color:var(--gold)}
-.rule-box{background:var(--rdim);border:1px solid rgba(255,61,87,.2);border-radius:8px;padding:12px;font-size:13px;color:var(--muted2);line-height:1.65;margin:8px 0}
-.rule-box strong{color:var(--red)}
-.tip-box{background:var(--gdim);border:1px solid rgba(0,230,118,.2);border-radius:8px;padding:12px;font-size:13px;color:var(--muted2);line-height:1.65;margin:8px 0}
-.tip-box strong{color:var(--green)}
-
-/* CERTIFICATION */
-.cert-screen{text-align:center;padding:36px 16px}
-.cert-icon{font-size:60px;margin-bottom:14px;animation:celebrate 1s ease infinite}
-.cert-title{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:3px;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
-.cert-body{font-size:13px;color:var(--muted2);line-height:1.8;max-width:480px;margin:0 auto 20px}
-.cert-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;max-width:460px;margin-left:auto;margin-right:auto}
-.cert-stat{background:var(--surface2);border-radius:9px;padding:12px}
-.cert-stat-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
-.cert-stat-val{font-family:'DM Mono',monospace;font-size:16px;font-weight:500;color:var(--green)}
-.cert-btn{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:2px;padding:13px 34px;border-radius:9px;border:none;background:linear-gradient(135deg,var(--gold),var(--amber));color:#000;cursor:pointer;transition:all .3s}
-
-/* COACH */
-.coach-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px}
-.chat-hist{display:flex;flex-direction:column;gap:10px;margin-bottom:10px;min-height:180px;max-height:300px;overflow-y:auto}
-.msg{display:flex;gap:8px;align-items:flex-start}
-.msg-av{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0}
-.msg-av.ai{background:var(--acdim);color:var(--accent)}.msg-av.user{background:var(--godim);color:var(--gold)}
-.msg-name{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;margin-bottom:3px}
-.msg-text{font-size:13px;line-height:1.7;color:var(--muted2);background:var(--surface2);border-radius:8px;padding:9px 12px}
-.msg-text.user-msg{background:var(--godim);color:var(--text)}
-.quick-qs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px}
-.quick-q{font-family:'Manrope',sans-serif;font-size:11px;padding:5px 10px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--muted2);cursor:pointer;transition:all .2s;font-weight:500}
-.quick-q:hover{border-color:var(--accent);color:var(--accent)}
-.chat-row{display:flex;gap:7px}
-.chat-input{flex:1;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:10px 13px;color:var(--text);font-family:'Manrope',sans-serif;font-size:13px;outline:none}
-.chat-input:focus{border-color:var(--accent)}
-.chat-send{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1px;padding:10px 18px;border-radius:8px;border:none;background:var(--accent);color:#000;cursor:pointer}
-.chat-send:disabled{opacity:.5;cursor:not-allowed}
-.api-banner{background:var(--adim);border:1px solid rgba(255,171,0,.25);border-radius:9px;padding:11px 13px;margin-bottom:12px;font-size:13px;color:var(--amber)}
-.api-row{display:flex;gap:7px;margin-top:7px}
-.api-row input{flex:1;background:var(--surface2);border:1px solid rgba(255,171,0,.3);border-radius:6px;padding:8px 11px;color:var(--text);font-family:'DM Mono',monospace;font-size:12px;outline:none}
-.api-row button{font-family:'Manrope',sans-serif;font-weight:700;font-size:12px;padding:8px 13px;border-radius:6px;border:none;background:var(--amber);color:#000;cursor:pointer}
+/* CANDLE SCHOOL */
+.pattern-list{display:flex;flex-direction:column;gap:10px}
+.pattern-row{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .2s}
+.pattern-row:hover{border-color:var(--border2)}
+.pattern-row.open{border-color:var(--accent)}
+.pr-head{display:flex;align-items:center;gap:14px;padding:14px 16px}
+.pr-visual{display:flex;align-items:flex-end;gap:2px;height:44px;width:60px;flex-shrink:0}
+.pr-info{flex:1}
+.pr-name{font-weight:800;font-size:14px;margin-bottom:2px}
+.pr-signal{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.pr-arrow{color:var(--muted);font-size:16px;transition:transform .2s}
+.pattern-row.open .pr-arrow{transform:rotate(180deg)}
+.pr-body{display:none;padding:0 16px 16px;border-top:1px solid var(--border)}
+.pattern-row.open .pr-body{display:block;animation:fadeIn .2s ease}
+.pr-explain{font-size:13px;color:var(--muted2);line-height:1.75;margin:12px 0}
+.pr-explain strong{color:var(--text)}
+.pr-rule{background:var(--surface2);border-radius:8px;padding:11px;font-size:12px;color:var(--muted2);line-height:1.6;border-left:3px solid var(--gold)}
+.pr-rule strong{color:var(--gold)}
+.pr-signal-badge{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:10px}
 
 /* GLOSSARY */
-.gloss-btn{position:fixed;bottom:18px;right:18px;width:42px;height:42px;border-radius:50%;border:none;background:var(--purple);color:#fff;font-weight:700;font-size:17px;cursor:pointer;box-shadow:0 4px 14px rgba(213,0,249,.4);z-index:300;transition:all .2s}
+.gloss-btn{position:fixed;bottom:16px;right:16px;width:40px;height:40px;border-radius:50%;border:none;background:var(--purple);color:#fff;font-weight:700;font-size:17px;cursor:pointer;box-shadow:0 4px 14px rgba(213,0,249,.4);z-index:300;transition:all .2s}
 .gloss-btn:hover{transform:scale(1.1)}
-.gloss-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:500;align-items:center;justify-content:center;padding:18px}
+.gloss-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:500;align-items:center;justify-content:center;padding:16px}
 .gloss-overlay.show{display:flex}
-.gloss-modal{background:var(--surface);border:1px solid var(--border2);border-radius:14px;width:100%;max-width:490px;max-height:80vh;overflow:hidden;display:flex;flex-direction:column}
+.gloss-modal{background:var(--surface);border:1px solid var(--border2);border-radius:14px;width:100%;max-width:480px;max-height:80vh;overflow:hidden;display:flex;flex-direction:column}
 .gloss-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .gloss-head h3{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--accent)}
 .gloss-close{background:none;border:none;color:var(--muted2);font-size:18px;cursor:pointer}
@@ -230,11 +218,46 @@ body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;fon
 .gi-plain{font-size:13px;color:var(--muted2);line-height:1.6}
 .gi-ex{font-size:11px;color:var(--muted);margin-top:3px;font-style:italic}
 
-.notif{position:fixed;top:74px;right:16px;background:var(--surface);border:1px solid var(--border2);border-radius:9px;padding:11px 15px;font-size:13px;z-index:400;animation:slideUp .3s ease;max-width:260px;display:none}
+/* COACH */
+.coach-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:14px}
+.chat-box{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;min-height:160px;max-height:280px;overflow-y:auto}
+.cmsg{display:flex;gap:9px;align-items:flex-start}
+.cav{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0}
+.cav.ai{background:var(--acdim);color:var(--accent)}.cav.user{background:var(--godim);color:var(--gold)}
+.cname{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;margin-bottom:3px}
+.cbubble{font-size:13px;line-height:1.7;color:var(--muted2);background:var(--surface2);border-radius:9px;padding:10px 13px}
+.cbubble.user-msg{background:var(--godim);color:var(--text)}
+.quick-qs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+.qq{font-family:'Manrope',sans-serif;font-size:11px;padding:5px 10px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--muted2);cursor:pointer;font-weight:600;transition:all .2s}
+.qq:hover{border-color:var(--accent);color:var(--accent)}
+.chat-row{display:flex;gap:7px}
+.chat-inp{flex:1;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:10px 13px;color:var(--text);font-family:'Manrope',sans-serif;font-size:13px;outline:none}
+.chat-inp:focus{border-color:var(--accent)}
+.chat-send{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1px;padding:10px 18px;border-radius:8px;border:none;background:var(--accent);color:#000;cursor:pointer}
+.chat-send:disabled{opacity:.5;cursor:not-allowed}
+.api-banner{background:var(--adim);border:1px solid rgba(255,171,0,.2);border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:13px;color:var(--amber);line-height:1.6}
+.api-row{display:flex;gap:7px;margin-top:8px}
+.api-row input{flex:1;background:var(--surface2);border:1px solid rgba(255,171,0,.3);border-radius:6px;padding:8px 11px;color:var(--text);font-family:'DM Mono',monospace;font-size:12px;outline:none}
+.api-row button{font-family:'Manrope',sans-serif;font-weight:700;font-size:12px;padding:8px 14px;border-radius:6px;border:none;background:var(--amber);color:#000;cursor:pointer}
+
+/* CERT */
+.cert-wrap{text-align:center;padding:40px 20px}
+.cert-emoji{font-size:64px;margin-bottom:16px;animation:celebrate 1s ease-in-out infinite}
+.cert-title{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:3px;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+.cert-body{font-size:14px;color:var(--muted2);line-height:1.8;max-width:460px;margin:0 auto 20px}
+.cert-body strong{color:var(--text)}
+.cert-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:420px;margin:0 auto 20px}
+.cst{background:var(--surface2);border-radius:10px;padding:14px}
+.cst-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+.cst-val{font-family:'DM Mono',monospace;font-size:18px;color:var(--green)}
+.cert-next{background:var(--surface2);border:1px solid var(--border2);border-radius:12px;padding:16px;max-width:420px;margin:0 auto 20px;text-align:left;font-size:13px;color:var(--muted2);line-height:1.7}
+.cert-next strong{color:var(--text);display:block;margin-bottom:6px;font-size:14px}
+
+.notif{position:fixed;top:70px;right:14px;background:var(--surface);border:1px solid var(--border2);border-radius:9px;padding:11px 15px;font-size:13px;z-index:400;animation:slideUp .3s ease;max-width:250px;display:none}
 .notif.show{display:block}
 .notif.win-n{border-color:rgba(0,230,118,.4)}.notif.lose-n{border-color:rgba(255,61,87,.4)}
 
-@media(max-width:640px){.level-cards{grid-template-columns:1fr 1fr}.game-title{font-size:38px}.trade-grid{grid-template-columns:1fr}.pattern-grid{grid-template-columns:1fr 1fr}.predict-choices{grid-template-columns:1fr}.cert-stats{grid-template-columns:1fr}}
+@media(max-width:600px){.welcome-steps{grid-template-columns:1fr}.cert-stats{grid-template-columns:1fr}.trade-stats{gap:10px}}
 </style>
 </head>
 <body>
@@ -244,290 +267,397 @@ body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;fon
 <nav class="nav">
   <div class="logo">Market Kings</div>
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="go('game')">🎮 Play</button>
-    <button class="nav-tab" onclick="go('candles')">🕯️ Candles</button>
-    <button class="nav-tab" onclick="go('learn')">📚 Learn</button>
-    <button class="nav-tab" onclick="go('coach')">🧠 Coach</button>
+    <button class="ntab active" onclick="goTab('play')">🎮 Play</button>
+    <button class="ntab" onclick="goTab('candles')">🕯️ Candles</button>
+    <button class="ntab" onclick="goTab('learn')">📚 Learn</button>
+    <button class="ntab" onclick="goTab('coach')">🧠 Coach</button>
   </div>
   <div class="nav-right">
-    <div class="cash-badge" id="nav-cash">$500</div>
-    <div class="level-badge" id="nav-level">LVL 1</div>
+    <div class="cash-pill" id="nav-cash">$500</div>
+    <div class="lvl-pill" id="nav-lvl">LVL 1</div>
   </div>
 </nav>
 
 <div class="main">
 
-<!-- ===== GAME ===== -->
-<div id="section-game" class="section active">
+<!-- ===== PLAY TAB ===== -->
+<div id="tab-play" class="screen active">
 
-  <div id="screen-home">
-    <div class="game-hero">
-      <div class="game-title">MARKET KINGS</div>
-      <div class="game-sub">From $500 to the top — one trade at a time</div>
-      <div class="level-cards" id="level-cards"></div>
-      <div class="prog-row">
-        <div class="prog-label"><span>Session Progress</span><span id="prog-pct">0%</span></div>
-        <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
-        <div style="font-size:11px;color:var(--muted2);margin-top:5px;text-align:center;" id="prog-text">Complete 5 trades to advance</div>
+  <!-- WELCOME -->
+  <div id="s-welcome" class="screen active">
+    <div class="welcome-wrap">
+      <div class="welcome-emoji">📈</div>
+      <div class="welcome-title">MARKET KINGS</div>
+      <div class="welcome-sub">You don't need a finance degree. You don't need $25,000. You just need this app and a willingness to learn. <strong>We'll teach you everything — one step at a time.</strong></div>
+      <button class="big-btn" onclick="startJourney()">START MY JOURNEY</button>
+      <div class="big-btn-sub">Free · No experience needed · Start with $500 in fake money</div>
+      <div class="welcome-steps">
+        <div class="ws-card"><div class="ws-num">1</div><div class="ws-title">Learn the basics</div><div class="ws-desc">We teach you what every button, chart, and term means before you do anything.</div></div>
+        <div class="ws-card"><div class="ws-num">2</div><div class="ws-title">Practice with fake money</div><div class="ws-desc">Make trades, make mistakes, and learn — without losing a single real dollar.</div></div>
+        <div class="ws-card"><div class="ws-num">3</div><div class="ws-title">Get certified when ready</div><div class="ws-desc">Complete all 5 levels and the app tells you exactly when you're ready to trade real money.</div></div>
       </div>
-      <button class="play-btn" onclick="startTrading()">ENTER THE MARKET</button>
     </div>
   </div>
 
-  <div id="screen-trading" style="display:none">
+  <!-- LESSON 1: What is a stock? -->
+  <div id="s-lesson1" class="screen">
+    <div class="instruct">
+      <div class="instruct-icon">📖</div>
+      <div class="instruct-body">
+        <div class="instruct-title">Before your first trade — let's learn the basics</div>
+        <div class="instruct-text">Don't worry. This takes less than 2 minutes. Read each step, then tap <strong>Next</strong> at the bottom. We won't let you make a trade until you understand what you're doing.</div>
+      </div>
+    </div>
+    <div class="lesson-card">
+      <div class="lesson-head"><div class="lesson-title">What is Day Trading?</div><div class="lesson-progress">Lesson 1 of 4</div></div>
+      <div class="lesson-body">
+        <div class="lesson-step">
+          <div class="ls-num">1</div>
+          <div class="ls-content">
+            <div class="ls-title">Day trading = buying and selling the same day</div>
+            <div class="ls-text">You buy something in the morning. The price goes up. You sell it in the afternoon and keep the profit. That's a day trade. <strong>Everything happens within one day — you never hold overnight.</strong></div>
+          </div>
+        </div>
+        <div class="lesson-step">
+          <div class="ls-num">2</div>
+          <div class="ls-content">
+            <div class="ls-title">You can profit when prices go UP or DOWN</div>
+            <div class="ls-text">Most people only know about buying something and hoping it goes up. But traders can also <strong>"short"</strong> — which means profiting when a price falls. We'll teach you both.</div>
+          </div>
+        </div>
+        <div class="lesson-step">
+          <div class="ls-num">3</div>
+          <div class="ls-content">
+            <div class="ls-title">The goal: $100–$200 extra per week to start</div>
+            <div class="ls-text">Not millions. Not overnight. <strong>Consistency is the goal.</strong> A trader making $150 a week reliably is doing better than someone swinging for $10,000 and losing everything.</div>
+          </div>
+        </div>
+        <div class="analogy"><strong>Real world analogy:</strong> Imagine you notice sneakers on sale for $80 that you know sell for $120 on eBay. You buy them, flip them the same day, and pocket $40. That's exactly what day trading is — just with stocks, currencies, or other assets instead of sneakers.</div>
+        <div class="tip"><strong>✓ Good news:</strong> You're starting with $500 in fake money. You cannot lose real money in this app. Practice here until you're confident, then take those skills to a real account.</div>
+      </div>
+      <div class="lesson-nav">
+        <div class="ln-dots"><div class="ln-dot active"></div><div class="ln-dot"></div><div class="ln-dot"></div><div class="ln-dot"></div></div>
+        <button class="lesson-btn" onclick="showScreen('s-lesson2')">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LESSON 2: What is a candlestick? -->
+  <div id="s-lesson2" class="screen">
+    <div class="instruct">
+      <div class="instruct-icon">🕯️</div>
+      <div class="instruct-body">
+        <div class="instruct-title">The most important skill in trading — reading charts</div>
+        <div class="instruct-text">Every chart is made of candlesticks. Once you can read them, you can read any market in the world. <strong>This is the language traders speak.</strong> We'll make it simple.</div>
+      </div>
+    </div>
+    <div class="lesson-card">
+      <div class="lesson-head"><div class="lesson-title">What is a Candlestick?</div><div class="lesson-progress">Lesson 2 of 4</div></div>
+      <div class="lesson-body">
+        <div class="lesson-step">
+          <div class="ls-num">1</div>
+          <div class="ls-content">
+            <div class="ls-title">Each candle = one period of time</div>
+            <div class="ls-text">On a 1-minute chart, each candle covers 1 minute. On a daily chart, each candle covers one whole day. <strong>The candle shows you everything that happened during that time period.</strong></div>
+          </div>
+        </div>
+        <div class="candle-demo">
+          <div class="candle-label-wrap">
+            <div class="c-visual c-bull">
+              <div class="c-wick" style="height:18px"></div>
+              <div class="c-body" style="height:28px;background:var(--green)"></div>
+              <div class="c-wick" style="height:10px"></div>
+            </div>
+            <div class="candle-label">Green Candle<br>(Buyers Won)</div>
+          </div>
+          <div style="font-size:24px;color:var(--muted)">vs</div>
+          <div class="candle-label-wrap">
+            <div class="c-visual c-bear">
+              <div class="c-wick" style="height:12px"></div>
+              <div class="c-body" style="height:28px;background:var(--red)"></div>
+              <div class="c-wick" style="height:18px"></div>
+            </div>
+            <div class="candle-label">Red Candle<br>(Sellers Won)</div>
+          </div>
+        </div>
+        <div class="candle-explain-grid">
+          <div class="ceg-item"><strong>The Fat Part (Body)</strong>Shows where the price opened and where it closed. Big body = strong move.</div>
+          <div class="ceg-item"><strong>The Thin Lines (Wicks)</strong>Show the highest and lowest prices reached. Long wick = big fight.</div>
+          <div class="ceg-item"><strong>Green = Bullish</strong>Price closed HIGHER than it opened. Buyers were in control.</div>
+          <div class="ceg-item"><strong>Red = Bearish</strong>Price closed LOWER than it opened. Sellers were in control.</div>
+        </div>
+        <div class="analogy"><strong>Real world analogy:</strong> Think of each candle like a tug-of-war score. Green = buyers pulled harder and won. Red = sellers pulled harder and won. The size of the candle tells you HOW much they won by. Long wicks mean it was a close fight.</div>
+        <div class="quiz-wrap">
+          <div class="quiz-q">Quick check: A candle is GREEN. What does that tell you?</div>
+          <div class="quiz-choices">
+            <button class="quiz-btn" onclick="checkQuiz(this,false,'q1')">A. The price went down — sellers won</button>
+            <button class="quiz-btn" onclick="checkQuiz(this,true,'q1')">B. The price went up — buyers won</button>
+            <button class="quiz-btn" onclick="checkQuiz(this,false,'q1')">C. Nothing — the color is random</button>
+          </div>
+          <div class="quiz-feedback" id="q1-fb"></div>
+        </div>
+      </div>
+      <div class="lesson-nav">
+        <div class="ln-dots"><div class="ln-dot done"></div><div class="ln-dot active"></div><div class="ln-dot"></div><div class="ln-dot"></div></div>
+        <div style="display:flex;gap:8px;">
+          <button class="lesson-btn secondary" onclick="showScreen('s-lesson1')">← Back</button>
+          <button class="lesson-btn" id="lesson2-next" onclick="showScreen('s-lesson3')" style="display:none">Next →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LESSON 3: Stop Loss -->
+  <div id="s-lesson3" class="screen">
+    <div class="instruct">
+      <div class="instruct-icon">🛡️</div>
+      <div class="instruct-body">
+        <div class="instruct-title">The most important rule in all of trading</div>
+        <div class="instruct-text">Before you make a single trade, you need to understand this. <strong>This one concept will save your account more times than anything else.</strong></div>
+      </div>
+    </div>
+    <div class="lesson-card">
+      <div class="lesson-head"><div class="lesson-title">The Stop Loss — Your Seatbelt</div><div class="lesson-progress">Lesson 3 of 4</div></div>
+      <div class="lesson-body">
+        <div class="lesson-step">
+          <div class="ls-num">1</div>
+          <div class="ls-content">
+            <div class="ls-title">A stop loss = your automatic exit if the trade goes wrong</div>
+            <div class="ls-text">Before you buy anything, you decide: <strong>"If this drops to [price], I get out automatically."</strong> That price is your stop loss. You set it and forget it. No panic. No emotion. It just happens.</div>
+          </div>
+        </div>
+        <div class="lesson-step">
+          <div class="ls-num">2</div>
+          <div class="ls-content">
+            <div class="ls-title">Example: You buy Nvidia at $870. Stop loss at $850.</div>
+            <div class="ls-text">If Nvidia drops to $850, your position sells automatically. <strong>You lose $20 per share — and not a penny more.</strong> Without a stop loss, you might hold and watch it drop to $700.</div>
+          </div>
+        </div>
+        <div class="lesson-step">
+          <div class="ls-num">3</div>
+          <div class="ls-content">
+            <div class="ls-title">The 1% rule — never risk more than 1% per trade</div>
+            <div class="ls-text">With $500, that's $5 maximum risk per trade. Sounds tiny — it's not. <strong>This rule is why professional traders survive for years</strong> while amateurs blow up their accounts in weeks.</div>
+          </div>
+        </div>
+        <div class="analogy"><strong>Real world analogy:</strong> A stop loss is exactly like your car's seatbelt. You don't plan to crash. But if you do, the seatbelt stops the damage from being catastrophic. <strong>Always buckle up before you drive — set your stop loss before every trade.</strong></div>
+        <div class="warn"><strong>⚠️ The #1 beginner mistake:</strong> Removing your stop loss because "it'll come back." Sometimes it does. Sometimes it goes from $870 to $500. The stop loss removes that decision from your emotional hands.</div>
+      </div>
+      <div class="lesson-nav">
+        <div class="ln-dots"><div class="ln-dot done"></div><div class="ln-dot done"></div><div class="ln-dot active"></div><div class="ln-dot"></div></div>
+        <div style="display:flex;gap:8px;">
+          <button class="lesson-btn secondary" onclick="showScreen('s-lesson2')">← Back</button>
+          <button class="lesson-btn" onclick="showScreen('s-lesson4')">Next →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LESSON 4: Ready to trade -->
+  <div id="s-lesson4" class="screen">
+    <div class="instruct">
+      <div class="instruct-icon">🎮</div>
+      <div class="instruct-body">
+        <div class="instruct-title">You're almost ready for your first trade!</div>
+        <div class="instruct-text">One last thing to learn — how to read a trade scenario and make a decision. <strong>We explain every button before you tap it. Nothing is hidden.</strong></div>
+      </div>
+    </div>
+    <div class="lesson-card">
+      <div class="lesson-head"><div class="lesson-title">How to Make a Trade</div><div class="lesson-progress">Lesson 4 of 4</div></div>
+      <div class="lesson-body">
+        <div class="lesson-step">
+          <div class="ls-num">1</div>
+          <div class="ls-content">
+            <div class="ls-title">Read the situation first — don't rush</div>
+            <div class="ls-text">Every trade scenario shows you a chart and news. <strong>Read the news carefully.</strong> What's happening to this stock? Is it good news or bad news? Is the chart going up or down?</div>
+          </div>
+        </div>
+        <div class="lesson-step">
+          <div class="ls-num">2</div>
+          <div class="ls-content">
+            <div class="ls-title">You have 3 choices every time</div>
+            <div class="ls-text"><strong>BUY / LONG</strong> — You think the price is going UP. You buy and profit if it rises.<br><br><strong>SELL / SHORT</strong> — You think the price is going DOWN. You profit if it falls.<br><br><strong>HOLD</strong> — No clear signal. The smartest move is sometimes doing nothing.</div>
+          </div>
+        </div>
+        <div class="lesson-step">
+          <div class="ls-num">3</div>
+          <div class="ls-content">
+            <div class="ls-title">After every trade — read the explanation</div>
+            <div class="ls-text">Whether you're right or wrong, the app tells you exactly <strong>why</strong> — in plain English. Every wrong trade is a free lesson. This is the whole point of practicing with fake money.</div>
+          </div>
+        </div>
+        <div class="tip"><strong>✓ Remember:</strong> In this app you start with $500 in fake money. Nothing is real. Make mistakes freely. The goal is to learn, not to win every trade.</div>
+      </div>
+      <div class="lesson-nav">
+        <div class="ln-dots"><div class="ln-dot done"></div><div class="ln-dot done"></div><div class="ln-dot done"></div><div class="ln-dot active"></div></div>
+        <div style="display:flex;gap:8px;">
+          <button class="lesson-btn secondary" onclick="showScreen('s-lesson3')">← Back</button>
+          <button class="lesson-btn" onclick="showLevelMap()" style="background:linear-gradient(135deg,var(--gold),var(--amber));color:#000;">I'm Ready — Let's Trade! 🚀</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVEL MAP -->
+  <div id="s-levelmap" class="screen">
+    <div class="instruct">
+      <div class="instruct-icon">🗺️</div>
+      <div class="instruct-body">
+        <div class="instruct-title">Your trading career starts here</div>
+        <div class="instruct-text">There are 5 levels. <strong>Start at Level 1 — The Rookie.</strong> Complete 5 trades to advance. Each level unlocks automatically when you finish the previous one. Tap Level 1 to start.</div>
+      </div>
+    </div>
+    <div class="prog-bar-wrap"><div class="prog-bar-fill" id="map-prog" style="width:0%"></div></div>
+    <div style="font-size:12px;color:var(--muted2);margin-bottom:14px;text-align:center;" id="map-prog-text">Level 1 of 5 — 0 trades completed</div>
+    <div class="level-map" id="level-map"></div>
+  </div>
+
+  <!-- TRADING SCREEN -->
+  <div id="s-trading" class="screen">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-      <button onclick="showHome()" style="background:var(--surface2);border:1px solid var(--border2);color:var(--muted2);padding:5px 12px;border-radius:6px;cursor:pointer;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;">← Back</button>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;color:var(--accent);" id="t-level-title">LEVEL 1 — THE ROOKIE</div>
+      <button onclick="showScreen('s-levelmap')" style="background:var(--surface2);border:1px solid var(--border2);color:var(--muted2);padding:5px 12px;border-radius:6px;cursor:pointer;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;">← Map</button>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;color:var(--accent);" id="t-level-name">LEVEL 1 — THE ROOKIE</div>
     </div>
-    <div class="arena">
-      <div class="arena-head">
-        <div class="arena-title" id="a-sym">NVDA</div>
-        <div class="a-stats">
-          <div><div class="a-stat-label">Cash</div><div class="a-stat-val green" id="a-cash">$500</div></div>
-          <div><div class="a-stat-label">P&L</div><div class="a-stat-val" id="a-pnl">$0</div></div>
-          <div><div class="a-stat-label">Trades</div><div class="a-stat-val" id="a-trades">0/5</div></div>
+    <div class="instruct" id="t-instruct">
+      <div class="instruct-icon">👇</div>
+      <div class="instruct-body">
+        <div class="instruct-title" id="t-instruct-title">Step 1: Read the news</div>
+        <div class="instruct-text" id="t-instruct-text">Before you do anything, read the NEWS box below. It tells you what's happening with this stock right now. Then look at the chart — is it going up or down? Take your time. There's no rush.</div>
+      </div>
+    </div>
+    <div class="trade-card">
+      <div class="trade-head">
+        <div class="trade-sym" id="t-sym">NVDA</div>
+        <div class="trade-stats">
+          <div><div class="ts-label">Your Cash</div><div class="ts-val green" id="t-cash">$500</div></div>
+          <div><div class="ts-label">Today's P&L</div><div class="ts-val" id="t-pnl">$0</div></div>
+          <div><div class="ts-label">Trade</div><div class="ts-val" id="t-count">1 of 5</div></div>
         </div>
       </div>
-      <div class="arena-body">
-        <div class="chart-wrap">
-          <div class="chart-header">
-            <div><div class="chart-sym" id="a-name">Nvidia Corp</div><div style="font-size:11px;color:var(--muted2);" id="a-time">9:45 AM ET</div></div>
-            <div><div class="chart-price-big" id="a-price">$870.42</div><div class="chart-chg" id="a-chg">+2.3%</div></div>
+      <div class="trade-body">
+        <div class="chart-box">
+          <div class="chart-top">
+            <div><div class="chart-name" id="t-name">Nvidia Corp</div><div class="chart-time" id="t-time">9:45 AM ET</div></div>
+            <div><div class="chart-price" id="t-price">$870.42</div><div class="chart-chg" id="t-chg">▲ +2.3%</div></div>
           </div>
-          <div class="candlestick-chart" id="a-chart"></div>
-          <div class="chart-axes" id="a-axes"></div>
-          <div class="chart-news" id="a-news"><strong>📰 News:</strong> Loading...</div>
+          <div class="chart-candles" id="t-chart"></div>
+          <div style="font-size:10px;color:var(--muted);text-align:center;margin-top:4px;">← Each bar = 5 minutes of trading · Tap any bar to learn what it means</div>
         </div>
-        <div class="amt-row">
-          <label>Invest:</label>
-          <div class="amt-btns">
-            <button class="amt-btn active" onclick="setAmt(50,this)">$50</button>
-            <button class="amt-btn" onclick="setAmt(100,this)">$100</button>
-            <button class="amt-btn" onclick="setAmt(200,this)">$200</button>
-            <button class="amt-btn" onclick="setAmt(-1,this)">All In</button>
-          </div>
+        <div class="news-box" id="t-news"><strong>📰 Market News:</strong> Loading...</div>
+        <div class="step-instruction" id="t-step-inst">
+          <strong>Now decide:</strong> Based on the news and chart above, what do you think will happen to this price? Pick one of the three options below. Each button explains exactly what it does.
         </div>
-        <div class="trade-grid">
-          <button class="trade-btn btn-buy" id="btn-buy" onclick="trade('buy')">▲ BUY / LONG</button>
-          <button class="trade-btn btn-sell" id="btn-sell" onclick="trade('sell')">▼ SHORT / SELL</button>
-          <button class="trade-btn btn-hold" id="btn-hold" onclick="trade('hold')">⏸ HOLD — SKIP THIS TRADE</button>
+        <div class="btn-label">Your Move:</div>
+        <div class="trade-btns">
+          <button class="trade-btn btn-buy" id="tb-buy" onclick="makeTrade('buy')">
+            <div class="tb-main">▲ BUY / GO LONG</div>
+            <div class="tb-explain">Tap this if you think the price will go UP. You profit if it rises. You lose if it falls.</div>
+          </button>
+          <button class="trade-btn btn-sell" id="tb-sell" onclick="makeTrade('sell')">
+            <div class="tb-main">▼ SELL / GO SHORT</div>
+            <div class="tb-explain">Tap this if you think the price will go DOWN. You profit if it falls. You lose if it rises.</div>
+          </button>
+          <button class="trade-btn btn-hold" id="tb-hold" onclick="makeTrade('hold')">
+            <div class="tb-main">⏸ HOLD — SKIP THIS TRADE</div>
+            <div class="tb-explain">Tap this if you're not sure or if there's no clear signal. Doing nothing IS a strategy.</div>
+          </button>
         </div>
-        <div class="result-box" id="result-box">
-          <div class="result-title" id="result-title"></div>
-          <div class="result-body" id="result-body"></div>
-          <button class="next-btn" id="next-btn" onclick="nextTrade()">NEXT TRADE →</button>
-        </div>
-        <div class="positions-box" id="pos-box" style="display:none">
-          <div class="pos-title">Today's Trades</div>
-          <div id="pos-list"></div>
+        <div class="result-box" id="t-result">
+          <div class="result-title" id="t-result-title"></div>
+          <div class="result-body" id="t-result-body"></div>
+          <div class="result-lesson" id="t-result-lesson"></div>
+          <button class="cont-btn" id="t-cont-btn" onclick="nextTrade()">NEXT TRADE →</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="screen-cert" style="display:none">
-    <div class="cert-screen">
-      <div class="cert-icon">🏆</div>
+  <!-- CERTIFICATION -->
+  <div id="s-cert" class="screen">
+    <div class="cert-wrap">
+      <div class="cert-emoji">🏆</div>
       <div class="cert-title">YOU'RE READY</div>
-      <div style="font-size:12px;color:var(--accent);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">FOR REAL WORLD TRADING</div>
-      <div class="cert-body">You've completed all 5 levels of Market Kings. You understand entries, exits, stop losses, candlestick patterns, position sizing, and market psychology. You've proven it with consistent decisions under pressure.<br><br><strong style="color:var(--gold);">You are ready. Start small. Stay disciplined. Trust your training.</strong></div>
+      <div style="font-size:12px;color:var(--accent);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">For Real World Trading</div>
+      <div class="cert-body">You've completed all 5 levels of Market Kings. You understand candlesticks, entries, exits, stop losses, and market psychology. You've proven it with real decisions under pressure — not just theory.<br><br><strong>You are ready. Start small. Stay disciplined.</strong></div>
       <div class="cert-stats" id="cert-stats"></div>
-      <div style="font-size:13px;color:var(--muted2);margin-bottom:18px;max-width:380px;margin-left:auto;margin-right:auto;"><strong style="color:var(--text);">First real step:</strong> Open an account with <strong style="color:var(--accent);">Oanda or Alpaca</strong>. Deposit $100–$200. Trade micro lots only. Apply everything you learned here.</div>
-      <button class="cert-btn" onclick="resetGame()">PLAY AGAIN</button>
+      <div class="cert-next">
+        <strong>Your recommended first steps:</strong>
+        1. Open a free account with <strong style="color:var(--accent);">Oanda</strong> (Forex, no PDT rule, start with $100)<br>
+        2. Trade micro lots only — tiny position sizes<br>
+        3. Apply your stop loss on every single trade<br>
+        4. Target $50–$100/week to start. Build from there.
+      </div>
+      <button class="big-btn" onclick="resetGame()">PLAY AGAIN</button>
     </div>
   </div>
+
 </div>
 
-<!-- ===== CANDLES ===== -->
-<div id="section-candles" class="section">
-  <div class="section-title">Candlestick School</div>
-  <div class="section-sub">Learn to read the language of the market — one candle at a time.</div>
-
-  <div class="page-tip">🕯️ <span><strong>What is a candlestick?</strong> Every candle on a chart tells you 4 things about that time period: where the price OPENED, where it CLOSED, the HIGHEST price it hit, and the LOWEST price it hit. Green = price went up. Red = price went down. The thin lines (wicks) show the high and low. The fat part (body) shows open to close. That's it.</span></div>
-
-  <div class="candle-tabs">
-    <button class="candle-tab active" onclick="switchCandleTab('live',this)">📈 Live Chart</button>
-    <button class="candle-tab" onclick="switchCandleTab('library',this)">📖 Pattern Library</button>
-    <button class="candle-tab" onclick="switchCandleTab('predict',this)">🎯 Predict Mode</button>
-  </div>
-
-  <!-- LIVE CHART -->
-  <div id="ct-live">
-    <div class="live-chart-wrap">
-      <div class="live-header">
-        <div><div style="font-weight:700;font-size:14px;">NVDA — Live Simulation</div><div style="font-size:11px;color:var(--muted2);">1-minute candles · Updates every 2 seconds</div></div>
-        <div><div class="live-price" id="live-price">$870.42</div><div style="font-size:11px;font-weight:700;" id="live-chg">+$2.18 (+0.25%)</div></div>
-      </div>
-      <div class="live-candles" id="live-candles"></div>
-      <div class="live-info">● Live market simulation — tap any candle to learn what it means</div>
-    </div>
-    <div id="live-candle-detail" style="display:none;margin-top:10px;" class="pattern-detail show">
-      <div class="pd-title" id="lcd-title">Candle Detail</div>
-      <div class="pd-body" id="lcd-body"></div>
+<!-- ===== CANDLES TAB ===== -->
+<div id="tab-candles" class="screen">
+  <div class="instruct">
+    <div class="instruct-icon">🕯️</div>
+    <div class="instruct-body">
+      <div class="instruct-title">Candlestick Pattern Library</div>
+      <div class="instruct-text">These are the patterns professional traders look for every day. <strong>Tap any pattern to expand it</strong> and learn exactly what it means, what it looks like, and the exact rule for trading it. Start from the top and work your way down.</div>
     </div>
   </div>
-
-  <!-- PATTERN LIBRARY -->
-  <div id="ct-library" style="display:none">
-    <div class="pattern-grid" id="pattern-grid"></div>
-    <div class="pattern-detail" id="pattern-detail"></div>
-  </div>
-
-  <!-- PREDICT MODE -->
-  <div id="ct-predict" style="display:none">
-    <div class="predict-wrap">
-      <div class="predict-head">
-        <div class="predict-title">🎯 PREDICT THE NEXT MOVE</div>
-        <div class="predict-score">Score: <span id="pred-score" style="color:var(--gold);font-weight:700;">0</span> / <span id="pred-total">0</span></div>
-      </div>
-      <div style="padding:16px;">
-        <div class="chart-wrap" style="margin-bottom:12px;">
-          <div class="chart-header"><div style="font-weight:700;font-size:13px;" id="pred-sym">NVDA — What happens next?</div><div style="font-size:11px;color:var(--muted2);">Read the candles and predict</div></div>
-          <div class="candlestick-chart" id="pred-chart" style="height:90px;"></div>
-        </div>
-        <div class="predict-question" id="pred-question"><strong>What do these candles tell you?</strong> Look at the pattern and predict what the price will do next.</div>
-        <div class="predict-choices" id="pred-choices"></div>
-        <div class="result-box" id="pred-result">
-          <div class="result-title" id="pred-result-title"></div>
-          <div class="result-body" id="pred-result-body"></div>
-          <button class="next-btn show" onclick="nextPredict()">NEXT PATTERN →</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="pattern-list" id="pattern-list"></div>
 </div>
 
-<!-- ===== LEARN ===== -->
-<div id="section-learn" class="section">
-  <div class="section-title">Learn Lab</div>
-  <div class="section-sub">Everything you need to know — from scratch. Plain English only.</div>
-
-  <div class="learn-tabs">
-    <button class="learn-tab active" onclick="switchLearnTab(0,this)">🕯️ Candlesticks</button>
-    <button class="learn-tab" onclick="switchLearnTab(1,this)">📊 Support & Resistance</button>
-    <button class="learn-tab" onclick="switchLearnTab(2,this)">🎯 Entry & Exit</button>
-    <button class="learn-tab" onclick="switchLearnTab(3,this)">🛡️ Risk Management</button>
-    <button class="learn-tab" onclick="switchLearnTab(4,this)">🧠 Psychology</button>
-    <button class="learn-tab" onclick="switchLearnTab(5,this)">📋 Day Trading Rules</button>
-  </div>
-
-  <div id="learn-0" class="learn-content active">
-    <div class="learn-module">
-      <div class="lm-title">Candlesticks — The Language of the Market</div>
-      <div class="lm-sub">Lesson 1 · Master this and you can read any chart in the world</div>
-      <div class="learn-step"><div class="step-num">1</div><div class="step-text"><strong>Every candle = one time period.</strong> On a 1-minute chart, each candle = 1 minute of trading. On a daily chart, each candle = one full day. The candle tells you everything that happened during that time.</div></div>
-      <div class="learn-step"><div class="step-num">2</div><div class="step-text"><strong>The body = open to close.</strong> A green (bullish) candle means price closed HIGHER than it opened — buyers won. A red (bearish) candle means price closed LOWER — sellers won.</div></div>
-      <div class="learn-step"><div class="step-num">3</div><div class="step-text"><strong>The wicks = the extremes.</strong> The thin line above the body = the highest price reached. The thin line below = the lowest. Long wicks mean there was a big fight between buyers and sellers.</div></div>
-      <div class="learn-step"><div class="step-num">4</div><div class="step-text"><strong>Patterns predict the future.</strong> When certain candle shapes appear in certain places, they reliably predict what happens next. That's why traders study them obsessively.</div></div>
-      <div class="analogy"><strong>Real analogy:</strong> Think of each candle like a sports score. It tells you who was winning (buyers or sellers), how dominant the winner was (big body), and whether there were any wild moments (long wicks). Read enough of these and you start to see the story the market is telling.</div>
-      <div class="tip-box"><strong>✓ Pro Tip:</strong> The most powerful candle signals happen at support and resistance levels — not in the middle of a trend. Location matters as much as the candle shape itself.</div>
+<!-- ===== LEARN TAB ===== -->
+<div id="tab-learn" class="screen">
+  <div class="instruct">
+    <div class="instruct-icon">📚</div>
+    <div class="instruct-body">
+      <div class="instruct-title">Everything you need to know — from scratch</div>
+      <div class="instruct-text">Six complete lessons covering every skill a day trader needs. <strong>Written like a friend explaining it to you</strong> — not a textbook. Read them in order. Each one builds on the last.</div>
     </div>
   </div>
-
-  <div id="learn-1" class="learn-content">
-    <div class="learn-module">
-      <div class="lm-title">Support & Resistance</div>
-      <div class="lm-sub">Lesson 2 · The invisible walls that control every price move</div>
-      <div class="learn-step"><div class="step-num">1</div><div class="step-text"><strong>Resistance = a price ceiling.</strong> It's a price level the market has tried to break above multiple times and failed. Every time it gets there, sellers come in and push it back down.</div></div>
-      <div class="learn-step"><div class="step-num">2</div><div class="step-text"><strong>Support = a price floor.</strong> It's a level where buyers consistently step in to stop the price from falling further. The market bounces off this level repeatedly.</div></div>
-      <div class="learn-step"><div class="step-num">3</div><div class="step-text"><strong>When support breaks, it becomes resistance.</strong> And when resistance breaks, it becomes support. This flip is one of the most reliable concepts in all of trading.</div></div>
-      <div class="learn-step"><div class="step-num">4</div><div class="step-text"><strong>How to use them:</strong> Buy near support (lower risk, stop loss just below). Sell near resistance (target). Don't chase price in the middle — wait for the levels.</div></div>
-      <div class="analogy"><strong>Real analogy:</strong> Support is like the floor of a room. You bounce off it. Resistance is like the ceiling — you hit your head on it and come back down. But sometimes someone knocks a hole in the ceiling (breakout) and the old ceiling becomes the new floor.</div>
-      <div class="rule-box"><strong>⚠️ Rule:</strong> Never buy in the middle of nowhere. Only buy near support. Only target resistance for profit. This single rule eliminates most amateur trading mistakes.</div>
-    </div>
-  </div>
-
-  <div id="learn-2" class="learn-content">
-    <div class="learn-module">
-      <div class="lm-title">Entry & Exit Strategies</div>
-      <div class="lm-sub">Lesson 3 · Knowing when to get in AND out is the whole game</div>
-      <div class="learn-step"><div class="step-num">1</div><div class="step-text"><strong>Always have a plan before you enter.</strong> Before you click buy, you need to know THREE things: (1) Where am I entering? (2) Where's my stop loss? (3) Where's my profit target? If you don't know all three — don't trade.</div></div>
-      <div class="learn-step"><div class="step-num">2</div><div class="step-text"><strong>The Risk/Reward ratio.</strong> For every dollar you risk, you should aim to make at least 2 dollars. Risk $50, target $100 minimum. This means even if you're wrong 50% of the time, you still make money.</div></div>
-      <div class="learn-step"><div class="step-num">3</div><div class="step-text"><strong>Entry signals to look for:</strong> Breakout above resistance with high volume. Bounce off support with a bullish candle. Pullback to a moving average in an uptrend. These are high-probability setups.</div></div>
-      <div class="learn-step"><div class="step-num">4</div><div class="step-text"><strong>Exit strategies:</strong> (1) Hit your profit target — sell. (2) Hit your stop loss — sell. (3) Pattern changes and tells you the trend is ending — sell. Never hold hoping it comes back.</div></div>
-      <div class="analogy"><strong>Real analogy:</strong> A good trade is like a business deal. You wouldn't sign a contract without knowing what you get if it works and what you lose if it doesn't. Entry and exit planning is your contract with the market.</div>
-      <div class="tip-box"><strong>✓ The 2:1 Rule:</strong> If your stop loss is $30 away from entry, your target must be at least $60 away. Always. Every single trade. This math is why disciplined traders survive.</div>
-    </div>
-  </div>
-
-  <div id="learn-3" class="learn-content">
-    <div class="learn-module">
-      <div class="lm-title">Risk Management & Position Sizing</div>
-      <div class="lm-sub">Lesson 4 · This is what separates survivors from blown accounts</div>
-      <div class="learn-step"><div class="step-num">1</div><div class="step-text"><strong>The 1% rule.</strong> Never risk more than 1% of your total account on any single trade. With $500, that's $5 maximum risk per trade. This sounds tiny — it's not. It's survival math.</div></div>
-      <div class="learn-step"><div class="step-num">2</div><div class="step-text"><strong>Position sizing.</strong> Your position size is determined by your stop loss distance. If your stop is $10 away and you can only risk $5, you buy 0.5 shares — not 10 shares. The math tells you how many to buy.</div></div>
-      <div class="learn-step"><div class="step-num">3</div><div class="step-text"><strong>Never average down.</strong> If you buy a stock and it goes against you — DO NOT buy more to "lower your average." This is how accounts get wiped. Accept the loss and move on.</div></div>
-      <div class="learn-step"><div class="step-num">4</div><div class="step-text"><strong>Maximum daily loss limit.</strong> Set a number — say 3% of your account — and if you lose that in one day, you stop trading for the day. No exceptions. Come back tomorrow.</div></div>
-      <div class="analogy"><strong>Real analogy:</strong> Risk management is like car insurance. You don't plan to crash. But when you do, the insurance stops the damage from destroying your whole life. Position sizing IS your insurance in trading.</div>
-      <div class="rule-box"><strong>⚠️ Brutal Truth:</strong> 90% of traders who blow up their accounts do so because they risked too much on one trade. One trade. The 1% rule means you need 100 consecutive losses to go broke. That almost never happens if you follow the rules.</div>
-    </div>
-  </div>
-
-  <div id="learn-4" class="learn-content">
-    <div class="learn-module">
-      <div class="lm-title">Market Psychology</div>
-      <div class="lm-sub">Lesson 5 · Why prices really move — and why your emotions will betray you</div>
-      <div class="learn-step"><div class="step-num">1</div><div class="step-text"><strong>Markets are driven by fear and greed.</strong> When people are greedy, they buy everything and prices go up. When they're scared, they sell everything and prices crash. Understanding this cycle is the edge most traders never get.</div></div>
-      <div class="learn-step"><div class="step-num">2</div><div class="step-text"><strong>FOMO — Fear Of Missing Out.</strong> You see a stock rocketing up. You jump in late because you don't want to miss it. You buy at the top right as everyone else starts selling. FOMO causes more losses than bad analysis.</div></div>
-      <div class="learn-step"><div class="step-num">3</div><div class="step-text"><strong>Revenge trading.</strong> You lose a trade. You're angry. You immediately take another trade to "win it back" — usually bigger than your rules allow. This almost always makes it worse. Loss + loss = blown account.</div></div>
-      <div class="learn-step"><div class="step-num">4</div><div class="step-text"><strong>The winning mindset.</strong> Think in probabilities, not certainties. No trade is guaranteed. Accept losses as the cost of doing business. A 60% win rate with 2:1 risk/reward makes you consistently profitable even though you lose 4 out of 10 trades.</div></div>
-      <div class="analogy"><strong>Real analogy:</strong> Your emotions in trading are like a backseat driver who always panics. "Sell! It's going down!" "Buy now! It's going up!" The best traders learn to mute that voice and follow their system — not their feelings.</div>
-      <div class="tip-box"><strong>✓ Mental Rule:</strong> If you feel excited about a trade, be more cautious. If you feel scared to take a trade but your setup is there — that's often your best trade. The market profits from emotional reactions.</div>
-    </div>
-  </div>
-
-  <div id="learn-5" class="learn-content">
-    <div class="learn-module">
-      <div class="lm-title">Day Trading Rules</div>
-      <div class="lm-sub">Lesson 6 · The non-negotiable rules professionals live by</div>
-      <div class="learn-step"><div class="step-num">1</div><div class="step-text"><strong>The PDT Rule.</strong> In the US, making 4+ day trades in 5 business days with under $25,000 gets your account flagged as a Pattern Day Trader and restricted. Solution: start in Forex (no PDT rule) or use a cash account.</div></div>
-      <div class="learn-step"><div class="step-num">2</div><div class="step-text"><strong>Avoid the first 30 minutes.</strong> 9:30–10:00am ET is the most chaotic, unpredictable time of the trading day. Wild swings. Fake breakouts. Most professionals sit on their hands during this window.</div></div>
-      <div class="learn-step"><div class="step-num">3</div><div class="step-text"><strong>Trade with the trend.</strong> If the overall market is going up, focus on buying setups. If it's going down, focus on short setups. "The trend is your friend" is a cliché because it's true.</div></div>
-      <div class="learn-step"><div class="step-num">4</div><div class="step-text"><strong>Keep a trade journal.</strong> Write down every trade — entry, exit, why you entered, what you were thinking, what happened. Reviewing this monthly shows you your patterns, your mistakes, and your edge.</div></div>
-      <div class="learn-step"><div class="step-num">5</div><div class="step-text"><strong>Start in Forex with under $500.</strong> No PDT rule. 24/5 market. Micro lots mean tiny position sizes. You can trade real money with $100 and learn without risking your life savings.</div></div>
-      <div class="rule-box"><strong>⚠️ The Honest Truth:</strong> 70–80% of day traders lose money in year one. Not because trading doesn't work — but because they skip the learning phase. This game, the Learn Lab, and the Coach exist so you don't have to pay tuition to the market. Learn here first.</div>
-      <div class="tip-box"><strong>✓ When you're ready:</strong> Complete all 5 levels of Market Kings. Win at least 60% of your predict mode challenges. Feel comfortable explaining every candlestick pattern. Then — and only then — open a real account with money you can afford to lose.</div>
-    </div>
-  </div>
+  <div style="display:flex;flex-direction:column;gap:10px;" id="learn-list"></div>
 </div>
 
-<!-- ===== COACH ===== -->
-<div id="section-coach" class="section">
-  <div class="section-title">Your Coach</div>
-  <div class="section-sub">Ask anything. Plain English. Honest every time.</div>
-  <div class="page-tip">🧠 <span><strong>How to use the Coach:</strong> Type any question about day trading, candlesticks, Forex, or anything money related. The coach answers like a patient teacher who also tells you the hard truth. Nothing is too basic to ask — the only dumb question is the one you didn't ask.</span></div>
+<!-- ===== COACH TAB ===== -->
+<div id="tab-coach" class="screen">
+  <div class="instruct">
+    <div class="instruct-icon">🧠</div>
+    <div class="instruct-body">
+      <div class="instruct-title">Your personal trading coach</div>
+      <div class="instruct-text">Ask me anything. <strong>There are no dumb questions here.</strong> I explain everything in plain English — no jargon without an explanation. Tap one of the quick questions below or type your own.</div>
+    </div>
+  </div>
   <div class="api-banner" id="api-banner">
-    <div>⚡ <strong>Activate AI Coach</strong> — paste your Claude API key below. Get one free at <strong>console.anthropic.com</strong></div>
-    <div class="api-row"><input type="password" id="api-key-input" placeholder="sk-ant-..."/><button onclick="saveKey()">Activate</button></div>
+    <div>⚡ <strong>Activate your AI Coach</strong> — paste your free Claude API key below. Get one at <strong>console.anthropic.com</strong> (takes 2 minutes, free to start).</div>
+    <div class="api-row"><input type="password" id="api-key-input" placeholder="sk-ant-..."/><button onclick="saveKey()">Activate Coach</button></div>
   </div>
-  <div class="coach-box">
-    <div class="chat-hist" id="chat-history">
-      <div class="msg"><div class="msg-av ai">K</div><div style="flex:1"><div class="msg-name">Market Kings Coach</div><div class="msg-text">What's up! I'm your day trading coach. Ask me anything — from "what is a candlestick" to "how do I manage a losing streak." Plain English only. No jargon without an explanation. What do you want to learn?</div></div></div>
+  <div class="coach-card">
+    <div class="chat-box" id="chat-box">
+      <div class="cmsg"><div class="cav ai">K</div><div style="flex:1"><div class="cname">Market Kings Coach</div><div class="cbubble">Hey! I'm your trading coach. Ask me anything — from "what is a candlestick" to "how do I not lose my mind during a losing streak." I speak plain English only and I always tell you the truth. What do you want to learn?</div></div></div>
     </div>
     <div class="quick-qs">
-      <button class="quick-q" onclick="askCoach('What is a candlestick and how do I read one?')">Read a candlestick?</button>
-      <button class="quick-q" onclick="askCoach('What is a doji candle and what does it mean?')">What is a doji?</button>
-      <button class="quick-q" onclick="askCoach('How do I start day trading with only $500?')">Start with $500?</button>
-      <button class="quick-q" onclick="askCoach('Explain support and resistance like I am 12 years old.')">Support & resistance?</button>
-      <button class="quick-q" onclick="askCoach('What is the PDT rule and how do I avoid it?')">PDT rule?</button>
-      <button class="quick-q" onclick="askCoach('How do professional traders manage their emotions?')">Manage emotions?</button>
-      <button class="quick-q" onclick="askCoach('What does going long vs short mean in simple terms?')">Long vs short?</button>
-      <button class="quick-q" onclick="askCoach('When am I actually ready to trade real money?')">Am I ready?</button>
+      <button class="qq" onclick="askCoach('What is a candlestick and how do I read one?')">Read a candlestick?</button>
+      <button class="qq" onclick="askCoach('How do I start day trading with only $500?')">Start with $500?</button>
+      <button class="qq" onclick="askCoach('What is a stop loss and why is it so important?')">Stop loss?</button>
+      <button class="qq" onclick="askCoach('Explain Forex trading in the simplest way possible.')">What is Forex?</button>
+      <button class="qq" onclick="askCoach('What is the PDT rule and how do I avoid it?')">PDT rule?</button>
+      <button class="qq" onclick="askCoach('How do I manage my emotions when I am losing money?')">Losing streak?</button>
+      <button class="qq" onclick="askCoach('What does going long vs short mean?')">Long vs short?</button>
+      <button class="qq" onclick="askCoach('When am I actually ready to trade real money?')">Am I ready?</button>
     </div>
     <div class="chat-row" style="margin-top:8px;">
-      <input type="text" class="chat-input" id="coach-input" placeholder="Ask your coach anything..." onkeydown="if(event.key==='Enter')askCoach()"/>
+      <input type="text" class="chat-inp" id="coach-inp" placeholder="Type your question here..." onkeydown="if(event.key==='Enter')askCoach()"/>
       <button class="chat-send" id="coach-send" onclick="askCoach()">ASK</button>
     </div>
   </div>
 </div>
 
-</div>
+</div><!-- /main -->
 
-<button class="gloss-btn" onclick="openGloss()">?</button>
+<button class="gloss-btn" onclick="openGloss()" title="Plain English Dictionary">?</button>
 <div class="gloss-overlay" id="gloss-overlay" onclick="if(event.target===this)closeGloss()">
   <div class="gloss-modal">
     <div class="gloss-head"><h3>PLAIN ENGLISH DICTIONARY</h3><button class="gloss-close" onclick="closeGloss()">✕</button></div>
-    <div class="gloss-search"><input type="text" placeholder="Search any trading word..." oninput="filterGloss(this.value)" id="gloss-search"/></div>
+    <div class="gloss-search"><input type="text" placeholder="Search any word..." oninput="filterGloss(this.value)" id="gloss-search"/></div>
     <div class="gloss-list" id="gloss-list"></div>
   </div>
 </div>
@@ -536,418 +666,408 @@ body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;fon
 <script>
 // ===== DATA =====
 const glossary=[
-  {term:'Candlestick',plain:'A bar on a chart that shows 4 things for one time period: where price opened, where it closed, the highest point it hit, and the lowest. Green = went up. Red = went down.',ex:'One 5-minute candle shows everything that happened in those 5 minutes of trading.'},
-  {term:'Bullish',plain:'Expecting or showing that price will go UP. A bullish candle is green — buyers were in control.',ex:'"I\'m bullish on NVDA" = I think Nvidia\'s price is going to rise.'},
-  {term:'Bearish',plain:'Expecting or showing that price will go DOWN. A bearish candle is red — sellers were in control.',ex:'"The market looks bearish today" = prices are falling and likely to keep falling.'},
-  {term:'Wick / Shadow',plain:'The thin lines above and below the candle body. They show the highest and lowest prices reached during that period.',ex:'A long upper wick means sellers pushed price back down after it spiked high. A warning sign.'},
-  {term:'Doji',plain:'A candle where the open and close price are almost equal — tiny body, sometimes long wicks. It means indecision. Neither buyers nor sellers won.',ex:'A doji after a big uptrend often signals the trend is about to reverse.'},
-  {term:'Hammer',plain:'A candle with a tiny body at the top and a very long lower wick. It means buyers rejected lower prices and pushed back up hard. Bullish signal.',ex:'Found at the bottom of a downtrend — sellers tried to push it lower but buyers won.'},
-  {term:'Engulfing',plain:'When one candle\'s body completely covers the previous candle\'s body. A bullish engulfing (green covering red) signals buyers taking over.',ex:'Red candle Monday. Huge green candle Tuesday that covers Monday\'s whole body = bullish engulfing.'},
-  {term:'Support',plain:'A price level where buyers consistently step in and stop the price from falling further. The market bounces here repeatedly.',ex:'Stock drops to $80 three times and bounces back each time. $80 is support.'},
-  {term:'Resistance',plain:'A price ceiling the market keeps hitting and failing to break above. Sellers come in every time it reaches this level.',ex:'Stock hits $100 three times and gets pushed back. $100 is resistance.'},
-  {term:'Breakout',plain:'When price moves decisively above a resistance level (or below support) with high volume. Often the start of a big move.',ex:'Stock was stuck at $100 for weeks. Suddenly breaks to $108 on huge volume = breakout.'},
-  {term:'Stop Loss',plain:'An automatic sell order that protects you if the trade goes wrong. If price hits your stop, it sells automatically — no hesitation.',ex:'Buy at $100. Stop at $92. If it drops to $92, you exit automatically losing only $8 per share.'},
-  {term:'Take Profit',plain:'The price where you plan to sell and lock in your winnings. Set BEFORE entering the trade.',ex:'Buy at $100. Take profit at $130. When it hits $130 you exit and keep the $30 gain.'},
-  {term:'Risk/Reward',plain:'The ratio of how much you risk vs how much you stand to gain. Good traders target at least 1:2 — risk $1 to make $2.',ex:'Stop loss $20 away. Target $40 away. That\'s a 1:2 risk/reward ratio — good trade.'},
-  {term:'Position Size',plain:'How many shares or units you buy. Calculated based on your account size and stop loss distance so you never risk too much.',ex:'$500 account, 1% risk = $5 max loss. Stop is $2.50 away from entry. Position size = 2 shares.'},
-  {term:'Day Trading',plain:'Buying and selling within the same day. All positions closed before the market closes. Never holding overnight.',ex:'Buy Tesla at 10am, it rises, sell at 1pm. That\'s a complete day trade.'},
-  {term:'Long',plain:'You bought something expecting the price to go UP. You profit when it rises.',ex:'"I\'m long NVDA at $870" = I own Nvidia shares and want the price to climb.'},
-  {term:'Short',plain:'You borrowed shares and sold them, expecting the price to DROP so you can buy them back cheaper.',ex:'Borrow Apple at $170, sell it. Price drops to $145. Buy back at $145. Profit $25.'},
-  {term:'Forex',plain:'Foreign Exchange. Trading one country\'s currency against another. Open 24/5. $7 trillion traded daily. No PDT rule.',ex:'EUR/USD = how many US dollars 1 Euro buys. Great starting market for small accounts.'},
-  {term:'PDT Rule',plain:'Pattern Day Trader Rule. Making 4+ day trades in 5 days with under $25,000 gets your US stock account restricted.',ex:'Solution: Trade Forex (no PDT rule) or use a cash account while building capital.'},
-  {term:'Volume',plain:'How many shares traded today. High volume = lots of traders active = more reliable price moves.',ex:'Breakout with 10x normal volume is much more powerful than one with low volume.'},
-  {term:'Trend',plain:'The general direction price is moving over time. Uptrend = higher highs and higher lows. Downtrend = lower highs and lower lows.',ex:'"Always trade with the trend" means buy in uptrends, short in downtrends.'},
-  {term:'FOMO',plain:'Fear Of Missing Out. Buying because a price is already rising fast and you don\'t want to miss it. Almost always results in buying the top.',ex:'Stock already up 15%. You buy because you\'re scared to miss more gains. It reverses. Classic FOMO loss.'},
-  {term:'Pip',plain:'The smallest price movement in Forex. Usually the 4th decimal place. How Forex profit and loss is measured.',ex:'EUR/USD moves from 1.0850 to 1.0870 = 20 pips of movement.'},
-  {term:'Leverage',plain:'Borrowing from your broker to control a bigger position than your cash allows. Multiplies BOTH profits and losses.',ex:'10:1 leverage on $100 = control $1,000 of currency. A 5% move = 50% of your money gone.'},
+  {term:'Day Trading',plain:'Buying and selling within the same day. Every trade is closed before 4pm ET. You never hold positions overnight.',ex:'Buy Tesla at 10am for $248. It rises. Sell at 1pm for $255. Profit $7 per share. That\'s a day trade.'},
+  {term:'Candlestick',plain:'A bar on a chart showing 4 things: where price opened, where it closed, the highest price, and the lowest price in one time period. Green = went up. Red = went down.',ex:'One 5-minute candle shows everything that happened in those 5 minutes of trading.'},
+  {term:'Bullish',plain:'Expecting price to go UP. A green candle is bullish — buyers won that period.',ex:'"I\'m bullish on NVDA" = I think Nvidia\'s price will rise.'},
+  {term:'Bearish',plain:'Expecting price to go DOWN. A red candle is bearish — sellers won that period.',ex:'"The chart looks bearish" = prices are falling and likely continuing down.'},
+  {term:'Stop Loss',plain:'An automatic sell order that kicks in if the price drops to a level you decide before entering. Protects you from big losses.',ex:'Buy at $100. Stop at $90. If price hits $90, you automatically exit and lose only $10 per share.'},
+  {term:'Take Profit',plain:'The price where you plan to sell and lock in your gains. You set this BEFORE entering the trade.',ex:'Buy at $100. Take profit at $130. When it hits $130, you exit and keep the $30.'},
+  {term:'Long / Buy',plain:'You bought something expecting the price to go UP. You profit when it rises.',ex:'"I\'m long NVDA at $870" = I own Nvidia and want the price to climb.'},
+  {term:'Short / Sell',plain:'You borrowed and sold something expecting the price to DROP. You profit when it falls.',ex:'Borrow Apple at $170. Sell it. Price drops to $145. Buy back at $145. Keep $25.'},
+  {term:'Support',plain:'A price level where buyers consistently step in and stop the price from falling further. The market bounces here.',ex:'Stock drops to $80 three times and bounces each time. $80 is support.'},
+  {term:'Resistance',plain:'A price ceiling the market keeps hitting and failing to break above. Sellers come in every time.',ex:'Stock hits $100 three times and gets pushed back. $100 is resistance.'},
+  {term:'Breakout',plain:'When price moves decisively above resistance (or below support) with high volume. Often the start of a big move.',ex:'Stock stuck at $100 for weeks. Breaks to $108 on huge volume = breakout.'},
+  {term:'Volume',plain:'How many shares traded in a given period. High volume = lots of traders active = more reliable price moves.',ex:'Breakout with 3x normal volume is much stronger than one with low volume.'},
+  {term:'Trend',plain:'The general direction price is moving over time. Uptrend = higher highs. Downtrend = lower lows.',ex:'A stock making new highs every few weeks is in a strong uptrend.'},
+  {term:'Doji',plain:'A candle with almost no body — open and close are almost equal. Means indecision — neither buyers nor sellers won.',ex:'A doji after a big uptrend often signals the move is losing steam.'},
+  {term:'Hammer',plain:'Tiny body at the top, long lower wick. Buyers rejected lower prices and pushed back hard. Bullish reversal signal.',ex:'Found at the bottom of a downtrend — sellers tried to push lower but buyers overwhelmed them.'},
+  {term:'Engulfing',plain:'When one candle\'s body completely covers the previous one. Bullish engulfing (green over red) = buyers took total control.',ex:'Big red Monday. Huge green Tuesday that covers Monday\'s whole body = buyers taking over.'},
+  {term:'Risk/Reward',plain:'The ratio of how much you risk vs how much you stand to gain. Aim for at least 1:2 — risk $1 to make $2.',ex:'Stop $20 away. Target $40 away. That\'s 1:2 risk/reward — a solid trade.'},
+  {term:'Position Size',plain:'How many shares you buy. Based on your account size and stop loss distance to keep risk controlled.',ex:'$500 account. Risk 1% = $5 max. Stop is $5 away from entry. Buy 1 share.'},
+  {term:'Forex',plain:'Foreign Exchange. Trading one country\'s currency against another. Open 24/5. No PDT rule. Great for small accounts.',ex:'EUR/USD = how many US dollars 1 Euro buys. Goes up = dollar weakening.'},
+  {term:'PDT Rule',plain:'Pattern Day Trader Rule. 4+ day trades in 5 days with under $25,000 gets your US stock account restricted.',ex:'Solution: Start in Forex (no PDT rule) or use a cash account while building up.'},
+  {term:'FOMO',plain:'Fear Of Missing Out. Buying because price is already running up and you don\'t want to miss it. Almost always results in buying the top.',ex:'Stock already up 15%. You buy scared to miss more. It reverses. Classic FOMO loss.'},
+  {term:'Leverage',plain:'Borrowing from your broker to control a bigger position than your cash allows. Multiplies wins AND losses.',ex:'10:1 leverage on $100 = control $1,000. A 5% move = 50% of your money gone.'},
+  {term:'Pip',plain:'The smallest price movement in Forex. Usually the 4th decimal place.',ex:'EUR/USD moves from 1.0850 to 1.0870 = 20 pips of movement.'},
+  {term:'P&L',plain:'Profit and Loss. How much you made or lost. Positive = winning. Negative = losing.',ex:'+$200 P&L means you made $200. -$50 means you lost $50.'},
 ];
 
 const candlePatterns=[
-  {name:'Doji',signal:'Indecision',color:'var(--amber)',candles:[{o:50,c:52,h:70,l:30,bull:true}],explain:'The doji has almost no body — open and close are nearly equal. It means the market can\'t decide which way to go. Neither buyers nor sellers are in control.',rule:'A doji by itself means nothing. A doji AFTER a strong trend means the trend may be ending. Always wait for confirmation from the next candle.',bullish:false},
-  {name:'Hammer',signal:'Bullish Reversal',color:'var(--green)',candles:[{o:75,c:80,h:82,l:20,bull:true}],explain:'A hammer has a tiny body at the TOP of the candle and a very long lower wick. Sellers pushed price way down, but buyers came in with force and pushed it back up. Strong bullish signal when found at the bottom of a downtrend.',rule:'Only trade a hammer at a SUPPORT level. A hammer in the middle of nowhere means very little. Location is everything.',bullish:true},
-  {name:'Shooting Star',signal:'Bearish Reversal',color:'var(--red)',candles:[{o:25,c:20,h:80,l:18,bull:false}],explain:'The opposite of a hammer. Tiny body at the BOTTOM, long upper wick. Buyers tried to push price higher but sellers slammed it back down hard. Bearish signal when found at resistance.',rule:'Only trade a shooting star at a RESISTANCE level. It\'s the market saying "we tried to go higher and got rejected hard."',bullish:false},
-  {name:'Bullish Engulfing',signal:'Strong Bullish Signal',color:'var(--green)',candles:[{o:65,c:40,h:68,l:38,bull:false},{o:35,c:72,h:75,l:33,bull:true}],explain:'A red candle followed by a much larger green candle that completely covers the red one. This means buyers completely overwhelmed sellers. One of the most reliable reversal signals.',rule:'Most powerful at support levels after a downtrend. The bigger the green candle relative to the red one, the stronger the signal.',bullish:true},
-  {name:'Bearish Engulfing',signal:'Strong Bearish Signal',color:'var(--red)',candles:[{o:35,c:65,h:68,l:33,bull:true},{o:70,c:30,h:72,l:28,bull:false}],explain:'A green candle followed by a much larger red candle that completely covers it. Sellers overwhelmed buyers completely. Strong reversal signal.',rule:'Most powerful at resistance levels after an uptrend. Signals that the rally is likely over.',bullish:false},
-  {name:'Morning Star',signal:'Strong Bullish Reversal',color:'var(--green)',candles:[{o:70,c:40,h:72,l:38,bull:false},{o:38,c:35,h:45,l:32,bull:false},{o:36,c:68,h:70,l:34,bull:true}],explain:'Three candles: big red, small candle (doji or small body), then big green. The small middle candle shows indecision at the bottom. Then buyers take over completely. One of the most powerful bullish reversal patterns.',rule:'This is a high-confidence signal especially after a sustained downtrend. The green candle should close above the midpoint of the first red candle.',bullish:true},
-  {name:'Evening Star',signal:'Strong Bearish Reversal',color:'var(--red)',candles:[{o:30,c:65,h:67,l:28,bull:true},{o:66,c:70,h:78,l:63,bull:true},{o:68,c:35,h:70,l:33,bull:false}],explain:'Three candles: big green, small candle at the top, then big red. The opposite of morning star. Shows buying exhaustion at the top, then sellers completely take over.',rule:'Found at resistance after a strong uptrend. The red candle must close below the midpoint of the first green candle for a valid signal.',bullish:false},
-  {name:'Spinning Top',signal:'Indecision / Pause',color:'var(--amber)',candles:[{o:45,c:55,h:80,l:20,bull:true}],explain:'Small body with long wicks on both sides. Both buyers and sellers fought hard but neither won convincingly. The market is pausing. Could go either way.',rule:'In an uptrend, a spinning top says "momentum is slowing." In a downtrend, same thing. Wait for the next candle to tell you which side wins.',bullish:false},
-  {name:'Three White Soldiers',signal:'Strong Bullish Trend',color:'var(--green)',candles:[{o:30,c:50,h:52,l:28,bull:true},{o:51,c:68,h:70,l:49,bull:true},{o:69,c:85,h:87,l:67,bull:true}],explain:'Three consecutive strong green candles each closing higher than the previous. Buyers are firmly in control with no hesitation. Strong bullish continuation signal.',rule:'This pattern confirms an uptrend is strong and continuing. Good for riding momentum. Just don\'t chase it if it\'s already moved too far.',bullish:true},
+  {name:'Doji',signal:'Indecision',bull:null,explain:'A doji has almost no body — the open and close prices are nearly equal. This means <strong>neither buyers nor sellers won</strong> during this period. It\'s the market saying "I don\'t know which way to go yet."',rule:'A doji by itself means nothing. A doji AFTER a strong trend is a warning that momentum is slowing. Always wait for the next candle to confirm direction before making a move.',candles:[{o:50,c:52,h:72,l:28}]},
+  {name:'Hammer',signal:'Bullish Reversal',bull:true,explain:'A hammer has a tiny body at the TOP and a very long lower wick. This means sellers tried to push price way down — but buyers came in with force and pushed it all the way back up. <strong>Buyers won decisively.</strong>',rule:'Only a hammer at a SUPPORT LEVEL is meaningful. A hammer in random space means nothing. When you see a hammer at support after a downtrend — that\'s a high-probability buying opportunity.',candles:[{o:72,c:76,h:78,l:20}]},
+  {name:'Shooting Star',signal:'Bearish Reversal',bull:false,explain:'The opposite of a hammer. Tiny body at the BOTTOM and a long upper wick. Buyers tried to push price way up — but sellers slammed it back down hard. <strong>Sellers won that fight.</strong>',rule:'Only a shooting star at a RESISTANCE LEVEL matters. After a strong uptrend, a shooting star at resistance is the market saying "we tried to go higher and got rejected." This often signals a reversal.',candles:[{o:28,c:24,h:80,l:22}]},
+  {name:'Bullish Engulfing',signal:'Strong Buy Signal',bull:true,explain:'A red candle followed by a much LARGER green candle that completely covers it. This means buyers completely overwhelmed sellers — they erased everything sellers did and more. <strong>One of the most reliable reversal signals in trading.</strong>',rule:'Most powerful at support levels after a downtrend. The bigger the green candle relative to the red one, the stronger the signal. Look for high volume to confirm.',candles:[{o:65,c:42,h:67,l:40},{o:38,c:70,h:73,l:36}]},
+  {name:'Bearish Engulfing',signal:'Strong Sell Signal',bull:false,explain:'A green candle followed by a much LARGER red candle that completely covers it. Sellers overwhelmed buyers completely. <strong>Everything buyers gained was erased and then some.</strong>',rule:'Most powerful at resistance levels after an uptrend. Strong red candle covering the previous green = sellers firmly in control. A signal to exit long positions or consider a short.',candles:[{o:38,c:65,h:67,l:36},{o:68,c:32,h:70,l:30}]},
+  {name:'Morning Star',signal:'Powerful Bullish Reversal',bull:true,explain:'Three candles: big red → small candle → big green. The small middle candle shows the downtrend losing steam. Then buyers completely take over with a strong green candle. <strong>One of the highest-confidence buy signals in trading.</strong>',rule:'The green candle must close above the midpoint of the first red candle for a valid signal. Found at the bottom of a downtrend — this often marks the exact turning point.',candles:[{o:70,c:42,h:72,l:40},{o:40,c:36,h:45,l:34},{o:38,c:68,h:70,l:36}]},
+  {name:'Evening Star',signal:'Powerful Bearish Reversal',bull:false,explain:'Three candles: big green → small candle → big red. The uptrend loses steam at the top (small candle), then sellers take complete control. <strong>The mirror image of the morning star — equally powerful.</strong>',rule:'The red candle must close below the midpoint of the first green candle. Found at the top of an uptrend — this often marks the exact peak before a major reversal.',candles:[{o:32,c:65,h:67,l:30},{o:66,c:70,h:76,l:64},{o:68,c:36,h:70,l:34}]},
+  {name:'Three White Soldiers',signal:'Strong Uptrend',bull:true,explain:'Three consecutive strong green candles, each closing higher than the last. No hesitation — buyers are firmly in control and the trend is accelerating. <strong>This confirms a strong uptrend is underway.</strong>',rule:'Good for confirming an uptrend and riding momentum. Don\'t chase it if it\'s already moved a lot — wait for a small pullback to a better entry price.',candles:[{o:30,c:48,h:50,l:28},{o:49,c:65,h:67,l:47},{o:66,c:82,h:84,l:64}]},
+  {name:'Spinning Top',signal:'Indecision / Pause',bull:null,explain:'A small body with long wicks on both sides. Buyers and sellers fought hard but neither won convincingly. <strong>The market is pausing and could go either way.</strong>',rule:'In a strong trend, a spinning top says momentum is slowing. Don\'t trade on it alone — wait for the next candle to show which side takes control.',candles:[{o:44,c:56,h:80,l:18}]},
 ];
 
-const predictScenarios=[
-  {candles:[{o:70,c:40,h:72,l:38,bull:false},{o:35,c:72,h:75,l:33,bull:true}],question:'You see a bearish candle followed by a much LARGER bullish candle that covers it completely. What is this pattern predicting?',choices:['Price will likely continue DOWN','Price will likely reverse UP','No reliable signal — wait','Price will trade sideways'],correct:1,explanation:'This is a <strong>Bullish Engulfing</strong> pattern. The massive green candle completely overwhelmed the red one — buyers are firmly in control. This predicts an upward reversal, especially at support.'},
-  {candles:[{o:30,c:65,h:67,l:28,bull:true},{o:66,c:70,h:78,l:63,bull:true},{o:68,c:35,h:70,l:33,bull:false}],question:'After a strong uptrend: big green candle, small candle at the top, then a big red candle. What does this three-candle pattern signal?',choices:['Strong continuation upward','Bullish reversal — buy opportunity','Bearish reversal — trend ending','Random noise — ignore it'],correct:2,explanation:'This is an <strong>Evening Star</strong> — one of the most reliable reversal patterns. The small middle candle showed buyers losing steam at the top, then sellers took full control. This signals the uptrend is likely over.'},
-  {candles:[{o:75,c:80,h:82,l:20,bull:true}],question:'After a strong downtrend you see a candle with a tiny body at the top and a very long lower wick. What does this "Hammer" tell you?',choices:['Sellers are still in control','Buyers rejected lower prices — possible reversal','The trend will continue down','Not enough information to decide'],correct:1,explanation:'A <strong>Hammer</strong> at the bottom of a downtrend is a strong bullish signal. Sellers pushed price way down (long wick) but buyers came in hard and pushed it back up (small body near top). This often signals the bottom.'},
-  {candles:[{o:45,c:47,h:80,l:15,bull:true}],question:'After a big uptrend you see a candle with almost no body and long wicks on both sides. What does this "Doji" signal?',choices:['Strong continuation — keep buying','The trend is accelerating','Indecision — wait for next candle','Guaranteed reversal — sell now'],correct:2,explanation:'A <strong>Doji</strong> after a strong trend means <strong>indecision</strong>. Neither buyers nor sellers won. This is a warning that momentum may be slowing. Wait for the NEXT candle to confirm direction — don\'t trade the doji alone.'},
-  {candles:[{o:25,c:20,h:78,l:18,bull:false}],question:'At a resistance level you see a candle with a tiny body at the bottom and a very long upper wick. What does this "Shooting Star" signal?',choices:['Buyers won — price going up','Sellers won — possible reversal down','Neutral — no signal','Gap up incoming'],correct:1,explanation:'A <strong>Shooting Star</strong> at resistance is a strong bearish signal. Buyers tried to push price higher (long wick up) but sellers completely rejected it and pushed price back down (small body at bottom). Classic reversal signal.'},
+const learnModules=[
+  {title:'Candlesticks & Chart Reading',emoji:'🕯️',sub:'The language every trader must speak',content:[
+    {type:'step',num:1,title:'Every candle tells a complete story',text:'Each candlestick covers one time period and shows four things: <strong>Open</strong> (where price started), <strong>Close</strong> (where it ended), <strong>High</strong> (highest point reached), and <strong>Low</strong> (lowest point). Green = buyers won. Red = sellers won.'},
+    {type:'step',num:2,title:'The body size matters',text:'A <strong>big body</strong> means one side won convincingly — strong momentum. A <strong>small body</strong> means the fight was close — indecision or a weakening trend. Size tells you how confident the market is.'},
+    {type:'step',num:3,title:'The wicks tell the real story',text:'Long upper wick = buyers tried to push higher but sellers rejected it. Long lower wick = sellers tried to push lower but buyers rejected it. <strong>Wicks show you where the market was rejected.</strong>'},
+    {type:'analogy',text:'Think of each candle like a sports halftime score. Green = home team winning. Red = away team winning. The size of the candle = how big the lead is. Long wicks = close game with big swings.'},
+    {type:'tip',text:'The most powerful candle signals happen AT support and resistance levels — not randomly in the middle of a chart. Location is everything.'},
+  ]},
+  {title:'Support & Resistance',emoji:'📊',sub:'The invisible walls that control every price move',content:[
+    {type:'step',num:1,title:'Support = a price floor',text:'A level where buyers consistently step in and stop the price from falling further. Price bounces off this level repeatedly. <strong>This is where you look to BUY — lower risk, defined stop loss.</strong>'},
+    {type:'step',num:2,title:'Resistance = a price ceiling',text:'A level the market keeps hitting and failing to break above. Sellers come in every time it reaches there. <strong>This is where you look to TAKE PROFIT or expect a reversal.</strong>'},
+    {type:'step',num:3,title:'The flip — old resistance becomes support',text:'When a stock breaks ABOVE resistance, that old ceiling often becomes a new floor. Traders call this "support-resistance flip" and it\'s one of the most reliable concepts in trading.'},
+    {type:'analogy',text:'Support is the floor of a room — you bounce off it. Resistance is the ceiling — you hit your head and come back down. But if someone knocks a hole in the ceiling (breakout), the ceiling becomes the new floor.'},
+    {type:'warn',text:'Never buy in the middle of nowhere. Only buy near support. Only target resistance for profit. This single rule eliminates most amateur trading mistakes.'},
+  ]},
+  {title:'Entry & Exit Strategies',emoji:'🎯',sub:'Knowing when to get in AND out is the whole game',content:[
+    {type:'step',num:1,title:'Always plan before you enter',text:'Before you click buy, know THREE things: (1) Where am I entering? (2) Where\'s my stop loss? (3) Where\'s my profit target? <strong>If you don\'t know all three — do not trade.</strong>'},
+    {type:'step',num:2,title:'The 2:1 Risk/Reward rule',text:'For every $1 you risk, aim to make at least $2. Risk $50, target $100. This means <strong>even if you\'re wrong 50% of the time, you\'re still profitable.</strong> The math works in your favor.'},
+    {type:'step',num:3,title:'High-probability entry signals',text:'Breakout above resistance with high volume. Bounce off support with a bullish candle. Pullback to a trend line in an uptrend. <strong>These are setups — not guarantees. But the odds are on your side.</strong>'},
+    {type:'analogy',text:'A good trade is like a business deal. You wouldn\'t sign a contract without knowing what you get if it works and what you lose if it doesn\'t. Entry and exit planning is your contract with the market.'},
+    {type:'tip',text:'The 2:1 rule: Stop loss $30 away from entry = target must be at least $60 away. Always. Every single trade. This math is why disciplined traders survive long-term.'},
+  ]},
+  {title:'Risk Management',emoji:'🛡️',sub:'This separates survivors from blown accounts',content:[
+    {type:'step',num:1,title:'The 1% rule — non-negotiable',text:'Never risk more than 1% of your total account on any single trade. With $500 = max $5 risk per trade. <strong>This sounds tiny. It\'s not. It\'s how you stay in the game long enough to get good.</strong>'},
+    {type:'step',num:2,title:'Position sizing — the math that saves you',text:'Your position size is determined by your stop loss. If your stop is $10 away and you can only risk $5, you buy 0.5 shares — not 10. <strong>The math tells you how much to buy. Follow it every time.</strong>'},
+    {type:'step',num:3,title:'Never average down',text:'If a trade goes against you, <strong>do NOT buy more</strong> to "lower your average." This turns a small loss into a catastrophic one. Accept the loss. Move on. Live to trade another day.'},
+    {type:'warn',text:'90% of traders who blow up their accounts do so because they risked too much on ONE trade. One trade. The 1% rule means you need 100 consecutive losses to go broke. That almost never happens.'},
+  ]},
+  {title:'Market Psychology',emoji:'🧠',sub:'Why prices really move and why emotions will betray you',content:[
+    {type:'step',num:1,title:'Markets are driven by fear and greed',text:'When people are greedy, they buy everything — prices rise. When they\'re scared, they sell everything — prices crash. <strong>Understanding this cycle gives you an edge most traders never find.</strong>'},
+    {type:'step',num:2,title:'FOMO — the account killer',text:'You see a stock rocketing up. You jump in late because you don\'t want to miss it. You buy at the top right as everyone starts selling. <strong>FOMO causes more losses than bad analysis.</strong>'},
+    {type:'step',num:3,title:'Revenge trading — the double killer',text:'You lose a trade. You\'re angry. You immediately take another, bigger trade to "win it back." This almost always makes it worse. <strong>Loss + revenge trade = blown account.</strong> Walk away for the day.'},
+    {type:'analogy',text:'Your emotions in trading are like a panicking backseat driver. "Sell! It\'s going down!" "Buy now! You\'re missing it!" The best traders learn to mute that voice and follow their system instead.'},
+    {type:'tip',text:'If you feel excited or desperate about a trade — be MORE cautious. If you feel calm and patient — your mindset is right. The market profits from emotional reactions.'},
+  ]},
+  {title:'Day Trading Rules',emoji:'📋',sub:'The non-negotiable rules professionals live by',content:[
+    {type:'step',num:1,title:'The PDT Rule — know before you trade stocks',text:'In the US, making 4+ day trades in 5 days with under $25,000 gets your account restricted. <strong>Solution: Start in Forex (no PDT rule) or use a cash account while you build capital.</strong>'},
+    {type:'step',num:2,title:'Skip the first 30 minutes',text:'9:30–10:00am ET is the most chaotic and unpredictable time of the trading day. Wild swings. Fake moves. <strong>Most professionals wait for the dust to settle before entering any position.</strong>'},
+    {type:'step',num:3,title:'Trade with the trend',text:'If the overall market is going up, focus on buying setups. Going down — focus on shorts. <strong>"The trend is your friend" is a cliché because it has made millions of traders money.</strong>'},
+    {type:'step',num:4,title:'Keep a trade journal',text:'Write every trade — entry, exit, why you entered, what you were feeling, what happened. <strong>Reviewing this monthly shows you your patterns, your edge, and your blind spots.</strong>'},
+    {type:'warn',text:'70–80% of day traders lose money in year one. Not because trading doesn\'t work — but because they skip the learning phase. The game, lessons, and coach in this app exist to change that for you.'},
+  ]},
+];
+
+const tradeScenarios=[
+  {sym:'NVDA',name:'Nvidia Corp',price:870.42,news:'AI chip demand is surging. Nvidia just broke above the key $865 resistance level with 3x its average daily volume. This is the same company that has beaten earnings estimates 6 quarters in a row.',correct:'buy',win:52,lose:31,reasoning:'A stock breaking above a key resistance level with 3x average volume is one of the strongest buy signals in trading. High volume confirms the move is real — not a fake-out. The correct move was to BUY.',lesson:'<strong>Lesson:</strong> When price breaks resistance with high volume, it signals that buyers have overwhelmed sellers convincingly. This is called a "confirmed breakout" — one of the highest-probability setups in day trading.'},
+  {sym:'MSFT',name:'Microsoft Corp',price:449,news:'Microsoft beat earnings after hours and gapped up 6% to $449 at this morning\'s open. It\'s the first 8 minutes of trading and the price is swinging wildly — up $3, down $5, up $4 in seconds.',correct:'hold',win:0,lose:38,reasoning:'The first 10–15 minutes after a big gap up are the most dangerous time to trade. Price swings are unpredictable. Waiting for the chaos to settle gives you a much better entry. The correct move was to HOLD and wait.',lesson:'<strong>Lesson:</strong> "Never trade the first 15 minutes of a gap up" is a rule most professional day traders follow strictly. The initial excitement creates wild swings that have no predictable direction. Patience here is a competitive advantage.'},
+  {sym:'EUR/USD',name:'Euro vs US Dollar',price:1.0892,news:'The US jobs report just came in weaker than expected. This is bad news for the dollar. EUR/USD is breaking above the key 1.0885 resistance level with significantly above-average volume.',correct:'buy',win:45,lose:28,reasoning:'Weak US jobs data = dollar weakening = EUR/USD going up. Combined with a break above key resistance and strong volume — this is a textbook long setup in Forex. The correct move was to BUY.',lesson:'<strong>Lesson:</strong> In Forex, when major economic data weakens one currency, the other side of the pair strengthens. Weak US jobs report = weak dollar = EUR/USD rises. Economic news + technical setup = high-probability trade.'},
+  {sym:'AAPL',name:'Apple Inc',price:171,news:'Apple is down 3% today with absolutely no Apple-specific news. The whole market is selling off slightly. Apple is sitting right at the $171 support level — a price it has bounced from 3 times in the past 6 weeks.',correct:'buy',win:34,lose:22,reasoning:'No fundamental bad news + a well-established support level that has held 3 times = a high-probability bounce trade. The risk is well-defined (stop just below $171). The correct move was to BUY near support.',lesson:'<strong>Lesson:</strong> "Buy at support with a tight stop loss" is one of the most reliable day trading strategies. When a stock drops to a support level for no fundamental reason, buyers usually step in. Your stop loss goes just below that support.'},
+  {sym:'TSLA',name:'Tesla Inc',price:248,news:'Tesla\'s CEO made controversial comments this morning. The stock is down 8% and still dropping with no bounce candles visible on the chart. It has already broken two support levels.',correct:'sell',win:58,lose:40,reasoning:'Strong downward momentum + negative catalyst + broken support levels + no reversal candle patterns = a short opportunity. Don\'t fight a trend with this much momentum. The correct move was to SELL / SHORT.',lesson:'<strong>Lesson:</strong> "Don\'t fight the trend" is one of the most important rules in trading. When a stock has broken multiple support levels with high volume and a negative catalyst, the path of least resistance is down. Shorting in this situation means trading WITH the momentum, not against it.'},
+  {sym:'GBP/USD',name:'British Pound',price:1.2634,news:'The Bank of England just announced a surprise interest rate hike. GBP/USD already surged 85 pips in the first 10 minutes on the news. You just saw it happen. You want in.',correct:'hold',win:0,lose:42,reasoning:'Missing the initial move and then chasing it is one of the most common — and costly — mistakes in Forex trading. The best play after a missed move is to wait for a pullback to a better entry. The correct move was to HOLD.',lesson:'<strong>Lesson:</strong> "The trade that already happened is not your trade." Every experienced trader has missed big moves and had to let them go. There will always be another setup. Chasing a price that already ran means you\'re buying when everyone else who got in early is selling their profit — directly onto you.'},
+  {sym:'SPY',name:'S&P 500 ETF',price:512,news:'The market opened flat. There\'s no significant economic data today, no major earnings, and no breaking news. SPY has been trading sideways in a $510–$514 range for the past 2 hours.',correct:'hold',win:0,lose:18,reasoning:'No clear direction + no catalyst + sideways price action = no trade. Forcing a trade when there\'s no setup is how accounts bleed slowly. The correct move was to HOLD — sometimes the best trade is no trade.',lesson:'<strong>Lesson:</strong> Professional traders often wait hours for the right setup. They\'d rather make 2 excellent trades a week than 20 mediocre ones. "Sitting on your hands" when there\'s no clear signal is a skill — and it\'s what separates patient, profitable traders from impatient, losing ones.'},
+  {sym:'NVDA',name:'Nvidia Corp',price:838,news:'You bought NVDA at $870 earlier today. It dropped to $838 — down $32. Your stop loss is set at $835. You\'re feeling scared and thinking about selling now to "stop the bleeding."',correct:'hold',win:62,lose:55,reasoning:'Your stop loss is at $835 — it has NOT been triggered. Your exit plan is intact. Selling at $838 because you\'re scared means your emotions made the decision, not your strategy. The correct move was to HOLD and trust the plan.',lesson:'<strong>Lesson:</strong> "Trust your stop loss" is the hardest rule to follow — and the most important. You set that stop for a reason. Selling early out of fear breaks your own plan and often means you exit right before the price recovers. The stop loss exists precisely to make this decision for you, without emotion.'},
 ];
 
 // ===== STATE =====
 const levels=[
-  {num:1,title:'The Rookie',cash:500,weeklyGoal:'$0–$50',completed:false,unlocked:true},
-  {num:2,title:'The Grinder',cash:1000,weeklyGoal:'$100–$200',completed:false,unlocked:false},
-  {num:3,title:'The Trader',cash:2500,weeklyGoal:'$500',completed:false,unlocked:false},
-  {num:4,title:'The Shark',cash:10000,weeklyGoal:'$1,000+',completed:false,unlocked:false},
-  {num:5,title:'Market King',cash:50000,weeklyGoal:'Unlimited',completed:false,unlocked:false},
+  {num:1,title:'The Rookie',desc:'Learn the basics. Start with $500. Break even is a win.',cash:500,unlocked:true,completed:false},
+  {num:2,title:'The Grinder',desc:'Start making $100–$200 extra. Consistency over big wins.',cash:1000,unlocked:false,completed:false},
+  {num:3,title:'The Trader',desc:'Target $500 extra per week. Your strategy is proven.',cash:2500,unlocked:false,completed:false},
+  {num:4,title:'The Shark',desc:'$1,000+ per week. You think like a professional.',cash:10000,unlocked:false,completed:false},
+  {num:5,title:'Market King',desc:'Prove real-world readiness. Complete this and you\'re certified.',cash:50000,unlocked:false,completed:false},
 ];
-const tradeScenarios=[
-  {sym:'NVDA',name:'Nvidia Corp',price:870.42,news:'AI chip demand surging. Stock breaks above $865 resistance with 3x average volume. Earnings next week.',correct:'buy',win:52,lose:31,reasoning:'Breaking resistance with high volume + positive catalyst = textbook buy setup. Momentum is your friend.'},
-  {sym:'MSFT',name:'Microsoft Corp',price:449,news:'Microsoft gaps up 6% on earnings beat. First 10 minutes of trading — price is whipping around wildly.',correct:'hold',win:0,lose:38,reasoning:'Never trade the first 10-15 minutes of a gap up. Wait for the chaos to settle. Patience saves accounts.'},
-  {sym:'EUR/USD',name:'Euro vs Dollar',price:1.0892,news:'US jobs report weak. Dollar softening. EUR/USD breaks above key 1.0885 level on heavy volume.',correct:'buy',win:45,lose:28,reasoning:'Weak dollar + break above resistance + strong volume = high-probability long setup in Forex.'},
-  {sym:'AAPL',name:'Apple Inc',price:171,news:'Apple down 3% with no company-specific news. Just general market sell-off. Sitting right at $171 support.',correct:'buy',win:34,lose:22,reasoning:'Support level + no fundamental bad news = high-probability bounce. Risk is well-defined here.'},
-  {sym:'TSLA',name:'Tesla Inc',price:248,news:'Tesla CEO controversy. Stock falling fast — down 8% and still dropping. No sign of reversal candles.',correct:'sell',win:58,lose:40,reasoning:'Downward momentum + negative catalyst + no reversal candles = short opportunity. Don\'t fight the trend.'},
-  {sym:'GBP/USD',name:'British Pound',price:1.2634,news:'Bank of England surprise rate hike. GBP already up 85 pips from the announcement. You missed the entry.',correct:'hold',win:0,lose:42,reasoning:'Never chase a move that already ran. The trade that already happened isn\'t your trade. Wait for retracement.'},
-  {sym:'SPY',name:'S&P 500 ETF',price:512,news:'Market flat all morning. No major news. SPY trading sideways between $510-$514 for 2 hours.',correct:'hold',win:0,lose:18,reasoning:'No clear setup = no trade. Sitting on your hands IS a strategy. Only trade high-probability setups.'},
-  {sym:'NVDA',name:'Nvidia Corp',price:838,news:'NVDA down $32 today. You\'re in a position from $870. Your stop loss is at $835. Current price: $838.',correct:'hold',win:62,lose:55,reasoning:'Stop not triggered = stay in the plan. Selling at $838 when your stop is $835 means fear made the decision.'},
-];
-let currentLevel=0,cash=500,sessionPnl=0,tradesThisSession=0,tradeWins=0,totalWins=0,totalTrades=0,currentScenario=0,selectedAmt=50,positions=[],apiKey='',chatMsgs=[],liveInterval=null,liveCandles=[],livePriceBase=870,predictIdx=0,predScore=0,predTotal=0;
+let currentLevel=0,cash=500,sessionPnl=0,tradesThisSession=0,tradeWins=0,totalWins=0,totalTrades=0,scenarioIdx=0,positions=[],apiKey='',chatMsgs=[],hasSeenLessons=false;
 
 // ===== TICKER =====
-function initTicker(){
-  const items=[{sym:'NVDA',p:'$870',c:'+2.3%',u:true},{sym:'MSFT',p:'$423',c:'+0.8%',u:true},{sym:'AAPL',p:'$171',c:'-0.4%',u:false},{sym:'EUR/USD',p:'1.0892',c:'+0.12%',u:true},{sym:'TSLA',p:'$248',c:'+1.7%',u:true},{sym:'SPY',p:'$512',c:'+0.3%',u:true},{sym:'BTC',p:'$82K',c:'-1.2%',u:false},{sym:'AMZN',p:'$188',c:'+0.9%',u:true},{sym:'GBP/USD',p:'1.2634',c:'-0.08%',u:false}];
-  const d=[...items,...items];
-  document.getElementById('ticker').innerHTML=d.map(i=>`<span class="tick-item"><span class="tick-sym">${i.sym}</span><span>${i.p}</span><span class="${i.u?'tick-up':'tick-dn'}">${i.c}</span></span>`).join('');
+(function(){const items=[{s:'NVDA',p:'$870',c:'+2.3%',u:true},{s:'MSFT',p:'$423',c:'+0.8%',u:true},{s:'AAPL',p:'$171',c:'-0.4%',u:false},{s:'EUR/USD',p:'1.0892',c:'+0.12%',u:true},{s:'TSLA',p:'$248',c:'+1.7%',u:true},{s:'SPY',p:'$512',c:'+0.3%',u:true},{s:'BTC',p:'$82K',c:'-1.2%',u:false},{s:'AMZN',p:'$188',c:'+0.9%',u:true}];const d=[...items,...items];document.getElementById('ticker').innerHTML=d.map(i=>`<span class="ti"><span class="ti-sym">${i.s}</span><span>${i.p}</span><span class="${i.u?'up':'dn'}">${i.c}</span></span>`).join('');})();
+
+// ===== NAVIGATION =====
+function goTab(tab){
+  document.querySelectorAll('.screen[id^="tab-"]').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.ntab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  const map={play:0,candles:1,learn:2,coach:3};
+  document.querySelectorAll('.ntab')[map[tab]].classList.add('active');
+  if(tab==='candles')renderPatterns();
+  if(tab==='learn')renderLearn();
 }
 
-// ===== NAV =====
-function go(tab){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('section-'+tab).classList.add('active');
-  const map={game:0,candles:1,learn:2,coach:3};
-  document.querySelectorAll('.nav-tab')[map[tab]].classList.add('active');
-  if(tab==='candles'){startLiveChart();renderPatternLibrary();loadPredict();}
-  else{stopLiveChart();}
+function showScreen(id){
+  document.querySelectorAll('#tab-play .screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
 
 function updateNav(){
   document.getElementById('nav-cash').textContent='$'+cash.toLocaleString();
-  document.getElementById('nav-level').textContent='LVL '+levels[currentLevel].num;
+  document.getElementById('nav-lvl').textContent='LVL '+levels[currentLevel].num;
 }
 
-// ===== HOME =====
-function renderHome(){
-  document.getElementById('level-cards').innerHTML=levels.map((l,i)=>{
-    let cls='level-card';let badge='';
-    if(l.completed){cls+=' completed';badge=`<div class="lc-badge lb-done">✓ Done</div>`;}
-    else if(i===currentLevel){cls+=' current unlocked';badge=`<div class="lc-badge lb-current">▶ Active</div>`;}
-    else if(l.unlocked){cls+=' unlocked';badge=`<div class="lc-badge" style="background:var(--bdim);color:var(--blue)">Open</div>`;}
-    else{cls+=' locked';badge=`<div class="lc-badge lb-lock">🔒</div>`;}
-    return `<div class="${cls}" onclick="${l.unlocked?`selectLevel(${i})`:'showNotif(\"Complete current level first\",false)'}">
-      <div class="lc-num">${l.num}</div><div class="lc-title">${l.title}</div>
-      <div class="lc-cash">$${l.cash.toLocaleString()}</div><div style="font-size:9px;color:var(--muted);margin-bottom:5px;">${l.weeklyGoal}/wk</div>${badge}</div>`;
+// ===== FLOW =====
+function startJourney(){
+  if(hasSeenLessons){showLevelMap();}else{showScreen('s-lesson1');}
+}
+
+function showLevelMap(){
+  hasSeenLessons=true;
+  renderLevelMap();
+  showScreen('s-levelmap');
+}
+
+function renderLevelMap(){
+  const prog=Math.min(100,Math.round((currentLevel/5)*100+(tradesThisSession/5)*20));
+  document.getElementById('map-prog').style.width=prog+'%';
+  document.getElementById('map-prog-text').textContent=`Level ${currentLevel+1} of 5 — ${tradesThisSession} of 5 trades completed`;
+  document.getElementById('level-map').innerHTML=levels.map((l,i)=>{
+    let cls='level-row';let badge='';let onclick='';
+    if(l.completed){cls+=' completed';badge=`<div class="lr-badge lb-done">✓ Complete</div>`;}
+    else if(i===currentLevel){cls+=' current';badge=`<div class="lr-badge lb-now">▶ Play Now</div>`;onclick=`startLevel(${i})`;}
+    else if(l.unlocked){badge=`<div class="lr-badge lb-next">Unlocked</div>`;onclick=`startLevel(${i})`;}
+    else{cls+=' locked';badge=`<div class="lr-badge lb-lock">🔒 Locked</div>`;}
+    return `<div class="${cls}" onclick="${onclick||''}">
+      <div class="lr-num">${l.num}</div>
+      <div class="lr-content">
+        <div class="lr-title">${l.title}</div>
+        <div class="lr-desc">${l.desc}</div>
+      </div>
+      ${badge}
+    </div>`;
   }).join('');
-  const p=Math.min(100,Math.round((tradesThisSession/5)*100));
-  document.getElementById('prog-fill').style.width=p+'%';
-  document.getElementById('prog-pct').textContent=p+'%';
-  document.getElementById('prog-text').textContent=`${tradesThisSession}/5 trades done this session`;
 }
 
-function showHome(){
-  document.getElementById('screen-home').style.display='block';
-  document.getElementById('screen-trading').style.display='none';
-  document.getElementById('screen-cert').style.display='none';
-  renderHome();
+function startLevel(i){
+  if(!levels[i].unlocked)return;
+  currentLevel=i;cash=levels[i].cash;tradesThisSession=0;sessionPnl=0;positions=[];scenarioIdx=0;
+  updateNav();
+  document.getElementById('t-level-name').textContent=`LEVEL ${levels[i].num} — ${levels[i].title.toUpperCase()}`;
+  loadScenario();
+  showScreen('s-trading');
 }
 
-function selectLevel(i){
-  currentLevel=i;cash=levels[i].cash;updateNav();startTrading();
-}
-
-// ===== CANDLE CHART HELPER =====
-function buildCandleChart(container,candles,height=100){
-  const el=document.getElementById(container);if(!el)return;
+// ===== CHART =====
+function buildChart(containerId,trending){
+  const el=document.getElementById(containerId);if(!el)return;
+  let price=50;const candles=[];
+  for(let i=0;i<18;i++){
+    const open=price;
+    const change=trending?(Math.random()*5-1):(Math.random()*5-3.8);
+    const close=Math.max(12,Math.min(95,open+change));
+    const high=Math.max(open,close)+Math.random()*4;
+    const low=Math.min(open,close)-Math.random()*4;
+    candles.push({o:open,c:close,h:high,l:Math.max(5,low),bull:close>=open});
+    price=close;
+  }
   const maxH=Math.max(...candles.map(c=>c.h));
   const minL=Math.min(...candles.map(c=>c.l));
   const range=maxH-minL||1;
-  const scale=v=>((v-minL)/range)*(height-8)+4;
+  const H=90;
+  const scale=v=>((v-minL)/range)*(H-10)+5;
   el.innerHTML=candles.map((c,idx)=>{
     const bodyTop=Math.max(c.o,c.c);const bodyBot=Math.min(c.o,c.c);
-    const bodyH=Math.max(2,(scale(bodyTop)-scale(bodyBot)));
-    const bodyBottom=scale(bodyBot);const wickTop=scale(c.h)-scale(bodyTop);const wickBottom=scale(bodyBot)-scale(c.l);
-    return `<div class="candle-wrap ${c.bull?'candle-bullish':'candle-bearish'}" style="height:${height}px;justify-content:flex-end;position:relative;" onclick="showCandleDetail(${idx},${JSON.stringify(c).replace(/"/g,'&quot;')})">
-      <div class="candle-tooltip"><strong>${c.bull?'Bullish (Green)':'Bearish (Red)'} Candle</strong>High: ${c.h} · Low: ${c.l}<br>Open: ${c.o} · Close: ${c.c}</div>
-      <div style="position:absolute;bottom:0;left:0;right:0;height:${height}px;">
-        <div class="candle-wick" style="position:absolute;left:50%;transform:translateX(-50%);bottom:${bodyBottom+bodyH}px;height:${Math.max(0,wickTop)}px;background:${c.bull?'var(--green)':'var(--red)'}"></div>
-        <div class="candle-body" style="position:absolute;left:1px;right:1px;bottom:${bodyBottom}px;height:${bodyH}px;background:${c.bull?'var(--green)':'var(--red)'}"></div>
-        <div class="candle-wick" style="position:absolute;left:50%;transform:translateX(-50%);bottom:${Math.max(0,scale(c.l))}px;height:${Math.max(0,wickBottom)}px;background:${c.bull?'var(--green)':'var(--red)'}"></div>
+    const bodyH=Math.max(2,scale(bodyTop)-scale(bodyBot));
+    const bodyBottom=scale(bodyBot);
+    const wickTop=Math.max(0,scale(c.h)-scale(bodyTop));
+    const wickBot=Math.max(0,scale(bodyBot)-scale(c.l));
+    const col=c.bull?'var(--green)':'var(--red)';
+    return `<div class="cc" style="height:${H}px;" onclick="showCandleTip(this,'${c.bull?'Green (Bullish)':'Red (Bearish)'} candle: Opened at ${Math.round(c.o)}, closed at ${Math.round(c.c)}. ${c.bull?'Buyers won — price went UP.':'Sellers won — price went DOWN.'}')">
+      <div class="cc-tip">${c.bull?'🟢 Green':'🔴 Red'}: ${c.bull?'Buyers won':'Sellers won'}</div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:${H}px;">
+        <div style="position:absolute;left:50%;transform:translateX(-50%);bottom:${bodyBottom+bodyH}px;height:${wickTop}px;width:1.5px;background:${col}"></div>
+        <div style="position:absolute;left:1px;right:1px;bottom:${bodyBottom}px;height:${bodyH}px;background:${col};border-radius:1px;opacity:${.55+idx/36}"></div>
+        <div style="position:absolute;left:50%;transform:translateX(-50%);bottom:${Math.max(0,scale(c.l))}px;height:${wickBot}px;width:1.5px;background:${col}"></div>
       </div></div>`;
   }).join('');
 }
 
-function buildRealisticChart(container,trending,numCandles=16){
-  let price=50;const candles=[];
-  for(let i=0;i<numCandles;i++){
-    const open=price;const change=trending?(Math.random()*6-1.5):(Math.random()*6-4.5);
-    const close=Math.max(10,Math.min(95,open+change));
-    const high=Math.max(open,close)+Math.random()*5;
-    const low=Math.min(open,close)-Math.random()*5;
-    candles.push({o:Math.round(open),c:Math.round(close),h:Math.round(high),l:Math.max(5,Math.round(low)),bull:close>=open});
-    price=close;
-  }
-  buildCandleChart(container,candles);
-}
+function showCandleTip(el,msg){showNotif(msg,true,4000);}
 
 // ===== TRADING =====
-function startTrading(){
-  tradesThisSession=0;sessionPnl=0;positions=[];currentScenario=0;
-  document.getElementById('screen-home').style.display='none';
-  document.getElementById('screen-trading').style.display='block';
-  document.getElementById('screen-cert').style.display='none';
-  document.getElementById('t-level-title').textContent=`LEVEL ${levels[currentLevel].num} — ${levels[currentLevel].title.toUpperCase()}`;
-  loadTradeScenario();
-}
-
-function loadTradeScenario(){
-  const s=tradeScenarios[currentScenario%tradeScenarios.length];
-  document.getElementById('a-sym').textContent=s.sym;
-  document.getElementById('a-name').textContent=`${s.sym} — ${s.name}`;
-  document.getElementById('a-time').textContent=getRandTime();
-  const priceStr=s.sym.includes('/')?s.price.toFixed(4):'$'+s.price.toFixed(2);
-  document.getElementById('a-price').textContent=priceStr;
-  const isUp=s.correct==='buy'||s.correct==='hold';
-  const chg=(Math.random()*3+(isUp?0.5:-2)).toFixed(2);
-  const chgEl=document.getElementById('a-chg');
+function loadScenario(){
+  const s=tradeScenarios[scenarioIdx%tradeScenarios.length];
+  const isUp=s.correct==='buy';
+  document.getElementById('t-sym').textContent=s.sym;
+  document.getElementById('t-name').textContent=`${s.sym} — ${s.name}`;
+  document.getElementById('t-time').textContent=getRandTime();
+  document.getElementById('t-price').textContent=s.sym.includes('/')?s.price.toFixed(4):'$'+s.price.toFixed(2);
+  const chg=(Math.random()*2+(isUp?0.5:-1.5)).toFixed(2);
+  const chgEl=document.getElementById('t-chg');
   chgEl.textContent=`${parseFloat(chg)>0?'▲ +':'▼ '}${chg}%`;
   chgEl.style.color=parseFloat(chg)>0?'var(--green)':'var(--red)';
-  buildRealisticChart('a-chart',isUp);
-  document.getElementById('a-axes').innerHTML=`<span>Open</span><span>${getRandTime()}</span><span>Now</span>`;
-  document.getElementById('a-news').innerHTML=`<strong>📰 News:</strong> ${s.news}`;
-  document.getElementById('a-cash').textContent='$'+cash.toLocaleString();
-  document.getElementById('a-pnl').textContent=(sessionPnl>=0?'+':'')+' $'+Math.abs(sessionPnl);
-  document.getElementById('a-pnl').style.color=sessionPnl>=0?'var(--green)':'var(--red)';
-  document.getElementById('a-trades').textContent=`${tradesThisSession}/5`;
-  const rb=document.getElementById('result-box');rb.className='result-box';
-  document.getElementById('next-btn').className='next-btn';
-  document.getElementById('next-btn').onclick=nextTrade;
-  document.getElementById('next-btn').textContent='NEXT TRADE →';
-  ['btn-buy','btn-sell','btn-hold'].forEach(id=>document.getElementById(id).disabled=false);
+  buildChart('t-chart',isUp);
+  document.getElementById('t-news').innerHTML=`<strong>📰 Market News:</strong> ${s.news}`;
+  document.getElementById('t-cash').textContent='$'+cash.toLocaleString();
+  document.getElementById('t-pnl').textContent=(sessionPnl>=0?'+':'')+' $'+Math.abs(sessionPnl);
+  document.getElementById('t-pnl').style.color=sessionPnl>=0?'var(--green)':'var(--red)';
+  document.getElementById('t-count').textContent=`${tradesThisSession+1} of 5`;
+  document.getElementById('t-instruct-title').textContent='Step 1: Read the situation carefully';
+  document.getElementById('t-instruct-text').textContent='Read the NEWS box below first — it tells you what\'s happening right now. Then look at the chart — notice if the candles are mostly green (going up) or red (going down). Take your time. Then make your move.';
+  document.getElementById('t-step-inst').innerHTML='<strong>Step 2: Make your decision.</strong> Based on everything you just read — do you think the price will go UP, DOWN, or are you unsure? Each button below tells you exactly what it does before you tap it.';
+  ['tb-buy','tb-sell','tb-hold'].forEach(id=>document.getElementById(id).disabled=false);
+  const rb=document.getElementById('t-result');rb.className='result-box';
+  document.getElementById('t-cont-btn').className='cont-btn';
 }
 
 function getRandTime(){const h=9+Math.floor(Math.random()*6);const m=Math.floor(Math.random()*60);return `${h}:${m<10?'0'+m:m} ${h<12?'AM':'PM'} ET`;}
 
-function setAmt(amt,btn){selectedAmt=amt===-1?cash:amt;document.querySelectorAll('.amt-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
-
-function trade(action){
-  const s=tradeScenarios[currentScenario%tradeScenarios.length];
-  ['btn-buy','btn-sell','btn-hold'].forEach(id=>document.getElementById(id).disabled=true);
+function makeTrade(action){
+  const s=tradeScenarios[scenarioIdx%tradeScenarios.length];
+  ['tb-buy','tb-sell','tb-hold'].forEach(id=>document.getElementById(id).disabled=true);
   tradesThisSession++;totalTrades++;
   const ok=action===s.correct;
-  const rb=document.getElementById('result-box');rb.classList.add('show');
   let pnl=0;
-  if(ok){
-    if(action!=='hold'){pnl=s.win;cash+=pnl;sessionPnl+=pnl;tradeWins++;totalWins++;}
-    rb.className='result-box show '+(action==='hold'?'neutral':'win');
-    document.getElementById('result-title').innerHTML=action==='hold'?`<span style="color:var(--amber)">⏸ SMART HOLD! Patience wins.</span>`:`<span style="color:var(--green)">✓ WINNING TRADE! +$${pnl}</span>`;
-    document.getElementById('result-body').innerHTML=`<strong>Correct call!</strong> ${s.reasoning}${pnl>0?`<br><br>+$${pnl} added to your account.`:'<br><br>Knowing when NOT to trade is one of the highest-value skills in this game.'}`;
-    showNotif(action==='hold'?'✓ Smart patience!':` ✓ +$${pnl} profit!`,true);
-  }else{
-    pnl=-s.lose;cash+=pnl;sessionPnl+=pnl;
-    rb.className='result-box show lose';
-    document.getElementById('result-title').innerHTML=`<span style="color:var(--red)">✗ WRONG CALL — -$${s.lose}</span>`;
-    document.getElementById('result-body').innerHTML=`That move cost you $${s.lose}. <strong>The right move was to ${s.correct}.</strong> ${s.reasoning}<br><br>This is why we practice here before risking real money.`;
-    showNotif(`✗ -$${s.lose} — study why`,false);
-  }
-  positions.push({sym:s.sym,action,pnl,price:s.sym.includes('/')?s.price.toFixed(4):'$'+s.price.toFixed(2)});
+  if(ok&&action!=='hold'){pnl=s.win;cash+=pnl;sessionPnl+=pnl;tradeWins++;totalWins++;}
+  else if(!ok){pnl=-s.lose;cash+=pnl;sessionPnl+=pnl;}
   updateNav();
-  document.getElementById('a-cash').textContent='$'+cash.toLocaleString();
-  document.getElementById('a-pnl').textContent=(sessionPnl>=0?'+':'')+' $'+Math.abs(sessionPnl);
-  document.getElementById('a-pnl').style.color=sessionPnl>=0?'var(--green)':'var(--red)';
-  document.getElementById('a-trades').textContent=`${tradesThisSession}/5`;
-  renderPositions();
-  document.getElementById('next-btn').classList.add('show');
-  if(tradesThisSession>=5){
-    document.getElementById('next-btn').textContent='FINISH SESSION →';
-    document.getElementById('next-btn').onclick=finishSession;
+  document.getElementById('t-cash').textContent='$'+cash.toLocaleString();
+  document.getElementById('t-pnl').textContent=(sessionPnl>=0?'+':'')+' $'+Math.abs(sessionPnl);
+  document.getElementById('t-pnl').style.color=sessionPnl>=0?'var(--green)':'var(--red)';
+  const rb=document.getElementById('t-result');
+  rb.classList.add('show');
+  if(ok){
+    if(action==='hold'){rb.className='result-box show neutral';document.getElementById('t-result-title').innerHTML=`<span style="color:var(--amber)">⏸ Smart patience! That was the right call.</span>`;}
+    else{rb.className='result-box show win';document.getElementById('t-result-title').innerHTML=`<span style="color:var(--green)">✓ Winning trade! +$${pnl} added to your account.</span>`;}
+    showNotif(action==='hold'?'✓ Smart hold!':` ✓ +$${pnl} profit!`,true);
+  }else{
+    rb.className='result-box show lose';
+    document.getElementById('t-result-title').innerHTML=`<span style="color:var(--red)">✗ Wrong call — but here's the lesson:</span>`;
+    showNotif(`✗ -$${s.lose} — read the explanation below`,false);
   }
+  document.getElementById('t-result-body').textContent=s.reasoning;
+  document.getElementById('t-result-lesson').innerHTML=s.lesson;
+  document.getElementById('t-instruct-title').textContent='Step 3: Read the explanation below';
+  document.getElementById('t-instruct-text').textContent='Whether you were right or wrong, the explanation below tells you exactly WHY. Read it carefully — this is how you get better. Then tap "Next Trade" when you\'re ready.';
+  const cb=document.getElementById('t-cont-btn');cb.classList.add('show');
+  if(tradesThisSession>=5){cb.textContent='FINISH LEVEL →';cb.onclick=finishLevel;}
+  else{cb.textContent=`NEXT TRADE (${tradesThisSession}/5 done) →`;cb.onclick=nextTrade;}
 }
 
-function nextTrade(){currentScenario++;loadTradeScenario();}
+function nextTrade(){scenarioIdx++;loadScenario();}
 
-function finishSession(){
-  if(sessionPnl>=0&&currentLevel<4){levels[currentLevel].completed=true;levels[currentLevel+1].unlocked=true;currentLevel++;cash=levels[currentLevel].cash;showNotif('🏆 Level Up! '+levels[currentLevel].title,true);}
-  if(levels[4].completed){showCert();}else{showHome();}
-}
-
-function renderPositions(){
-  const b=document.getElementById('pos-box');b.style.display='block';
-  document.getElementById('pos-list').innerHTML=positions.map(p=>`<div class="pos-row"><div><div class="pos-sym">${p.sym}</div><div class="pos-detail">${p.action.toUpperCase()} @ ${p.price}</div></div><div class="pos-pnl" style="color:${p.pnl>=0?'var(--green)':'var(--red)'}">${p.pnl>=0?'+':''} $${Math.abs(p.pnl)}</div></div>`).join('');
+function finishLevel(){
+  const won=sessionPnl>=0;
+  if(won&&currentLevel<4){levels[currentLevel].completed=true;levels[currentLevel+1].unlocked=true;currentLevel++;showNotif('🏆 Level Up! '+levels[currentLevel].title,true);}
+  if(levels[4].completed){showCert();}else{renderLevelMap();showScreen('s-levelmap');}
 }
 
 function showCert(){
-  document.getElementById('screen-home').style.display='none';
-  document.getElementById('screen-trading').style.display='none';
-  document.getElementById('screen-cert').style.display='block';
   const wr=totalTrades>0?Math.round((totalWins/totalTrades)*100):0;
-  document.getElementById('cert-stats').innerHTML=`<div class="cert-stat"><div class="cert-stat-label">Total P&L</div><div class="cert-stat-val">$${sessionPnl>=0?'+':''} ${Math.abs(sessionPnl)}</div></div><div class="cert-stat"><div class="cert-stat-label">Win Rate</div><div class="cert-stat-val">${wr}%</div></div><div class="cert-stat"><div class="cert-stat-label">Levels</div><div class="cert-stat-val">5/5 ✓</div></div>`;
+  document.getElementById('cert-stats').innerHTML=`<div class="cst"><div class="cst-label">Total P&L</div><div class="cst-val">${sessionPnl>=0?'+':''} $${Math.abs(sessionPnl)}</div></div><div class="cst"><div class="cst-label">Win Rate</div><div class="cst-val">${wr}%</div></div><div class="cst"><div class="cst-label">Levels Done</div><div class="cst-val">5 / 5 ✓</div></div>`;
+  showScreen('s-cert');
 }
 
 function resetGame(){
   levels.forEach((l,i)=>{l.completed=false;l.unlocked=i===0;});
   currentLevel=0;cash=500;sessionPnl=0;tradeWins=0;totalWins=0;totalTrades=0;tradesThisSession=0;positions=[];
-  updateNav();showHome();
+  updateNav();showScreen('s-welcome');
 }
 
-// ===== LIVE CHART =====
-function startLiveChart(){
-  liveCandles=[];livePriceBase=870;
-  for(let i=0;i<20;i++)addLiveCandle();
-  renderLiveChart();
-  liveInterval=setInterval(()=>{addLiveCandle();if(liveCandles.length>24)liveCandles.shift();renderLiveChart();},2000);
+// ===== QUIZ =====
+function checkQuiz(btn,correct,qId){
+  const btns=btn.parentElement.querySelectorAll('.quiz-btn');
+  btns.forEach(b=>b.disabled=true);
+  btn.classList.add(correct?'correct':'wrong');
+  if(!correct)btns.forEach(b=>{if(b.textContent.includes('went up'))b.classList.add('correct');});
+  const fb=document.getElementById(qId+'-fb');
+  fb.classList.add('show');
+  fb.innerHTML=correct?'<strong style="color:var(--green)">✓ Correct!</strong> Green candle = buyers won = price went UP. Red candle = sellers won = price went DOWN. That\'s the foundation of reading any chart.':'<strong style="color:var(--red)">Not quite.</strong> Green = buyers won = price went UP. The color tells you who was in control during that time period.';
+  document.getElementById('lesson2-next').style.display='inline-flex';
 }
 
-function stopLiveChart(){if(liveInterval){clearInterval(liveInterval);liveInterval=null;}}
-
-function addLiveCandle(){
-  const open=livePriceBase;
-  const change=(Math.random()*3-1.2);
-  const close=Math.max(850,Math.min(895,open+change));
-  const high=Math.max(open,close)+Math.random()*1.5;
-  const low=Math.min(open,close)-Math.random()*1.5;
-  liveCandles.push({o:open,c:close,h:high,l:low,bull:close>=open,openP:open.toFixed(2),closeP:close.toFixed(2),highP:high.toFixed(2),lowP:low.toFixed(2)});
-  livePriceBase=close;
-  const last=liveCandles[liveCandles.length-1];
-  const chg=last.c-liveCandles[0].c;
-  document.getElementById('live-price').textContent='$'+last.c.toFixed(2);
-  const chgEl=document.getElementById('live-chg');
-  chgEl.textContent=`${chg>=0?'▲ +':'▼ '}$${Math.abs(chg).toFixed(2)} (${((chg/liveCandles[0].c)*100).toFixed(2)}%)`;
-  chgEl.style.color=chg>=0?'var(--green)':'var(--red)';
-}
-
-function renderLiveChart(){
-  const el=document.getElementById('live-candles');if(!el)return;
-  const height=120;
-  const allH=liveCandles.map(c=>c.h);const allL=liveCandles.map(c=>c.l);
-  const maxH=Math.max(...allH);const minL=Math.min(...allL);const range=maxH-minL||1;
-  const scale=v=>((v-minL)/range)*(height-12)+6;
-  el.innerHTML=liveCandles.map((c,idx)=>{
-    const bodyTop=Math.max(c.o,c.c);const bodyBot=Math.min(c.o,c.c);
-    const bodyH=Math.max(2,scale(bodyTop)-scale(bodyBot));
-    const bodyBottom=scale(bodyBot);
-    const wickTopH=scale(c.h)-scale(bodyTop);const wickBotH=scale(bodyBot)-scale(c.l);
-    return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;position:relative;height:${height}px;cursor:pointer;" onclick="showLiveCandleDetail(${idx})">
-      <div style="position:absolute;bottom:0;left:0;right:0;height:${height}px;">
-        <div style="position:absolute;left:50%;transform:translateX(-50%);bottom:${bodyBottom+bodyH}px;height:${Math.max(0,wickTopH)}px;width:1.5px;background:${c.bull?'var(--green)':'var(--red)'}"></div>
-        <div style="position:absolute;left:1px;right:1px;bottom:${bodyBottom}px;height:${bodyH}px;background:${c.bull?'var(--green)':'var(--red)'};border-radius:1px;opacity:${0.6+idx/liveCandles.length*0.4}"></div>
-        <div style="position:absolute;left:50%;transform:translateX(-50%);bottom:${Math.max(0,scale(c.l))}px;height:${Math.max(0,wickBotH)}px;width:1.5px;background:${c.bull?'var(--green)':'var(--red)'}"></div>
-      </div></div>`;
-  }).join('');
-}
-
-function showLiveCandleDetail(idx){
-  const c=liveCandles[idx];if(!c)return;
-  const d=document.getElementById('live-candle-detail');d.style.display='block';
-  document.getElementById('lcd-title').textContent=`${c.bull?'🟢 Bullish (Green)':'🔴 Bearish (Red)'} Candle`;
-  document.getElementById('lcd-body').innerHTML=`
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
-      <div style="background:var(--surface3);border-radius:6px;padding:8px;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">OPEN</div><div style="font-family:'DM Mono',monospace;">$${c.openP}</div></div>
-      <div style="background:var(--surface3);border-radius:6px;padding:8px;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">CLOSE</div><div style="font-family:'DM Mono',monospace;color:${c.bull?'var(--green)':'var(--red)'};">$${c.closeP}</div></div>
-      <div style="background:var(--surface3);border-radius:6px;padding:8px;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">HIGH (top wick)</div><div style="font-family:'DM Mono',monospace;">$${c.highP}</div></div>
-      <div style="background:var(--surface3);border-radius:6px;padding:8px;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">LOW (bottom wick)</div><div style="font-family:'DM Mono',monospace;">$${c.lowP}</div></div>
-    </div>
-    <div style="font-size:13px;color:var(--muted2);line-height:1.7;">
-      ${c.bull?`<strong style="color:var(--green)">Buyers won this candle.</strong> Price opened at $${c.openP} and closed HIGHER at $${c.closeP}. The body represents buying pressure. The wicks show where sellers tried to push back but failed.`:`<strong style="color:var(--red)">Sellers won this candle.</strong> Price opened at $${c.openP} and closed LOWER at $${c.closeP}. The body represents selling pressure. The wicks show where buyers tried to fight back but failed.`}
+// ===== CANDLE PATTERNS =====
+function renderPatterns(){
+  const list=document.getElementById('pattern-list');if(list.children.length>0)return;
+  list.innerHTML=candlePatterns.map((p,i)=>{
+    const sigColor=p.bull===true?'var(--green)':p.bull===false?'var(--red)':'var(--amber)';
+    const mini=buildMiniCandles(p.candles);
+    return `<div class="pattern-row" id="pr-${i}" onclick="togglePattern(${i})">
+      <div class="pr-head">
+        <div class="pr-visual">${mini}</div>
+        <div class="pr-info">
+          <div class="pr-name">${p.name}</div>
+          <div class="pr-signal" style="color:${sigColor}">${p.signal}</div>
+        </div>
+        <div class="pr-arrow">▼</div>
+      </div>
+      <div class="pr-body">
+        <div class="pr-signal-badge" style="background:${p.bull===true?'var(--gdim)':p.bull===false?'var(--rdim)':'var(--adim)'};color:${sigColor}">${p.signal}</div>
+        <div class="pr-explain">${p.explain}</div>
+        <div class="pr-rule"><strong>📋 Trading Rule:</strong> ${p.rule}</div>
+      </div>
     </div>`;
-}
-
-function showCandleDetail(idx,candle){}
-
-// ===== PATTERN LIBRARY =====
-function switchCandleTab(tab,btn){
-  document.querySelectorAll('.candle-tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('ct-live').style.display=tab==='live'?'block':'none';
-  document.getElementById('ct-library').style.display=tab==='library'?'block':'none';
-  document.getElementById('ct-predict').style.display=tab==='predict'?'block':'none';
-  if(tab==='live'&&!liveInterval)startLiveChart();
-  if(tab==='predict')loadPredict();
-}
-
-function renderPatternLibrary(){
-  const pg=document.getElementById('pattern-grid');if(!pg||pg.children.length>0)return;
-  pg.innerHTML=candlePatterns.map((p,i)=>{
-    const mini=p.candles.map(c=>{
-      const bull=c.bull;const bodyH=Math.max(4,Math.abs(c.c-c.o)*0.8);const bodyBot=(c.l?((Math.min(c.o,c.c)-c.l)/((c.h||Math.max(c.o,c.c))-c.l||1))*48:4);
-      return `<div style="display:flex;flex-direction:column;align-items:center;flex:1;height:48px;position:relative;"><div style="position:absolute;bottom:0;left:0;right:0;height:48px;"><div style="position:absolute;left:50%;transform:translateX(-50%);bottom:${Math.min(c.c,Math.max(c.o,c.c))+bodyH}px;width:1.5px;height:8px;background:${bull?'var(--green)':'var(--red)'}"></div><div style="position:absolute;left:2px;right:2px;bottom:${Math.min(c.o,c.c)*0.4+2}px;height:${bodyH}px;background:${bull?'var(--green)':'var(--red)'};border-radius:1px;"></div><div style="position:absolute;left:50%;transform:translateX(-50%);bottom:2px;width:1.5px;height:${Math.min(c.o,c.c)*0.3+2}px;background:${bull?'var(--green)':'var(--red)'}"></div></div></div>`;
-    }).join('');
-    const sigColor=p.bullish?'var(--green)':p.signal.includes('Indecision')?'var(--amber)':'var(--red)';
-    return `<div class="pattern-card" onclick="showPattern(${i})"><div class="pattern-visual">${mini}</div><div class="pattern-name">${p.name}</div><div class="pattern-signal" style="color:${sigColor}">${p.signal}</div></div>`;
   }).join('');
 }
 
-let activePattern=-1;
-function showPattern(i){
-  const p=candlePatterns[i];
-  document.querySelectorAll('.pattern-card').forEach((c,idx)=>c.classList.toggle('active',idx===i));
-  const d=document.getElementById('pattern-detail');
-  const sigColor=p.bullish?'var(--green)':p.signal.includes('Indecision')?'var(--amber)':'var(--red)';
-  d.innerHTML=`<div class="pd-title">${p.name}</div><div class="pd-signal" style="color:${sigColor}">${p.signal}</div><div class="pd-body">${p.explain}</div><div class="pd-rule"><strong>📋 Trading Rule:</strong> ${p.rule}</div>`;
-  d.classList.add('show');d.style.display='block';
+function buildMiniCandles(candles){
+  const maxH=Math.max(...candles.map(c=>c.h||Math.max(c.o,c.c)+5));
+  const minL=Math.min(...candles.map(c=>c.l||Math.min(c.o,c.c)-5));
+  const range=maxH-minL||1;const H=44;
+  const sc=v=>((v-minL)/range)*(H-6)+3;
+  return candles.map(c=>{
+    const bull=c.c>=c.o;const bTop=Math.max(c.o,c.c);const bBot=Math.min(c.o,c.c);
+    const bH=Math.max(3,sc(bTop)-sc(bBot));const bBot2=sc(bBot);
+    const wT=Math.max(0,sc(c.h||bTop+3)-sc(bTop));const wB=Math.max(0,sc(bBot)-sc(c.l||bBot-3));
+    const col=bull?'var(--green)':'var(--red)';
+    return `<div style="flex:1;position:relative;height:${H}px;">
+      <div style="position:absolute;left:50%;transform:translateX(-50%);bottom:${bBot2+bH}px;height:${wT}px;width:1.5px;background:${col}"></div>
+      <div style="position:absolute;left:2px;right:2px;bottom:${bBot2}px;height:${bH}px;background:${col};border-radius:1px;"></div>
+      <div style="position:absolute;left:50%;transform:translateX(-50%);bottom:${Math.max(0,sc(c.l||bBot-3))}px;height:${wB}px;width:1.5px;background:${col}"></div>
+    </div>`;
+  }).join('');
 }
 
-// ===== PREDICT MODE =====
-function loadPredict(){
-  const s=predictScenarios[predictIdx%predictScenarios.length];
-  buildCandleChart('pred-chart',s.candles,90);
-  document.getElementById('pred-question').innerHTML=`<strong>Pattern Analysis:</strong> ${s.question}`;
-  document.getElementById('pred-choices').innerHTML=s.choices.map((c,i)=>`<button class="pred-btn" onclick="checkPredict(${i})">${String.fromCharCode(65+i)}. ${c}</button>`).join('');
-  document.getElementById('pred-result').className='result-box';
-  document.getElementById('pred-score').textContent=predScore;
-  document.getElementById('pred-total').textContent=predTotal;
+function togglePattern(i){
+  const row=document.getElementById('pr-'+i);row.classList.toggle('open');
 }
 
-function checkPredict(idx){
-  const s=predictScenarios[predictIdx%predictScenarios.length];
-  document.querySelectorAll('.pred-btn').forEach((b,i)=>{b.disabled=true;if(i===s.correct)b.classList.add('correct');if(i===idx&&i!==s.correct)b.classList.add('wrong');});
-  predTotal++;
-  const ok=idx===s.correct;
-  if(ok)predScore++;
-  const rb=document.getElementById('pred-result');
-  rb.className='result-box show '+(ok?'win':'lose');
-  document.getElementById('pred-result-title').innerHTML=ok?`<span style="color:var(--green)">✓ CORRECT! You read that pattern right.</span>`:`<span style="color:var(--red)">✗ Not quite — here's what that pattern means:</span>`;
-  document.getElementById('pred-result-body').innerHTML=s.explanation;
-  document.getElementById('pred-score').textContent=predScore;
-  document.getElementById('pred-total').textContent=predTotal;
+// ===== LEARN =====
+function renderLearn(){
+  const list=document.getElementById('learn-list');if(list.children.length>0)return;
+  list.innerHTML=learnModules.map((m,i)=>`
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;">
+      <div style="background:var(--surface2);padding:16px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;border-bottom:1px solid var(--border);" onclick="toggleLearn(${i})">
+        <div style="font-size:22px;">${m.emoji}</div>
+        <div style="flex:1;"><div style="font-weight:800;font-size:15px;">${m.title}</div><div style="font-size:12px;color:var(--muted2);margin-top:2px;">${m.sub}</div></div>
+        <div style="color:var(--muted);font-size:16px;transition:transform .2s;" id="learn-arrow-${i}">▼</div>
+      </div>
+      <div id="learn-content-${i}" style="display:none;padding:18px;">
+        ${m.content.map(c=>{
+          if(c.type==='step')return `<div style="display:flex;gap:12px;margin-bottom:18px;align-items:flex-start;"><div style="width:28px;height:28px;border-radius:50%;background:var(--acdim);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">${c.num}</div><div><div style="font-weight:800;font-size:14px;margin-bottom:4px;">${c.title}</div><div style="font-size:13px;color:var(--muted2);line-height:1.75;">${c.text}</div></div></div>`;
+          if(c.type==='analogy')return `<div class="analogy"><strong>💡 Real world analogy:</strong> ${c.text}</div>`;
+          if(c.type==='tip')return `<div class="tip"><strong>✓ Pro tip:</strong> ${c.text}</div>`;
+          if(c.type==='warn')return `<div class="warn"><strong>⚠️ Warning:</strong> ${c.text}</div>`;
+          return '';
+        }).join('')}
+      </div>
+    </div>`).join('');
 }
 
-function nextPredict(){predictIdx++;loadPredict();}
-
-// ===== LEARN LAB =====
-function switchLearnTab(idx,btn){
-  document.querySelectorAll('.learn-tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.learn-content').forEach(c=>c.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('learn-'+idx).classList.add('active');
+function toggleLearn(i){
+  const content=document.getElementById('learn-content-'+i);
+  const arrow=document.getElementById('learn-arrow-'+i);
+  const open=content.style.display==='none';
+  content.style.display=open?'block':'none';
+  arrow.style.transform=open?'rotate(180deg)':'';
 }
 
 // ===== COACH =====
 function saveKey(){
   const k=document.getElementById('api-key-input').value.trim();
-  if(k.startsWith('sk-ant-')){apiKey=k;document.getElementById('api-banner').style.display='none';addMsg('ai','Coach activated! Ask me anything — from candlestick basics to advanced day trading strategy. Plain English only.');}
+  if(k.startsWith('sk-ant-')){apiKey=k;document.getElementById('api-banner').style.display='none';addMsg('ai','Coach activated! Ask me anything — what do you want to learn first?');}
   else alert('Please enter a valid Claude API key (starts with sk-ant-)');
 }
 
 function addMsg(role,text){
-  const h=document.getElementById('chat-history');const isAI=role==='ai';
-  const d=document.createElement('div');d.className='msg';
-  d.innerHTML=`<div class="msg-av ${isAI?'ai':'user'}">${isAI?'K':'U'}</div><div style="flex:1"><div class="msg-name">${isAI?'Market Kings Coach':'You'}</div><div class="msg-text ${isAI?'':'user-msg'}">${text}</div></div>`;
+  const h=document.getElementById('chat-box');const isAI=role==='ai';
+  const d=document.createElement('div');d.className='cmsg';
+  d.innerHTML=`<div class="cav ${isAI?'ai':'user'}">${isAI?'K':'U'}</div><div style="flex:1"><div class="cname">${isAI?'Market Kings Coach':'You'}</div><div class="cbubble ${isAI?'':'user-msg'}">${text}</div></div>`;
   h.appendChild(d);h.scrollTop=h.scrollHeight;
   chatMsgs.push({role:isAI?'assistant':'user',content:text.replace(/<[^>]+>/g,'')});
 }
 
 async function askCoach(q){
-  const input=document.getElementById('coach-input');const question=q||input.value.trim();
-  if(!question)return;input.value='';addMsg('user',question);
-  if(!apiKey){addMsg('ai','Please enter your Claude API key in the yellow banner above. Get one free at console.anthropic.com — takes 2 minutes.');return;}
+  const inp=document.getElementById('coach-inp');const question=q||inp.value.trim();
+  if(!question)return;inp.value='';addMsg('user',question);
+  if(!apiKey){addMsg('ai','Please enter your Claude API key in the yellow banner above to activate me. Get one free at console.anthropic.com — takes about 2 minutes.');return;}
   const btn=document.getElementById('coach-send');btn.disabled=true;btn.textContent='...';
-  const sys=`You are the Market Kings Coach inside a day trading education game. Your student is a complete beginner focused on day trading, starting with under $500. They are learning candlesticks, support/resistance, entries, exits, risk management, and market psychology.
+  const sys=`You are the Market Kings Coach inside a beginner day trading education game. Your student is a complete beginner focused on day trading with under $500, starting with Forex and stocks.
 
 Rules:
-- Always use the SIMPLEST language possible — like teaching a smart 12-year-old.
-- ALWAYS use real-world analogies for every financial concept.
-- Never use jargon without immediately explaining it in plain English.
-- Be brutally honest about risk. Day trading is hard. Don't sugarcoat it.
-- Short paragraphs. Direct. No fluff. No "great question."`;
+- Explain EVERYTHING like teaching a smart 12-year-old. Maximum simplicity.
+- Use a real-world analogy for EVERY financial concept you explain.
+- Never use jargon without explaining it immediately in the same sentence.
+- Be completely honest about risk. Day trading is hard. Say so directly.
+- Short paragraphs. Plain language. No jargon. No filler.
+- Never say "great question."`;
   try{
     const msgs=[...chatMsgs.slice(-6),{role:'user',content:question}];
     const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,system:sys,messages:msgs})});
@@ -959,25 +1079,22 @@ Rules:
 }
 
 // ===== GLOSSARY =====
-function openGloss(){document.getElementById('gloss-overlay').classList.add('show');document.getElementById('gloss-search').value='';renderGlossList('');}
+function openGloss(){document.getElementById('gloss-overlay').classList.add('show');document.getElementById('gloss-search').value='';renderGloss('');}
 function closeGloss(){document.getElementById('gloss-overlay').classList.remove('show');}
-function filterGloss(q){renderGlossList(q);}
-function renderGlossList(q){
+function filterGloss(q){renderGloss(q);}
+function renderGloss(q){
   const f=q?glossary.filter(g=>g.term.toLowerCase().includes(q.toLowerCase())||g.plain.toLowerCase().includes(q.toLowerCase())):glossary;
   document.getElementById('gloss-list').innerHTML=f.length?f.map(g=>`<div class="gi"><div class="gi-term">${g.term}</div><div class="gi-plain">${g.plain}</div>${g.ex?`<div class="gi-ex">💡 ${g.ex}</div>`:''}</div>`).join(''):'<div style="color:var(--muted);padding:20px;text-align:center;">No terms found.</div>';
 }
 
-function showNotif(msg,win){
+function showNotif(msg,win,dur=2800){
   const n=document.getElementById('notif');n.textContent=msg;n.className=`notif show ${win?'win-n':'lose-n'}`;
-  setTimeout(()=>n.classList.remove('show'),2800);
+  setTimeout(()=>n.classList.remove('show'),dur);
 }
 
 // ===== INIT =====
-initTicker();
-renderHome();
 updateNav();
-renderGlossList('');
-startLiveChart();
+renderGloss('');
 </script>
 </body>
 </html>
